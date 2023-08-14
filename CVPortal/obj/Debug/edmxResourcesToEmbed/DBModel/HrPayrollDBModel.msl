@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HrPayrollDBModelStoreContainer" CdmEntityContainer="HrPayrollEntities">
+    <EntitySetMapping Name="tblCVPortalUsers">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblCVPortalUser">
+        <MappingFragment StoreEntitySet="tblCVPortalUsers">
+          <ScalarProperty Name="CVPortalUsersId" ColumnName="CVPortalUsersId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
