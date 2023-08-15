@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -37,7 +38,7 @@ namespace CVPortal.Controllers
 
                     objtblCVPortalUser.UserName = objCVPortalUsers.UserName;
                     objtblCVPortalUser.UserEmail = objCVPortalUsers.UserEmail;
-                    objtblCVPortalUser.UserPassword = objCVPortalUsers.UserPassword;
+                    objtblCVPortalUser.UserPassword = Crypto.Hash(objCVPortalUsers.UserPassword);
                     objtblCVPortalUser.IsActive = 1;
                     objtblCVPortalUser.CreateDate = DateTime.Now;
 
@@ -61,7 +62,8 @@ namespace CVPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = objHrPayrollEntities.tblCVPortalUsers.FirstOrDefault(users => users.UserEmail == objCVPortalLogin.UserEmail && users.UserPassword == objCVPortalLogin.UserPassword);
+                var hashedPassword = Crypto.Hash(objCVPortalLogin.UserPassword);
+                var user = objHrPayrollEntities.tblCVPortalUsers.FirstOrDefault(users => users.UserEmail == objCVPortalLogin.UserEmail && users.UserPassword == hashedPassword);
                 if (user == null)
                 {
                     ModelState.AddModelError("Error", "Email or Password is not matching!");

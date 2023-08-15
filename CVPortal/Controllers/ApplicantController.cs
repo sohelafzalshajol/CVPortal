@@ -41,11 +41,28 @@ namespace CVPortal.Controllers
                         applicant.MaritalStatus = objApplicantInfo.MaritalStatus;
                         applicant.HasDisability = objApplicantInfo.HasDisability;
                         applicant.DisabilityInfo = objApplicantInfo.DisabilityInfo;
+                        applicant.DistrictId = objApplicantInfo.DistrictId;
+                        applicant.DistrictName = objApplicantInfo.DistrictName;
+                        applicant.PresentAddress = objApplicantInfo.PresentAddress;
+                        applicant.PermanentAddress = objApplicantInfo.PermanentAddress;
+                        applicant.Country = objApplicantInfo.Country;
+                        applicant.ContactNumber1 = objApplicantInfo.ContactNumber1;
+                        applicant.ContactNumber2 = objApplicantInfo.ContactNumber2;
+                        applicant.EmailAddress = objApplicantInfo.EmailAddress;
+                        applicant.LinkedInProfile = objApplicantInfo.LinkedInProfile;
+                        applicant.NIDNumber = objApplicantInfo.NIDNumber;
+                        applicant.TINNumber = objApplicantInfo.TINNumber;
+                        applicant.PassportNumber = objApplicantInfo.PassportNumber;
+                        applicant.TotalExperience = objApplicantInfo.TotalExperience;
+                        applicant.LastOrganization = objApplicantInfo.LastOrganization;
+                        applicant.LastOrgDesignation = objApplicantInfo.LastOrgDesignation;
+                        applicant.CanGetReleaseLtrLastOrg = objApplicantInfo.CanGetReleaseLtrLastOrg;
+                        applicant.WhyCantGetReleaseLtrLastOrg = objApplicantInfo.WhyCantGetReleaseLtrLastOrg;
+                        applicant.FieldOfExpertise = objApplicantInfo.FieldOfExpertise;
+                        applicant.LinkOfPublishedWork = objApplicantInfo.LinkOfPublishedWork;
                         applicant.IsActive = userData.IsActive;
                         applicant.EUserId = userData.CVPortalUsersId;
                         applicant.UpdateDate = DateTime.Now;
-
-                        objHrPayrollEntities.SaveChanges();
 
                         //var entityToUpdate = objHrPayrollEntities.tblApplicantInfoes.Find(objApplicantInfo.ApplicantId);
                         //objHrPayrollEntities.Entry(objtblApplicantInfo).State = EntityState.Modified;
@@ -65,8 +82,26 @@ namespace CVPortal.Controllers
                         objtblApplicantInfo.MaritalStatus = objApplicantInfo.MaritalStatus;
                         objtblApplicantInfo.HasDisability = objApplicantInfo.HasDisability;
                         objtblApplicantInfo.DisabilityInfo = objApplicantInfo.DisabilityInfo;
+                        objtblApplicantInfo.DistrictId = objApplicantInfo.DistrictId;
+                        objtblApplicantInfo.DistrictName = objApplicantInfo.DistrictName;
+                        objtblApplicantInfo.PresentAddress = objApplicantInfo.PresentAddress;
+                        objtblApplicantInfo.PermanentAddress = objApplicantInfo.PermanentAddress;
+                        objtblApplicantInfo.Country = objApplicantInfo.Country;
+                        objtblApplicantInfo.ContactNumber1 = objApplicantInfo.ContactNumber1;
+                        objtblApplicantInfo.ContactNumber2 = objApplicantInfo.ContactNumber2;
+                        objtblApplicantInfo.EmailAddress = objApplicantInfo.EmailAddress;
+                        objtblApplicantInfo.LinkedInProfile = objApplicantInfo.LinkedInProfile;
+                        objtblApplicantInfo.NIDNumber = objApplicantInfo.NIDNumber;
+                        objtblApplicantInfo.TINNumber = objApplicantInfo.TINNumber;
+                        objtblApplicantInfo.PassportNumber = objApplicantInfo.PassportNumber;
+                        objtblApplicantInfo.TotalExperience = objApplicantInfo.TotalExperience;
+                        objtblApplicantInfo.LastOrganization = objApplicantInfo.LastOrganization;
+                        objtblApplicantInfo.LastOrgDesignation = objApplicantInfo.LastOrgDesignation;
+                        objtblApplicantInfo.CanGetReleaseLtrLastOrg = objApplicantInfo.CanGetReleaseLtrLastOrg;
+                        objtblApplicantInfo.WhyCantGetReleaseLtrLastOrg = objApplicantInfo.WhyCantGetReleaseLtrLastOrg;
+                        objtblApplicantInfo.FieldOfExpertise = objApplicantInfo.FieldOfExpertise;
+                        objtblApplicantInfo.LinkOfPublishedWork = objApplicantInfo.LinkOfPublishedWork;
                         objtblApplicantInfo.IsActive = userData.IsActive;
-
                         objtblApplicantInfo.EUserId = userData.CVPortalUsersId;
                         objtblApplicantInfo.EntryDate = DateTime.Now;
 

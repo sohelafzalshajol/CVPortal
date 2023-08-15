@@ -28,7 +28,7 @@
     <Property Name="LinkedInProfile" Type="nvarchar(max)" />
     <Property Name="HasDisability" Type="int" Nullable="false" />
     <Property Name="DisabilityInfo" Type="nvarchar(max)" />
-    <Property Name="TotalExperience" Type="int" Nullable="false" />
+    <Property Name="TotalExperience" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="LastOrganization" Type="nvarchar(max)" />
     <Property Name="LastOrgDesignation" Type="nvarchar(max)" />
     <Property Name="CanGetReleaseLtrLastOrg" Type="nvarchar(max)" />
@@ -39,6 +39,8 @@
     <Property Name="EUserId" Type="bigint" />
     <Property Name="EntryDate" Type="datetime" />
     <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="ApplicantPhoto" Type="varbinary(max)" />
+    <Property Name="ApplicantSignature" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="tblCVPortalUsers">
     <Key>

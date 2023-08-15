@@ -31,13 +31,18 @@ namespace CVPortal.Models
         public string LinkedInProfile { get; set; }
         public int HasDisability { get; set; }
         public string DisabilityInfo { get; set; }
-        public int TotalExperience { get; set; }
+        public decimal TotalExperience { get; set; }
         public string LastOrganization { get; set; }
         public string LastOrgDesignation { get; set; }
         public string CanGetReleaseLtrLastOrg { get; set; }
         public string WhyCantGetReleaseLtrLastOrg { get; set; }
         public string FieldOfExpertise { get; set; }
         public string LinkOfPublishedWork { get; set; }
+
+
+        public byte[] ApplicantPhoto { get; set; }
+        public byte[] ApplicantSignature { get; set; }
+
 
         public int IsActive { get; set; }
         public long? EUserId { get; set; }

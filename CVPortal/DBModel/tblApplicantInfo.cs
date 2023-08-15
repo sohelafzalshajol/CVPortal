@@ -38,7 +38,7 @@ namespace CVPortal.DBModel
         public string LinkedInProfile { get; set; }
         public int HasDisability { get; set; }
         public string DisabilityInfo { get; set; }
-        public int TotalExperience { get; set; }
+        public decimal TotalExperience { get; set; }
         public string LastOrganization { get; set; }
         public string LastOrgDesignation { get; set; }
         public string CanGetReleaseLtrLastOrg { get; set; }
@@ -49,5 +49,7 @@ namespace CVPortal.DBModel
         public Nullable<long> EUserId { get; set; }
         public Nullable<System.DateTime> EntryDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public byte[] ApplicantPhoto { get; set; }
+        public byte[] ApplicantSignature { get; set; }
     }
 }

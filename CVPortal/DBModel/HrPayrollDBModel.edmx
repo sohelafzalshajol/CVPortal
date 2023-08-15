@@ -33,7 +33,7 @@
           <Property Name="LinkedInProfile" Type="nvarchar(max)" />
           <Property Name="HasDisability" Type="int" Nullable="false" />
           <Property Name="DisabilityInfo" Type="nvarchar(max)" />
-          <Property Name="TotalExperience" Type="int" Nullable="false" />
+          <Property Name="TotalExperience" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="LastOrganization" Type="nvarchar(max)" />
           <Property Name="LastOrgDesignation" Type="nvarchar(max)" />
           <Property Name="CanGetReleaseLtrLastOrg" Type="nvarchar(max)" />
@@ -44,6 +44,8 @@
           <Property Name="EUserId" Type="bigint" />
           <Property Name="EntryDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="ApplicantPhoto" Type="varbinary(max)" />
+          <Property Name="ApplicantSignature" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tblCVPortalUsers">
           <Key>
@@ -86,9 +88,17 @@
         </EntityType>
         <EntityContainer Name="HrPayrollEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUser" />
-          <EntitySet Name="tblApplicantInfoes" EntityType="HrPayrollDBModel.tblApplicantInfo" />
           <EntitySet Name="tblDistricts" EntityType="HrPayrollDBModel.tblDistrict" />
+          <EntitySet Name="tblApplicantInfoes" EntityType="HrPayrollDBModel.tblApplicantInfo" />
         </EntityContainer>
+        <EntityType Name="tblDistrict">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblApplicantInfo">
           <Key>
             <PropertyRef Name="ApplicantId" />
@@ -117,7 +127,7 @@
           <Property Name="LinkedInProfile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HasDisability" Type="Int32" Nullable="false" />
           <Property Name="DisabilityInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TotalExperience" Type="Int32" Nullable="false" />
+          <Property Name="TotalExperience" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="LastOrganization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastOrgDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CanGetReleaseLtrLastOrg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -128,14 +138,8 @@
           <Property Name="EUserId" Type="Int64" />
           <Property Name="EntryDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="tblDistrict">
-          <Key>
-            <PropertyRef Name="DistrictId" />
-          </Key>
-          <Property Name="DistrictId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="ApplicantPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ApplicantSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -155,9 +159,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblDistricts">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblDistrict">
+              <MappingFragment StoreEntitySet="tblDistricts">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tblApplicantInfoes">
             <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
               <MappingFragment StoreEntitySet="tblApplicantInfo">
+                <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
+                <ScalarProperty Name="ApplicantPhoto" ColumnName="ApplicantPhoto" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="EUserId" ColumnName="EUserId" />
@@ -193,15 +208,6 @@
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblDistricts">
-            <EntityTypeMapping TypeName="HrPayrollDBModel.tblDistrict">
-              <MappingFragment StoreEntitySet="tblDistricts">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

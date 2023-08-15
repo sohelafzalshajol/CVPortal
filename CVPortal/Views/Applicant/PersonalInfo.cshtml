@@ -81,6 +81,32 @@ else
                                     <label for="txtDisabilityInfo" class="form-label">what kind of disability?</label>
                                     <input type="text" class="form-control" id="txtDisabilityInfo" name="txtDisabilityInfo" placeholder="enter disability info" />
                                 </div>
+                                <div class="col-md-12 mb-2">
+                                    <div class="card-header my-2">
+                                        <h5><strong>Address Information</strong></h5>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="ddlDistrict" class="form-label required-label">District</label>
+                                        <select id="ddlDistrict" name="ddlDistrict" class="form-select" placeholder="--select district--" required>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtPresentAddress" class="form-label required-label">Present Address</label>
+                                        <input type="text" class="form-control" id="txtPresentAddress" name="txtPresentAddress" placeholder="enter present address" required />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtPermanentAddress" class="form-label">Permanent Address</label>
+                                        <input type="text" class="form-control" id="txtPermanentAddress" name="txtPermanentAddress" placeholder="enter permanent address" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtApplicantPhoto" class="form-label">Applicant Photo</label>
+                                        <input type="file" id="imgApplicantPhoto" name="imgApplicantPhoto" class="form-control" placeholder="enter applicant photo" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtApplicantSignature" class="form-label">Applicant Signature</label>
+                                        <input type="file" id="imgApplicantSignature" name="imgApplicantSignature" class="form-control" placeholder="enter applicant signature" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="card col-md-6 mb-2">
                                 <div class="card-header my-2">
@@ -123,20 +149,39 @@ else
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <div class="card-header my-2">
-                                        <h5><strong>Address Information</strong></h5>
+                                        <h5><strong>Experience Information</strong></h5>
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="ddlDistrict" class="form-label required-label">District</label>
-                                        <select id="ddlDistrict" name="ddlDistrict" class="form-select" placeholder="--select district--" required>
+                                        <label for="txtTotalExperience" class="form-label required-label">Total Year(s) of Experience</label>
+                                        <input type="number" class="form-control" id="txtTotalExperience" name="txtTotalExperience" placeholder="enter total experience in year" required />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtLastOrganization" class="form-label">Name of The Current/Last Organization</label>
+                                        <input type="text" class="form-control" id="txtLastOrganization" name="txtLastOrganization" placeholder="enter last organization" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtLastOrgDesignation" class="form-label">Position Held In The Current/Last Organization</label>
+                                        <input type="text" class="form-control" id="txtLastOrgDesignation" name="txtLastOrgDesignation" placeholder="enter last organization designation" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtCanGetReleaseLtrLastOrg" class="form-label required-label">Can You Get A Release Letter From Your Current/Last Organization?</label>
+                                        <select id="txtCanGetReleaseLtrLastOrg" name="txtCanGetReleaseLtrLastOrg" class="form-select" placeholder="select answer" required>
+                                            <option value="">--select answer--</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-2">
-                                        <label for="txtPresentAddress" class="form-label required-label">Present Address</label>
-                                        <input type="text" class="form-control" id="txtPresentAddress" name="txtPresentAddress" placeholder="enter present address" required />
+                                    <div class="form-group mb-2" id="divtxtWhyCantGetReleaseLtrLastOrg" style="display: none;">
+                                        <label for="txtWhyCantGetReleaseLtrLastOrg" class="form-label">If No, Then Please Explain The Reason</label>
+                                        <input type="text" class="form-control" id="txtWhyCantGetReleaseLtrLastOrg" name="txtWhyCantGetReleaseLtrLastOrg" placeholder="enter reason" />
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label for="txtPermanentAddress" class="form-label">Permanent Address</label>
-                                        <input type="text" class="form-control" id="txtPermanentAddress" name="txtPermanentAddress" placeholder="enter permanent address" />
+                                        <label for="txtFieldOfExpertise" class="form-label">Field of Expertise and Experience (Maximum 200 words)</label>
+                                        <input type="text" class="form-control" id="txtFieldOfExpertise" name="txtFieldOfExpertise" placeholder="enter field of expertise" />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtLinkOfPublishedWork" class="form-label">Link of Published Work (Maximum 3 if any)</label>
+                                        <input type="text" class="form-control" id="txtLinkOfPublishedWork" name="txtLinkOfPublishedWork" placeholder="enter link of published work" />
                                     </div>
                                 </div>
                             </div>
@@ -178,6 +223,24 @@ else
     var rdoYes = $("#rdoYes");
     var rdoNo = $("#rdoNo");
     var txtDisabilityInfo = $("#txtDisabilityInfo");
+    
+    var txtPresentAddress = $("#txtPresentAddress");
+    var txtPermanentAddress = $("#txtPermanentAddress");
+    var txtCountry = $("#txtCountry");
+    var txtContactNumber1 = $("#txtContactNumber1");
+    var txtContactNumber2 = $("#txtContactNumber2");
+    var txtEmailAddress = $("#txtEmailAddress");
+    var txtLinkedInProfile = $("#txtLinkedInProfile");
+    var txtNIDNumber = $("#txtNIDNumber");
+    var txtTINNumber = $("#txtTINNumber");
+    var txtPassportNumber = $("#txtPassportNumber");
+    var txtTotalExperience = $("#txtTotalExperience");
+    var txtLastOrganization = $("#txtLastOrganization");
+    var txtLastOrgDesignation = $("#txtLastOrgDesignation");
+    var txtCanGetReleaseLtrLastOrg = $("#txtCanGetReleaseLtrLastOrg");
+    var txtWhyCantGetReleaseLtrLastOrg = $("#txtWhyCantGetReleaseLtrLastOrg");
+    var txtFieldOfExpertise = $("#txtFieldOfExpertise");
+    var txtLinkOfPublishedWork = $("#txtLinkOfPublishedWork");
 
     var ddlDistrict = $('#ddlDistrict');
 
@@ -220,6 +283,15 @@ else
         $("#resetButton").click(function () {
             $("#PersonalInfoForm")[0].reset();
         });
+        $("#txtCanGetReleaseLtrLastOrg").change(function () {
+            var selectedValue = $(this).val();
+            if (selectedValue == "No") {
+                $("#divtxtWhyCantGetReleaseLtrLastOrg").show();
+            } else {
+                $("#divtxtWhyCantGetReleaseLtrLastOrg").hide();
+            }
+        });
+
     });
 
     function loadPersonalInfo() {
@@ -259,6 +331,25 @@ else
                     rdoNo.prop('checked', true);
                     $("#divDisabilityInfo").hide();
                 }
+
+                ddlDistrict.val(response.DistrictId);
+                txtPresentAddress.val(response.PresentAddress);
+                txtPermanentAddress.val(response.PermanentAddress);
+                txtCountry.val(response.Country);
+                txtContactNumber1.val(response.ContactNumber1);
+                txtContactNumber2.val(response.ContactNumber2);
+                txtEmailAddress.val(response.EmailAddress);
+                txtLinkedInProfile.val(response.LinkedInProfile);
+                txtNIDNumber.val(response.NIDNumber);
+                txtTINNumber.val(response.TINNumber);
+                txtPassportNumber.val(response.PassportNumber);
+                txtTotalExperience.val(response.TotalExperience);
+                txtLastOrganization.val(response.LastOrganization);
+                txtLastOrgDesignation.val(response.LastOrgDesignation);
+                txtCanGetReleaseLtrLastOrg.val(response.CanGetReleaseLtrLastOrg);
+                txtWhyCantGetReleaseLtrLastOrg.val(response.WhyCantGetReleaseLtrLastOrg);
+                txtFieldOfExpertise.val(response.FieldOfExpertise);
+                txtLinkOfPublishedWork.val(response.LinkOfPublishedWork);
             },
             error: function (error) {
                 console.log("Error loading personal info:", error);
@@ -285,7 +376,26 @@ else
             Gender: txtGender.val(),
             MaritalStatus: txtMaritalStatus.val(),
             HasDisability: HasDisability,
-            DisabilityInfo: txtDisabilityInfo.val()
+            DisabilityInfo: txtDisabilityInfo.val(),
+            DistrictId: ddlDistrict.val(),
+            DistrictName: $("#ddlDistrict option:selected").text(),
+            PresentAddress: txtPresentAddress.val(),
+            PermanentAddress: txtPermanentAddress.val(),
+            Country: txtCountry.val(),
+            ContactNumber1: txtContactNumber1.val(),
+            ContactNumber2: txtContactNumber2.val(),
+            EmailAddress: txtEmailAddress.val(),
+            LinkedInProfile: txtLinkedInProfile.val(),
+            NIDNumber: txtNIDNumber.val(),
+            TINNumber: txtTINNumber.val(),
+            PassportNumber: txtPassportNumber.val(),
+            TotalExperience: txtTotalExperience.val(),
+            LastOrganization: txtLastOrganization.val(),
+            LastOrgDesignation: txtLastOrgDesignation.val(),
+            CanGetReleaseLtrLastOrg: txtCanGetReleaseLtrLastOrg.val(),
+            WhyCantGetReleaseLtrLastOrg: txtWhyCantGetReleaseLtrLastOrg.val(),
+            FieldOfExpertise: txtFieldOfExpertise.val(),
+            LinkOfPublishedWork: txtLinkOfPublishedWork.val()
         };
 
         $.ajax({

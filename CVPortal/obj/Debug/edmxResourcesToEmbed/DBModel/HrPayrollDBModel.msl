@@ -13,9 +13,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblDistricts">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblDistrict">
+        <MappingFragment StoreEntitySet="tblDistricts">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblApplicantInfoes">
       <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
         <MappingFragment StoreEntitySet="tblApplicantInfo">
+          <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
+          <ScalarProperty Name="ApplicantPhoto" ColumnName="ApplicantPhoto" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
           <ScalarProperty Name="EUserId" ColumnName="EUserId" />
@@ -51,15 +62,6 @@
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblDistricts">
-      <EntityTypeMapping TypeName="HrPayrollDBModel.tblDistrict">
-        <MappingFragment StoreEntitySet="tblDistricts">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
