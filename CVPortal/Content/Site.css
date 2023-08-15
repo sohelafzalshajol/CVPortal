@@ -1,12 +1,12 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    font-family: "Poppins", sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -17,8 +17,79 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 380px;
+}*/
+
+.textColor {
+    color: #030F27;
+}
+
+.navbarBgDark {
+    background: #030F27;
+}
+
+.navbar-nav .nav-link.active {
+    color: #EDA72F;
+}
+
+.nav-link:hover {
+    color: #EDA72F;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.getBtn {
+    color: #fff;
+}
+
+.sideLine {
+    border-right: 1px solid #030F27;
+}
+
+.iconHeight {
+    height: 24px;
+    width: 24px;
+}
+
+@media screen and (min-width: 992px) {
+    .sideLine {
+        border-right: none;
+    }
+
+    .iconHeight {
+        height: 46px;
+        width: 46px;
+    }
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    /*padding-left: .75em;
+    padding-right: .75em;*/
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.required-label::after {
+    content: "*";
+    color: red;
+}
+
+.error {
+    color: #F00;
+    background-color: #ede4e4;
+    border-radius: 5px;
+}
+
+form label {
+    font-weight: bold;
+    color: #3d3d1d;
 }

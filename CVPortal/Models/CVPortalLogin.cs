@@ -6,8 +6,8 @@ using System.Web;
 
 namespace CVPortal.Models
 {
-    public class CVPortalLogin
-    {
+	public class CVPortalLogin
+	{
 		public long CVPortalUsersId { get; set; }
 		public string UserName { get; set; }
 

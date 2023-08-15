@@ -2,82 +2,99 @@
 @{
     ViewBag.Title = "Register";
 }
-<legend>
-    User Registration
-</legend>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
-       @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card card-registration my-4">
+                        <div class="row g-0">
+                            <div class="col-xl-6 d-none d-xl-block">
+                                <img src="~/Content/img/HRM_Vector.jpg"
+                                     alt="Sample photo" class="img-fluid"
+                                     style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; height: 512px;" />
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card-body text-black">
+                                    <h3>User Registration Form</h3>
 
-       @*<table>
-           <tr>
-               <td>
-                   @Html.LabelFor(model => model.UserName)
-               </td>
-               <td>
-                   @Html.TextBoxFor(model => model.UserName)
-               </td>
-           </tr>
-       </table>*@
+                                    <div class="form-horizontal" id="RegistrationForm">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-6" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "enter your name" } })
+                                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-       <div class="form-horizontal">
-           @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-           <div class="form-group">
-               @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                   @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                   @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-               </div>
-           </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-6" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "enter your email" } })
+                                                @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-           <div class="form-group">
-               @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                   @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
-                   @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
-               </div>
-           </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-6" })
+                                            <div class="col-md-10">
+                                                @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control", placeholder = "enter password" })
+                                                @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-           <div class="form-group">
-               @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                   @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control" })
-                   @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
-               </div>
-           </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserRePassword, htmlAttributes: new { @class = "control-label col-md-6" })
+                                            <div class="col-md-10">
+                                                @Html.PasswordFor(model => model.UserRePassword, new { @class = "form-control", placeholder = "re-enter Password" })
+                                                @Html.ValidationMessageFor(model => model.UserRePassword, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-           <div class="form-group">
-               @Html.LabelFor(model => model.UserRePassword, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                   @Html.PasswordFor(model => model.UserRePassword, new { @class = "form-control" })
-                   @Html.ValidationMessageFor(model => model.UserRePassword, "", new { @class = "text-danger" })
-               </div>
-           </div>
-           
-           <div class="form-group">
-               <div class="col-md-2">
+                                        <div class="form-group pt-3">
+                                            <div class="col-md-2">
 
-               </div>
-               <div class="col-md-2">
-                   <input type="reset" value="Reset" class="btn btn-default" />
-                   <input type="submit" value="Register" class="btn btn-default" />
-               </div>
-               <div class="clearfix"></div>
-               <br />
-               @{
-                   if (!string.IsNullOrEmpty(Model.SuccessMessage))
-                   {
-                       <div class="alert alert-success" role="alert">
-                           <strong>Success!</strong> @Model.SuccessMessage
-                       </div>
-                   }
-                   if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                   {
-                       <div class="alert alert-warning" role="alert">
-                           <strong>Sorry!</strong> @Model.ErrorMessage
-                       </div>
-                   }
-               }
-           </div>
-       </div>
- }
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input id="resetButton" type="reset" value="Reset" class="btn btn-light btn-lg" />
+                                                <input type="submit" value="Register" class="btn btn-warning btn-lg ms-2" />
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <br />
+                                            @{
+                                                if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                                                {
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>Success!</strong> @Model.SuccessMessage <a href="@Url.Action("Login", "Account")">Login</a> Now
+                                                    </div>
+                                                }
+                                                if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                                {
+                                                    <div class="alert alert-warning" role="alert">
+                                                        <strong>Sorry!</strong> @Model.ErrorMessage
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<script>
+    $(document).ready(function () {
+        $("#resetButton").click(function () {
+            $("#RegistrationForm")[0].reset();
+        });
+    });
+</script>

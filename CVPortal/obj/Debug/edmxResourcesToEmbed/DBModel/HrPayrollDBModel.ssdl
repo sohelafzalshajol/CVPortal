@@ -1,5 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="HrPayrollDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblApplicantInfo">
+    <Key>
+      <PropertyRef Name="ApplicantId" />
+    </Key>
+    <Property Name="ApplicantId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="MiddleName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="FatherName" Type="nvarchar(max)" />
+    <Property Name="MotherName" Type="nvarchar(max)" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="Age" Type="nvarchar(max)" />
+    <Property Name="MaritalStatus" Type="nvarchar(max)" />
+    <Property Name="Gender" Type="nvarchar(max)" />
+    <Property Name="Country" Type="nvarchar(max)" />
+    <Property Name="ContactNumber1" Type="nvarchar(max)" />
+    <Property Name="ContactNumber2" Type="nvarchar(max)" />
+    <Property Name="NIDNumber" Type="nvarchar(max)" />
+    <Property Name="TINNumber" Type="nvarchar(max)" />
+    <Property Name="PassportNumber" Type="nvarchar(max)" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" />
+    <Property Name="PresentAddress" Type="nvarchar(max)" />
+    <Property Name="PermanentAddress" Type="nvarchar(max)" />
+    <Property Name="DistrictName" Type="nvarchar(max)" />
+    <Property Name="DistrictId" Type="bigint" Nullable="false" />
+    <Property Name="LinkedInProfile" Type="nvarchar(max)" />
+    <Property Name="HasDisability" Type="int" Nullable="false" />
+    <Property Name="DisabilityInfo" Type="nvarchar(max)" />
+    <Property Name="TotalExperience" Type="int" Nullable="false" />
+    <Property Name="LastOrganization" Type="nvarchar(max)" />
+    <Property Name="LastOrgDesignation" Type="nvarchar(max)" />
+    <Property Name="CanGetReleaseLtrLastOrg" Type="nvarchar(max)" />
+    <Property Name="WhyCantGetReleaseLtrLastOrg" Type="nvarchar(max)" />
+    <Property Name="FieldOfExpertise" Type="nvarchar(max)" />
+    <Property Name="LinkOfPublishedWork" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="EUserId" Type="bigint" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="tblCVPortalUsers">
     <Key>
       <PropertyRef Name="CVPortalUsersId" />
@@ -11,7 +51,17 @@
     <Property Name="IsActive" Type="int" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="tblDistricts">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DistrictName" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+  </EntityType>
   <EntityContainer Name="HrPayrollDBModelStoreContainer">
+    <EntitySet Name="tblApplicantInfo" EntityType="Self.tblApplicantInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDistricts" EntityType="Self.tblDistricts" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

@@ -100,6 +100,29 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap-grid.css" />
+    <Content Include="Content\css\bootstrap-grid.min.css" />
+    <Content Include="Content\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\css\bootstrap-reboot.css" />
+    <Content Include="Content\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\css\bootstrap-utilities.css" />
+    <Content Include="Content\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap.rtl.css" />
+    <Content Include="Content\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\building-check.svg" />
+    <Content Include="Content\img\envelope-of-white-paper.svg" />
+    <Content Include="Content\img\HRM_Rec.jpg" />
+    <Content Include="Content\img\HRM_Vector.jpg" />
+    <Content Include="Content\img\mail-svgrepo-com.svg" />
+    <Content Include="Content\img\telephone-inbound-fill.svg" />
+    <Content Include="Content\img\telephone-svgrepo-com.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="DBModel\HrPayrollDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -112,6 +135,26 @@
       <LastGenOutput>HrPayrollDBModel.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\css\bootstrap-grid.css.map" />
+    <Content Include="Content\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\bootstrap.min.css.map" />
+    <Content Include="Content\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\css\bootstrap.rtl.min.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -124,12 +167,19 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\bootstrap.bundle.js" />
+    <Content Include="Scripts\js\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\js\bootstrap.esm.js" />
+    <Content Include="Scripts\js\bootstrap.esm.min.js" />
+    <Content Include="Scripts\js\bootstrap.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DBModel\HrPayrollDBModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -146,14 +196,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HrPayrollDBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\tblApplicantInfo.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\tblCVPortalUser.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\tblDistrict.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicantInfo.cs" />
     <Compile Include="Models\CVPortalLogin.cs" />
     <Compile Include="Models\CVPortalUsers.cs" />
+    <Compile Include="Models\District.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -165,10 +223,6 @@
     <Content Include="DBModel\HrPayrollDBModel.edmx.diagram">
       <DependentUpon>HrPayrollDBModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -176,8 +230,15 @@
     <Content Include="Views\Shared\_loginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Applicant\PersonalInfo.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\js\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\js\bootstrap.esm.js.map" />
+    <Content Include="Scripts\js\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\js\bootstrap.js.map" />
+    <Content Include="Scripts\js\bootstrap.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

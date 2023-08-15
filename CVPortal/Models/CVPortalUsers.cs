@@ -6,8 +6,8 @@ using System.Web;
 
 namespace CVPortal.Models
 {
-    public class CVPortalUsers
-    {
+	public class CVPortalUsers
+	{
 		public long CVPortalUsersId { get; set; }
 
 		[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter User Name")]
@@ -33,7 +33,7 @@ namespace CVPortal.Models
 
 		public int IsActive { get; set; }
 		public Nullable<DateTime> CreateDate { get; set; }
-        public string SuccessMessage { get; set; }
+		public string SuccessMessage { get; set; }
 		public string ErrorMessage { get; set; }
 	}
 }

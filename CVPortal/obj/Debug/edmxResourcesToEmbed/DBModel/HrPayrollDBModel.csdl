@@ -13,5 +13,55 @@
   </EntityType>
   <EntityContainer Name="HrPayrollEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUser" />
+    <EntitySet Name="tblApplicantInfoes" EntityType="HrPayrollDBModel.tblApplicantInfo" />
+    <EntitySet Name="tblDistricts" EntityType="HrPayrollDBModel.tblDistrict" />
   </EntityContainer>
+  <EntityType Name="tblApplicantInfo">
+    <Key>
+      <PropertyRef Name="ApplicantId" />
+    </Key>
+    <Property Name="ApplicantId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaritalStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NIDNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TINNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PassportNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PresentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictId" Type="Int64" Nullable="false" />
+    <Property Name="LinkedInProfile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HasDisability" Type="Int32" Nullable="false" />
+    <Property Name="DisabilityInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalExperience" Type="Int32" Nullable="false" />
+    <Property Name="LastOrganization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastOrgDesignation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CanGetReleaseLtrLastOrg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WhyCantGetReleaseLtrLastOrg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FieldOfExpertise" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LinkOfPublishedWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+    <Property Name="EUserId" Type="Int64" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblDistrict">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

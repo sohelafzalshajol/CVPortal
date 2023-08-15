@@ -1,23 +1,12 @@
 ﻿@if (Session["objUser"] == null)
-    {
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Register", "Register", "Account", null, null)
-            </li>
-            <li>
-                @Html.ActionLink("Login", "Login", "Account", null, null)
-            </li>
-        </ul> 
-    }
-    else
-    {
-    
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hi! "+Session["UserName"], "Home", "Home", null, null)
-            </li>
-            <li>
-                @Html.ActionLink("Logout", "Logout", "Account", null, null)
-            </li>
-        </ul>
-    }
+{
+<div class="text-white m-1 p-3">
+    @Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @class = "btn getBtn border border-white rounded-0", type = "button" })
+    @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { @class = "btn getBtn border border-white rounded-0", type = "button" })
+</div> }
+            else
+            {
+<div class="text-white m-1 p-3">
+    @Html.ActionLink("Hi! " + Session["UserName"], "Home", "Home", new { area = "" }, new { @class = "btn getBtn border border-white rounded-0", type = "button" })
+    @Html.ActionLink("Logout", "Logout", "Account", new { area = "" }, new { @class = "btn getBtn border border-white rounded-0", type = "button" })
+</div>}

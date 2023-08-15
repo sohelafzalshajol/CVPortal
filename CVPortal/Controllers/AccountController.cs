@@ -48,7 +48,7 @@ namespace CVPortal.Controllers
                     objCVPortalUsers.SuccessMessage = string.Format(@"{0} is successfully registered!", objtblCVPortalUser.UserName);
                 }
             }
-            
+
             return View(objCVPortalUsers);
         }
         public ActionResult Login()
@@ -66,6 +66,13 @@ namespace CVPortal.Controllers
                 {
                     ModelState.AddModelError("Error", "Email or Password is not matching!");
                     string error = "Email or Password is not matching!";
+                    objCVPortalLogin = new CVPortalLogin();
+                    objCVPortalLogin.ErrorMessage = error;
+                }
+                else if (user != null && user.IsActive == 0)
+                {
+                    ModelState.AddModelError("Error", "Contact the administrator to obtain permission!");
+                    string error = "Contact the administrator to obtain permission!";
                     objCVPortalLogin = new CVPortalLogin();
                     objCVPortalLogin.ErrorMessage = error;
                 }

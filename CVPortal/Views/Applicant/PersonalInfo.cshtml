@@ -1,0 +1,340 @@
+﻿
+@{
+    ViewBag.Title = "PersonalInfo";
+}
+@if (Session["objUser"] == null || Session["UserEmail"] == null)
+{
+    Response.Redirect("~/Account/Login");
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="card my-4">
+                <div class="card-body">
+                    <form id="PersonalInfoForm">
+                        <div class="row">
+                            <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="" />
+                            <div class="card col-md-6 mb-2">
+                                <div class="card-header my-2">
+                                    <h5><strong>Basic Information</strong></h5>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtFirstName" class="form-label required-label">First Name</label>
+                                    <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" placeholder="enter first name" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtMiddleName" class="form-label">Middle Name</label>
+                                    <input type="text" class="form-control" id="txtMiddleName" name="txtMiddleName" placeholder="enter middle name" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtLastName" class="form-label required-label">Last Name</label>
+                                    <input type="text" class="form-control" id="txtLastName" name="txtLastName" placeholder="enter last name" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtFatherName" class="form-label">Father's Name</label>
+                                    <input type="text" class="form-control" id="txtFatherName" name="txtFatherName" placeholder="enter father's name" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtMotherName" class="form-label">Mother's Name</label>
+                                    <input type="text" class="form-control" id="txtMotherName" name="txtMotherName" placeholder="enter mother's name" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtDOB" class="form-label required-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="txtDOB" name="txtDOB" placeholder="enter date of birth" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtAge" class="form-label required-label">Age</label>
+                                    <input type="text" class="form-control" id="txtAge" name="txtAge" placeholder="enter age" disabled />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtGender" class="form-label required-label">Gender</label>
+                                    <select id="txtGender" name="txtGender" class="form-select" placeholder="select gender" required>
+                                        <option value="">--select gender--</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtMaritalStatus" class="form-label required-label">Marital Status</label>
+                                    <select id="txtMaritalStatus" name="txtMaritalStatus" class="form-select" placeholder="select marital status" required>
+                                        <option value="">--select marital status--</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Unmarried">Unmarried</option>
+                                        <option value="Separated">Separated</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2" id="divDisability">
+                                    <label for="" class="form-label">Do you have any Disability?</label>
+                                    <div class="form-check col-md-2">
+                                        <input type="radio" class="form-check-input" id="rdoYes" name="rdoDisability" value="1">
+                                        <label class="form-check-label" for="rdoYes">Yes</label>
+                                    </div>
+                                    <div class="form-check col-md-2">
+                                        <input type="radio" class="form-check-input" id="rdoNo" name="rdoDisability" value="0">
+                                        <label class="form-check-label" for="rdoNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2" id="divDisabilityInfo" style="display: none;">
+                                    <label for="txtDisabilityInfo" class="form-label">what kind of disability?</label>
+                                    <input type="text" class="form-control" id="txtDisabilityInfo" name="txtDisabilityInfo" placeholder="enter disability info" />
+                                </div>
+                            </div>
+                            <div class="card col-md-6 mb-2">
+                                <div class="card-header my-2">
+                                    <h5><strong>Contact Information</strong></h5>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtCountry" class="form-label required-label">Country</label>
+                                    <select id="txtCountry" name="txtCountry" class="form-select" placeholder="select country" required>
+                                        <option value="">--select country--</option>
+                                        <option value="Bangladesh">Bangladesh</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtContactNumber1" class="form-label required-label">Contact Number 1</label>
+                                    <input type="text" class="form-control" id="txtContactNumber1" name="txtContactNumber1" placeholder="enter contact number 1" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtContactNumber2" class="form-label">Contact Number 2</label>
+                                    <input type="text" class="form-control" id="txtContactNumber2" name="txtContactNumber2" placeholder="enter contact number 2" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtEmailAddress" class="form-label required-label">Email Address</label>
+                                    <input type="email" class="form-control" id="txtEmailAddress" name="txtEmailAddress" placeholder="enter email address" required />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtLinkedInProfile" class="form-label">LinkedIn Profile</label>
+                                    <input type="text" class="form-control" id="txtLinkedInProfile" name="txtLinkedInProfile" placeholder="enter linkedIn profile link" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtNIDNumber" class="form-label">NID Number</label>
+                                    <input type="text" class="form-control" id="txtNIDNumber" name="txtNIDNumber" placeholder="enter NID number" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtTINNumber" class="form-label">TIN Number</label>
+                                    <input type="text" class="form-control" id="txtTINNumber" name="txtTINNumber" placeholder="enter TIN number" />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="txtPassportNumber" class="form-label">Passport Number</label>
+                                    <input type="text" class="form-control" id="txtPassportNumber" name="txtPassportNumber" placeholder="enter passport number" />
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <div class="card-header my-2">
+                                        <h5><strong>Address Information</strong></h5>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="ddlDistrict" class="form-label required-label">District</label>
+                                        <select id="ddlDistrict" name="ddlDistrict" class="form-select" placeholder="--select district--" required>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtPresentAddress" class="form-label required-label">Present Address</label>
+                                        <input type="text" class="form-control" id="txtPresentAddress" name="txtPresentAddress" placeholder="enter present address" required />
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="txtPermanentAddress" class="form-label">Permanent Address</label>
+                                        <input type="text" class="form-control" id="txtPermanentAddress" name="txtPermanentAddress" placeholder="enter permanent address" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 mx-auto text-center mt-2">
+                            <div id="divSuccess" class="alert alert-success" role="alert" style="display:none;">
+                                <strong>Success!</strong>
+                            </div>
+                            <div id="divEror" class="alert alert-warning" role="alert" style="display:none;">
+                                <strong>Sorry!</strong>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-md-6 mx-auto text-center">
+                                <input id="resetButton" type="reset" value="Reset" class="btn btn-light btn-lg" />
+                                <button type="submit" id="btnSavePersonalInfo" class="btn btn-warning btn-lg ms-2" value="Submit">Submit</button>
+                            </div>
+                        </div>
+                        <div id="response" class="col-md-8 mx-auto text-center"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    var txtApplicantId = $("#txtApplicantId");
+    var txtFirstName = $("#txtFirstName");
+    var txtMiddleName = $("#txtMiddleName");
+    var txtLastName = $("#txtLastName");
+    var txtFatherName = $("#txtFatherName");
+    var txtMotherName = $("#txtMotherName");
+    var txtDOB = $("#txtDOB");
+    var txtAge = $("#txtAge");
+    var txtGender = $("#txtGender");
+    var txtMaritalStatus = $("#txtMaritalStatus");
+    var rdoYes = $("#rdoYes");
+    var rdoNo = $("#rdoNo");
+    var txtDisabilityInfo = $("#txtDisabilityInfo");
+
+    var ddlDistrict = $('#ddlDistrict');
+
+    $(document).ready(function () {
+        loadddlDistrict();
+        loadPersonalInfo();
+        $("#btnSavePersonalInfo").click(function (event) {
+            debugger;
+            event.preventDefault();
+            if ($("#PersonalInfoForm").valid() && ddlDistrict.val() > 0) {
+                SavePersonalInfo();
+            } else {
+                $("#divEror").html("<strong>Sorry!</strong> Please fill-up the required (*) fields");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+        });
+        $('#divDisability').change(function () {
+            var HasDisability = $("input[name='rdoDisability']:checked").val();
+            if (HasDisability == 1) {
+                $("#divDisabilityInfo").show();
+            } else {
+                $("#divDisabilityInfo").hide();
+            }
+        });
+        $('#txtDOB').change(function () {
+            debugger
+            var dob = new Date(txtDOB.val());
+            var currentDate = new Date();
+
+            const oneDayMins = 1000 * 60 * 60 * 24;
+            const ageInMilliseconds = currentDate - dob;
+            const diffDays = Math.floor(ageInMilliseconds / oneDayMins);
+            const years = Math.floor(diffDays / 365.25);
+            const months = Math.floor(diffDays / 30.44) % 12;
+            const days = diffDays - (Math.floor(years * 365.25)) - (Math.floor(months * 30.44));
+
+            txtAge.val(years + " Years " + months + " Months " + days + " Days");
+        });
+        $("#resetButton").click(function () {
+            $("#PersonalInfoForm")[0].reset();
+        });
+    });
+
+    function loadPersonalInfo() {
+        debugger;
+        var ApplicantId = txtApplicantId.val() == "" ? 0 : parseInt(txtApplicantId.val());
+        var objData = {
+            ApplicantId: ApplicantId
+        };
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("loadPersonalInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            data: objData,
+            dataType: "json",
+            success: function (response) {
+                debugger
+                txtApplicantId.val(response.ApplicantId);
+                txtFirstName.val(response.FirstName);
+                txtMiddleName.val(response.MiddleName);
+                txtLastName.val(response.LastName);
+                txtFatherName.val(response.FatherName);
+                txtMotherName.val(response.MotherName);
+                var milliseconds = parseInt(response.DOB.replace('/Date(', '').replace(')/', ''), 10);
+                var formatedDate = new Date(milliseconds);
+                milliseconds = formatedDate.setDate(formatedDate.getDate() + 1);
+                formatedDate = new Date(milliseconds);
+                var dt = formatedDate.toISOString().substr(0, 10);
+                txtDOB.val(dt);
+                txtAge.val(response.Age);
+                txtGender.val(response.Gender);
+                txtMaritalStatus.val(response.MaritalStatus);
+                txtDisabilityInfo.val(response.DisabilityInfo);
+                if (response.HasDisability == 1) {
+                    rdoYes.prop('checked', true);
+                    $("#divDisabilityInfo").show();
+                } else {
+                    rdoNo.prop('checked', true);
+                    $("#divDisabilityInfo").hide();
+                }
+            },
+            error: function (error) {
+                console.log("Error loading personal info:", error);
+            }
+        });
+    }
+
+    function SavePersonalInfo() {
+        debugger;
+        var HasDisability = 0;
+        if ($("input[name='rdoDisability']:checked").val() == 1) {
+             HasDisability = 1;
+        }
+        var ApplicantId = txtApplicantId.val() == "" ? 0 : txtApplicantId.val();
+        var objData = {
+            ApplicantId: ApplicantId,
+            FirstName: txtFirstName.val(),
+            MiddleName: txtMiddleName.val(),
+            LastName: txtLastName.val(),
+            FatherName: txtFatherName.val(),
+            MotherName: txtMotherName.val(),
+            DOB: txtDOB.val(),
+            Age: txtAge.val(),
+            Gender: txtGender.val(),
+            MaritalStatus: txtMaritalStatus.val(),
+            HasDisability: HasDisability,
+            DisabilityInfo: txtDisabilityInfo.val()
+        };
+
+        $.ajax({
+                url: "@Url.Action("PersonalInfo", "Applicant")",
+                type: "POST",
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(objData),
+                success: function(response) {
+                    if (response) {
+                        /*$("#response").html(response.message);*/
+                        $("#divSuccess").html("<strong>Success!</strong> Personal Info Saved/Updated Successfully");
+                        $("#divSuccess").show();
+                        $("#divEror").hide();
+                    } else {
+                        /*$("#response").html(response.message);*/
+                        $("#divEror").html("<strong>Sorry!</strong> Personal Info. Saved/Updated Unsuccessful");
+                        $("#divEror").show();
+                        $("#divSuccess").hide();
+                    }
+                },
+            error: function () {
+                $("#divEror").html("An error occurred while sending the request");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+
+                }
+            });
+
+    }
+
+    function loadddlDistrict() {
+        $.ajax({
+            url: "@Url.Action("GetDistricts", "Applicant")",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                debugger
+                ddlDistrict.empty();
+                ddlDistrict.append($('<option>').text('--select district--').attr('value', 0));
+                data.forEach(function (district) {
+                    ddlDistrict.append($('<option>').text(district.DistrictName).attr('value', district.DistrictId));
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching district data: ' + error);
+            }
+        });
+    }
+
+
+</script>

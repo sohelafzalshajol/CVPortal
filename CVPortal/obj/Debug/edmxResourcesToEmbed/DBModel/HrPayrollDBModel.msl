@@ -13,5 +13,55 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblApplicantInfoes">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
+        <MappingFragment StoreEntitySet="tblApplicantInfo">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LinkOfPublishedWork" ColumnName="LinkOfPublishedWork" />
+          <ScalarProperty Name="FieldOfExpertise" ColumnName="FieldOfExpertise" />
+          <ScalarProperty Name="WhyCantGetReleaseLtrLastOrg" ColumnName="WhyCantGetReleaseLtrLastOrg" />
+          <ScalarProperty Name="CanGetReleaseLtrLastOrg" ColumnName="CanGetReleaseLtrLastOrg" />
+          <ScalarProperty Name="LastOrgDesignation" ColumnName="LastOrgDesignation" />
+          <ScalarProperty Name="LastOrganization" ColumnName="LastOrganization" />
+          <ScalarProperty Name="TotalExperience" ColumnName="TotalExperience" />
+          <ScalarProperty Name="DisabilityInfo" ColumnName="DisabilityInfo" />
+          <ScalarProperty Name="HasDisability" ColumnName="HasDisability" />
+          <ScalarProperty Name="LinkedInProfile" ColumnName="LinkedInProfile" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+          <ScalarProperty Name="TINNumber" ColumnName="TINNumber" />
+          <ScalarProperty Name="NIDNumber" ColumnName="NIDNumber" />
+          <ScalarProperty Name="ContactNumber2" ColumnName="ContactNumber2" />
+          <ScalarProperty Name="ContactNumber1" ColumnName="ContactNumber1" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDistricts">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblDistrict">
+        <MappingFragment StoreEntitySet="tblDistricts">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
