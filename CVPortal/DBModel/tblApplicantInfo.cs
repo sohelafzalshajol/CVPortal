@@ -51,5 +51,7 @@ namespace CVPortal.DBModel
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public byte[] ApplicantPhoto { get; set; }
         public byte[] ApplicantSignature { get; set; }
+        public string ApplicantPhotoPath { get; set; }
+        public string ApplicantSignaturePath { get; set; }
     }
 }

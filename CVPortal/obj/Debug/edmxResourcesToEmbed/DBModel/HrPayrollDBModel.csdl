@@ -65,5 +65,7 @@
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <Property Name="ApplicantPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="ApplicantSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ApplicantPhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApplicantSignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

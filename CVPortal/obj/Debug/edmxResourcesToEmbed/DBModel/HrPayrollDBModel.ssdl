@@ -41,6 +41,8 @@
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="ApplicantPhoto" Type="varbinary(max)" />
     <Property Name="ApplicantSignature" Type="varbinary(max)" />
+    <Property Name="ApplicantPhotoPath" Type="nvarchar(max)" />
+    <Property Name="ApplicantSignaturePath" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="tblCVPortalUsers">
     <Key>

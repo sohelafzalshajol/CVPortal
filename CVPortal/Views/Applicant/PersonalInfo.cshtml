@@ -12,42 +12,42 @@ else
         <div class="row">
             <div class="card my-4">
                 <div class="card-body">
-                    <form id="PersonalInfoForm">
+                    <form id="PersonalInfoForm" enctype = "multipart/form-data">
                         <div class="row">
-                            <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="" />
+                            <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
                             <div class="card col-md-6 mb-2">
                                 <div class="card-header my-2">
                                     <h5><strong>Basic Information</strong></h5>
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtFirstName" class="form-label required-label">First Name</label>
                                     <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" placeholder="enter first name" required />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtMiddleName" class="form-label">Middle Name</label>
                                     <input type="text" class="form-control" id="txtMiddleName" name="txtMiddleName" placeholder="enter middle name" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtLastName" class="form-label required-label">Last Name</label>
                                     <input type="text" class="form-control" id="txtLastName" name="txtLastName" placeholder="enter last name" required />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtFatherName" class="form-label">Father's Name</label>
                                     <input type="text" class="form-control" id="txtFatherName" name="txtFatherName" placeholder="enter father's name" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtMotherName" class="form-label">Mother's Name</label>
                                     <input type="text" class="form-control" id="txtMotherName" name="txtMotherName" placeholder="enter mother's name" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtDOB" class="form-label required-label">Date of Birth</label>
                                     <input type="date" class="form-control" id="txtDOB" name="txtDOB" placeholder="enter date of birth" required />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtAge" class="form-label required-label">Age</label>
                                     <input type="text" class="form-control" id="txtAge" name="txtAge" placeholder="enter age" disabled />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtGender" class="form-label required-label">Gender</label>
                                     <select id="txtGender" name="txtGender" class="form-select" placeholder="select gender" required>
                                         <option value="">--select gender--</option>
@@ -55,7 +55,7 @@ else
                                         <option value="Female">Female</option>
                                     </select>
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtMaritalStatus" class="form-label required-label">Marital Status</label>
                                     <select id="txtMaritalStatus" name="txtMaritalStatus" class="form-select" placeholder="select marital status" required>
                                         <option value="">--select marital status--</option>
@@ -66,7 +66,7 @@ else
                                         <option value="Widowed">Widowed</option>
                                     </select>
                                 </div>
-                                <div class="form-group mb-2" id="divDisability">
+                                <div class="mb-2" id="divDisability">
                                     <label for="" class="form-label">Do you have any Disability?</label>
                                     <div class="form-check col-md-2">
                                         <input type="radio" class="form-check-input" id="rdoYes" name="rdoDisability" value="1">
@@ -77,7 +77,7 @@ else
                                         <label class="form-check-label" for="rdoNo">No</label>
                                     </div>
                                 </div>
-                                <div class="form-group mb-2" id="divDisabilityInfo" style="display: none;">
+                                <div class="mb-2" id="divDisabilityInfo" style="display: none;">
                                     <label for="txtDisabilityInfo" class="form-label">what kind of disability?</label>
                                     <input type="text" class="form-control" id="txtDisabilityInfo" name="txtDisabilityInfo" placeholder="enter disability info" />
                                 </div>
@@ -85,26 +85,18 @@ else
                                     <div class="card-header my-2">
                                         <h5><strong>Address Information</strong></h5>
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="ddlDistrict" class="form-label required-label">District</label>
                                         <select id="ddlDistrict" name="ddlDistrict" class="form-select" placeholder="--select district--" required>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtPresentAddress" class="form-label required-label">Present Address</label>
                                         <input type="text" class="form-control" id="txtPresentAddress" name="txtPresentAddress" placeholder="enter present address" required />
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtPermanentAddress" class="form-label">Permanent Address</label>
                                         <input type="text" class="form-control" id="txtPermanentAddress" name="txtPermanentAddress" placeholder="enter permanent address" />
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="txtApplicantPhoto" class="form-label">Applicant Photo</label>
-                                        <input type="file" id="imgApplicantPhoto" name="imgApplicantPhoto" class="form-control" placeholder="enter applicant photo" />
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label for="txtApplicantSignature" class="form-label">Applicant Signature</label>
-                                        <input type="file" id="imgApplicantSignature" name="imgApplicantSignature" class="form-control" placeholder="enter applicant signature" />
                                     </div>
                                 </div>
                             </div>
@@ -112,38 +104,38 @@ else
                                 <div class="card-header my-2">
                                     <h5><strong>Contact Information</strong></h5>
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtCountry" class="form-label required-label">Country</label>
                                     <select id="txtCountry" name="txtCountry" class="form-select" placeholder="select country" required>
                                         <option value="">--select country--</option>
                                         <option value="Bangladesh">Bangladesh</option>
                                     </select>
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtContactNumber1" class="form-label required-label">Contact Number 1</label>
                                     <input type="text" class="form-control" id="txtContactNumber1" name="txtContactNumber1" placeholder="enter contact number 1" required />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtContactNumber2" class="form-label">Contact Number 2</label>
                                     <input type="text" class="form-control" id="txtContactNumber2" name="txtContactNumber2" placeholder="enter contact number 2" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtEmailAddress" class="form-label required-label">Email Address</label>
                                     <input type="email" class="form-control" id="txtEmailAddress" name="txtEmailAddress" placeholder="enter email address" required />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtLinkedInProfile" class="form-label">LinkedIn Profile</label>
                                     <input type="text" class="form-control" id="txtLinkedInProfile" name="txtLinkedInProfile" placeholder="enter linkedIn profile link" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtNIDNumber" class="form-label">NID Number</label>
                                     <input type="text" class="form-control" id="txtNIDNumber" name="txtNIDNumber" placeholder="enter NID number" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtTINNumber" class="form-label">TIN Number</label>
                                     <input type="text" class="form-control" id="txtTINNumber" name="txtTINNumber" placeholder="enter TIN number" />
                                 </div>
-                                <div class="form-group mb-2">
+                                <div class="mb-2">
                                     <label for="txtPassportNumber" class="form-label">Passport Number</label>
                                     <input type="text" class="form-control" id="txtPassportNumber" name="txtPassportNumber" placeholder="enter passport number" />
                                 </div>
@@ -151,19 +143,19 @@ else
                                     <div class="card-header my-2">
                                         <h5><strong>Experience Information</strong></h5>
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtTotalExperience" class="form-label required-label">Total Year(s) of Experience</label>
                                         <input type="number" class="form-control" id="txtTotalExperience" name="txtTotalExperience" placeholder="enter total experience in year" required />
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtLastOrganization" class="form-label">Name of The Current/Last Organization</label>
                                         <input type="text" class="form-control" id="txtLastOrganization" name="txtLastOrganization" placeholder="enter last organization" />
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtLastOrgDesignation" class="form-label">Position Held In The Current/Last Organization</label>
                                         <input type="text" class="form-control" id="txtLastOrgDesignation" name="txtLastOrgDesignation" placeholder="enter last organization designation" />
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtCanGetReleaseLtrLastOrg" class="form-label required-label">Can You Get A Release Letter From Your Current/Last Organization?</label>
                                         <select id="txtCanGetReleaseLtrLastOrg" name="txtCanGetReleaseLtrLastOrg" class="form-select" placeholder="select answer" required>
                                             <option value="">--select answer--</option>
@@ -171,20 +163,46 @@ else
                                             <option value="No">No</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-2" id="divtxtWhyCantGetReleaseLtrLastOrg" style="display: none;">
+                                    <div class="mb-2" id="divtxtWhyCantGetReleaseLtrLastOrg" style="display: none;">
                                         <label for="txtWhyCantGetReleaseLtrLastOrg" class="form-label">If No, Then Please Explain The Reason</label>
                                         <input type="text" class="form-control" id="txtWhyCantGetReleaseLtrLastOrg" name="txtWhyCantGetReleaseLtrLastOrg" placeholder="enter reason" />
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtFieldOfExpertise" class="form-label">Field of Expertise and Experience (Maximum 200 words)</label>
                                         <input type="text" class="form-control" id="txtFieldOfExpertise" name="txtFieldOfExpertise" placeholder="enter field of expertise" />
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="mb-2">
                                         <label for="txtLinkOfPublishedWork" class="form-label">Link of Published Work (Maximum 3 if any)</label>
                                         <input type="text" class="form-control" id="txtLinkOfPublishedWork" name="txtLinkOfPublishedWork" placeholder="enter link of published work" />
                                     </div>
                                 </div>
                             </div>
+                            <div class="card col-md-12 mb-2">
+                                <div class="col-md-12 mb-2">
+                                    <div class="card-header my-2">
+                                        <h5><strong>Upload Images</strong></h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="imgApplicantPhoto" class="form-label required-label">Applicant Photo</label> (Only png, jpg, jpeg & must be 100kb or Less)
+                                            <input type="file" id="imgApplicantPhoto" name="imgApplicantPhoto" class="form-control" placeholder="enter applicant photo" accept=".jpg, .jpeg, .png" required />
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <img id="imgPreviewApplicantPhoto" src="#" alt="Preview Applicant Photo" style="max-width: 200px; max-height: 200px; display: none;" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="imgApplicantSignature" class="form-label required-label">Applicant Signature</label> (Only png, jpg, jpeg & must be 100kb or Less)
+                                            <input type="file" id="imgApplicantSignature" name="imgApplicantSignature" class="form-control" placeholder="enter applicant signature" accept=".jpg, .jpeg, .png" required />
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <img id="imgPreviewApplicantSignature" src="#" alt="Preview Applicant Signature" style="max-width: 200px; max-height: 200px; display: none;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="col-md-8 mx-auto text-center mt-2">
                             <div id="divSuccess" class="alert alert-success" role="alert" style="display:none;">
@@ -223,7 +241,7 @@ else
     var rdoYes = $("#rdoYes");
     var rdoNo = $("#rdoNo");
     var txtDisabilityInfo = $("#txtDisabilityInfo");
-    
+
     var txtPresentAddress = $("#txtPresentAddress");
     var txtPermanentAddress = $("#txtPermanentAddress");
     var txtCountry = $("#txtCountry");
@@ -241,7 +259,10 @@ else
     var txtWhyCantGetReleaseLtrLastOrg = $("#txtWhyCantGetReleaseLtrLastOrg");
     var txtFieldOfExpertise = $("#txtFieldOfExpertise");
     var txtLinkOfPublishedWork = $("#txtLinkOfPublishedWork");
-
+    var imgApplicantPhoto = $("#imgApplicantPhoto");
+    var imgApplicantSignature = $("#imgApplicantSignature");
+    var imgPreviewApplicantPhoto = $("#imgPreviewApplicantPhoto");
+    var imgPreviewApplicantSignature = $("#imgPreviewApplicantSignature");
     var ddlDistrict = $('#ddlDistrict');
 
     $(document).ready(function () {
@@ -263,6 +284,7 @@ else
             if (HasDisability == 1) {
                 $("#divDisabilityInfo").show();
             } else {
+                txtDisabilityInfo.val("");
                 $("#divDisabilityInfo").hide();
             }
         });
@@ -288,17 +310,52 @@ else
             if (selectedValue == "No") {
                 $("#divtxtWhyCantGetReleaseLtrLastOrg").show();
             } else {
+                txtWhyCantGetReleaseLtrLastOrg.val("");
                 $("#divtxtWhyCantGetReleaseLtrLastOrg").hide();
             }
         });
+        $("#imgApplicantPhoto").change(function () {
+            debugger;
+            var reader = new FileReader();
+            var file = this.files[0];
 
+            reader.onload = function (e) {
+                $("#imgPreviewApplicantPhoto").attr("src", e.target.result);
+                $("#imgPreviewApplicantPhoto").show();
+
+                // Convert the image to base64 byte code without url mimetype.
+                //var byteCode = e.target.result.split(",")[1];
+
+                var byteCode = e.target.result;
+                saveImgApplicantPhoto(byteCode);
+            };
+
+            reader.readAsDataURL(file);
+        });
+        $("#imgApplicantSignature").change(function () {
+            debugger;
+            var reader = new FileReader();
+            var file = this.files[0];
+
+            reader.onload = function (e) {
+                $("#imgPreviewApplicantSignature").attr("src", e.target.result);
+                $("#imgPreviewApplicantSignature").show();
+
+                // Convert the image to base64 byte code without url mimetype.
+                //var byteCode = e.target.result.split(",")[1];
+
+                var byteCode = e.target.result;
+                saveImgApplicantSignature(byteCode);
+            };
+
+            reader.readAsDataURL(file);
+        });
     });
 
     function loadPersonalInfo() {
         debugger;
-        var ApplicantId = txtApplicantId.val() == "" ? 0 : parseInt(txtApplicantId.val());
         var objData = {
-            ApplicantId: ApplicantId
+            ApplicantId: parseInt(txtApplicantId.val())
         };
         $.ajax({
             type: "GET",
@@ -348,8 +405,25 @@ else
                 txtLastOrgDesignation.val(response.LastOrgDesignation);
                 txtCanGetReleaseLtrLastOrg.val(response.CanGetReleaseLtrLastOrg);
                 txtWhyCantGetReleaseLtrLastOrg.val(response.WhyCantGetReleaseLtrLastOrg);
+                if (response.CanGetReleaseLtrLastOrg == "No") {
+                    $("#divtxtWhyCantGetReleaseLtrLastOrg").show();
+                } else {
+                    $("#divtxtWhyCantGetReleaseLtrLastOrg").hide();
+                }
                 txtFieldOfExpertise.val(response.FieldOfExpertise);
                 txtLinkOfPublishedWork.val(response.LinkOfPublishedWork);
+
+                
+                if (response.ApplicantPhoto != null || response.ApplicantPhoto.trim() != "") {
+                    var dataUrl = 'data:image/jpeg;base64,' + btoa(String.fromCharCode.apply(null, response.ApplicantPhoto));
+                    imgPreviewApplicantPhoto.attr("src", dataUrl);
+                    imgPreviewApplicantPhoto.show();
+                }
+                if (response.ApplicantSignature != null || response.ApplicantSignature.trim() != "") {
+                    var dataUrl = 'data:image/jpeg;base64,' + btoa(String.fromCharCode.apply(null, response.ApplicantSignature));
+                    imgPreviewApplicantSignature.attr("src", dataUrl);
+                    imgPreviewApplicantSignature.show();
+                }
             },
             error: function (error) {
                 console.log("Error loading personal info:", error);
@@ -363,9 +437,8 @@ else
         if ($("input[name='rdoDisability']:checked").val() == 1) {
              HasDisability = 1;
         }
-        var ApplicantId = txtApplicantId.val() == "" ? 0 : txtApplicantId.val();
         var objData = {
-            ApplicantId: ApplicantId,
+            ApplicantId: txtApplicantId.val(),
             FirstName: txtFirstName.val(),
             MiddleName: txtMiddleName.val(),
             LastName: txtLastName.val(),
@@ -397,14 +470,14 @@ else
             FieldOfExpertise: txtFieldOfExpertise.val(),
             LinkOfPublishedWork: txtLinkOfPublishedWork.val()
         };
-
         $.ajax({
                 url: "@Url.Action("PersonalInfo", "Applicant")",
                 type: "POST",
                 dataType: "html",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(objData),
-                success: function(response) {
+            success: function (response) {
+                debugger;
                     if (response) {
                         /*$("#response").html(response.message);*/
                         $("#divSuccess").html("<strong>Success!</strong> Personal Info Saved/Updated Successfully");
@@ -439,6 +512,8 @@ else
                 data.forEach(function (district) {
                     ddlDistrict.append($('<option>').text(district.DistrictName).attr('value', district.DistrictId));
                 });
+
+                $.validator.setDefaults({ ignore: ":hidden:not('#ddlDistrict')" });
             },
             error: function (xhr, status, error) {
                 console.error('Error fetching district data: ' + error);
@@ -446,5 +521,56 @@ else
         });
     }
 
+    function saveImgApplicantPhoto(byteCode) {
+        $.ajax({
+            url: "@Url.Action("saveImgApplicantPhoto", "Applicant")",
+            type: "POST",
+            data: { ApplicantId: txtApplicantId.val(), byteCode: byteCode },
+            success: function (response) {
+                if (response.error) {
+                    $("#divEror").html("<strong>Sorry!</strong> Applicant Photo Saved/Updated Unsuccessful");
+                    $("#divEror").show();
+                    $("#divSuccess").hide();
+                } else {
+                    //$("#imgApplicantPhotoPath").val(response.FilePath);
+                    $("#divSuccess").html("<strong>Success!</strong> Applicant Photo Saved/Updated Successfully");
+                    $("#divSuccess").show();
+                    $("#divEror").hide();
+                }
+
+            },
+            error: function () {
+                $("#divEror").html("<strong>Sorry!</strong> Applicant Photo Saved/Updated Unsuccessful");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+        });
+    }
+
+    function saveImgApplicantSignature(byteCode) {
+        $.ajax({
+            url: "@Url.Action("saveImgApplicantSignature", "Applicant")",
+            type: "POST",
+            data: { ApplicantId: txtApplicantId.val(), byteCode: byteCode },
+            success: function (response) {
+                if (response.error) {
+                    $("#divEror").html("<strong>Sorry!</strong> Applicant Signature Saved/Updated Unsuccessful");
+                    $("#divEror").show();
+                    $("#divSuccess").hide();
+                } else {
+                    //$("#imgApplicantSignaturePath").val(response.FilePath);
+                    $("#divSuccess").html("<strong>Success!</strong> Applicant Signature Saved/Updated Successfully");
+                    $("#divSuccess").show();
+                    $("#divEror").hide();
+                }
+
+            },
+            error: function () {
+                $("#divEror").html("<strong>Sorry!</strong> Applicant Signature Saved/Updated Unsuccessful");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+        });
+    }
 
 </script>

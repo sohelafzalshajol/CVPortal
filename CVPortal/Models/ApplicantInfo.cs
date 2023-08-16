@@ -42,7 +42,8 @@ namespace CVPortal.Models
 
         public byte[] ApplicantPhoto { get; set; }
         public byte[] ApplicantSignature { get; set; }
-
+        public string ApplicantPhotoPath { get; set; }
+        public string ApplicantSignaturePath { get; set; }
 
         public int IsActive { get; set; }
         public long? EUserId { get; set; }

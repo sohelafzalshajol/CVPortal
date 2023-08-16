@@ -69,6 +69,7 @@ D:\CVPortal\CVPortal\bin\System.Web.Webpages.Razor.xml
 D:\CVPortal\CVPortal\bin\System.Web.Helpers.xml
 D:\CVPortal\CVPortal\bin\System.Web.Mvc.xml
 D:\CVPortal\CVPortal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\CVPortal\CVPortal\obj\Debug\CVPortal.csproj.AssemblyReference.cache
 D:\CVPortal\CVPortal\obj\Debug\CVPortal.csproj.CoreCompileInputs.cache
 D:\CVPortal\CVPortal\obj\Debug\CVPortal.csproj.CopyComplete
 D:\CVPortal\CVPortal\obj\Debug\CVPortal.dll

@@ -25,6 +25,8 @@
     <EntitySetMapping Name="tblApplicantInfoes">
       <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
         <MappingFragment StoreEntitySet="tblApplicantInfo">
+          <ScalarProperty Name="ApplicantSignaturePath" ColumnName="ApplicantSignaturePath" />
+          <ScalarProperty Name="ApplicantPhotoPath" ColumnName="ApplicantPhotoPath" />
           <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
           <ScalarProperty Name="ApplicantPhoto" ColumnName="ApplicantPhoto" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />

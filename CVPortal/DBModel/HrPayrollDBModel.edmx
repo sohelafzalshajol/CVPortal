@@ -46,6 +46,8 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="ApplicantPhoto" Type="varbinary(max)" />
           <Property Name="ApplicantSignature" Type="varbinary(max)" />
+          <Property Name="ApplicantPhotoPath" Type="nvarchar(max)" />
+          <Property Name="ApplicantSignaturePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tblCVPortalUsers">
           <Key>
@@ -140,6 +142,8 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="ApplicantPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ApplicantSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ApplicantPhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicantSignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -171,6 +175,8 @@
           <EntitySetMapping Name="tblApplicantInfoes">
             <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
               <MappingFragment StoreEntitySet="tblApplicantInfo">
+                <ScalarProperty Name="ApplicantSignaturePath" ColumnName="ApplicantSignaturePath" />
+                <ScalarProperty Name="ApplicantPhotoPath" ColumnName="ApplicantPhotoPath" />
                 <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
                 <ScalarProperty Name="ApplicantPhoto" ColumnName="ApplicantPhoto" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />

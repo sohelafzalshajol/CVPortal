@@ -3,6 +3,7 @@ using CVPortal.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -130,7 +131,7 @@ namespace CVPortal.Controllers
         public ActionResult loadPersonalInfo(long? ApplicantId)
         {
             tblApplicantInfo objtblApplicantInfo = new tblApplicantInfo();
-            if (ApplicantId != 0)
+            if (ApplicantId > 0)
             {
                 objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.ApplicantId == ApplicantId);
             }
@@ -152,5 +153,166 @@ namespace CVPortal.Controllers
             return Json(districts, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult saveImgApplicantPhoto(long? ApplicantId, string byteCode)
+        {
+            try
+            {
+                var splitesData = byteCode.Split(',');
+                if (!string.IsNullOrEmpty(byteCode) && splitesData.Length == 2)
+                {
+                    var imgExtension = GetExtensionFromMimeType(splitesData[0].Split(':')[1].Split(';')[0]);
+                    var userData = Session["objUser"] as dynamic;
+                    long UserId = userData.CVPortalUsersId;
+                    // Remove the data URI prefix if not removed for png image as example
+                    var base64Data = splitesData[1];
+
+                    // Convert base64 byte code to bytes
+                    byte[] imageBytes = Convert.FromBase64String(base64Data);
+                    double fileSizeInKB = imageBytes.Length / 1024.0;
+                    if (imgExtension == ".png" || imgExtension == ".jpg" && fileSizeInKB < 101)
+                    {
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + imgExtension;
+                        var imagePath = Path.Combine(Server.MapPath("~/ApplicantImages/ApplicantPhoto/"), uniqueFileName);
+                        var applicant = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(e => e.EUserId == UserId);
+                        if (applicant != null)
+                        {
+                            if (System.IO.File.Exists(applicant.ApplicantPhotoPath))
+                            {
+                                System.IO.File.Delete(applicant.ApplicantPhotoPath);
+                            }
+                            applicant.ApplicantPhoto = imageBytes;
+                            applicant.ApplicantPhotoPath = imagePath;
+
+                            applicant.EUserId = userData.CVPortalUsersId;
+                            applicant.UpdateDate = DateTime.Now;
+                            objHrPayrollEntities.SaveChanges();
+                            System.IO.File.WriteAllBytes(imagePath, imageBytes);
+                        }
+                        else
+                        {
+                            tblApplicantInfo objtblApplicantInfo = new tblApplicantInfo();
+                            objtblApplicantInfo.ApplicantPhoto = imageBytes;
+                            objtblApplicantInfo.ApplicantPhotoPath = imagePath;
+
+                            objtblApplicantInfo.EUserId = userData.CVPortalUsersId;
+                            objtblApplicantInfo.EntryDate = DateTime.Now;
+
+                            objHrPayrollEntities.tblApplicantInfoes.Add(objtblApplicantInfo);
+                            objHrPayrollEntities.SaveChanges();
+                            System.IO.File.WriteAllBytes(imagePath, imageBytes);
+                        }
+
+                        var result = new
+                        {
+                            FilePath = imagePath,
+                            FileName = uniqueFileName
+                        };
+
+                        return Json(result);
+                    }
+                    else
+                    {
+                        return Json(new { error = "Error Image Format/Size" });
+                    }
+                }
+                else
+                {
+                    return Json(new { error = "Error saving image." });
+                }
+                    
+            }
+            catch
+            {
+                return Json(new { error = "Error saving image." });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult saveImgApplicantSignature(long? ApplicantId, string byteCode)
+        {
+            try
+            {
+                var splitesData = byteCode.Split(',');
+                if (!string.IsNullOrEmpty(byteCode) && splitesData.Length == 2)
+                {
+                    var imgExtension = GetExtensionFromMimeType(splitesData[0].Split(':')[1].Split(';')[0]);
+                    var userData = Session["objUser"] as dynamic;
+                    long UserId = userData.CVPortalUsersId;
+                    // Remove the data URI prefix if not removed for png image as example
+                    var base64Data = splitesData[1];
+
+                    // Convert base64 byte code to bytes
+                    byte[] imageBytes = Convert.FromBase64String(base64Data);
+                    double fileSizeInKB = imageBytes.Length / 1024.0;
+                    if (imgExtension == ".png" || imgExtension == ".jpg" && fileSizeInKB < 101)
+                    {
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + imgExtension;
+                        var imagePath = Path.Combine(Server.MapPath("~/ApplicantImages/ApplicantSignature/"), uniqueFileName);
+                        var applicant = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(e => e.EUserId == UserId);
+                        if (applicant != null)
+                        {
+                            if (System.IO.File.Exists(applicant.ApplicantSignaturePath))
+                            {
+                                System.IO.File.Delete(applicant.ApplicantSignaturePath);
+                            }
+                            applicant.ApplicantSignature = imageBytes;
+                            applicant.ApplicantSignaturePath = imagePath;
+
+                            applicant.EUserId = userData.CVPortalUsersId;
+                            applicant.UpdateDate = DateTime.Now;
+                            objHrPayrollEntities.SaveChanges();
+                            System.IO.File.WriteAllBytes(imagePath, imageBytes);
+                        }
+                        else
+                        {
+                            tblApplicantInfo objtblApplicantInfo = new tblApplicantInfo();
+                            objtblApplicantInfo.ApplicantSignature = imageBytes;
+                            objtblApplicantInfo.ApplicantSignaturePath = imagePath;
+
+                            objtblApplicantInfo.EUserId = userData.CVPortalUsersId;
+                            objtblApplicantInfo.EntryDate = DateTime.Now;
+
+                            objHrPayrollEntities.tblApplicantInfoes.Add(objtblApplicantInfo);
+                            objHrPayrollEntities.SaveChanges();
+                            System.IO.File.WriteAllBytes(imagePath, imageBytes);
+                        }
+
+                        var result = new
+                        {
+                            FilePath = imagePath,
+                            FileName = uniqueFileName
+                        };
+
+                        return Json(result);
+                    }
+                    else
+                    {
+                        return Json(new { error = "Error Image Format/Size" });
+                    }
+                }
+                else
+                {
+                    return Json(new { error = "Error saving image." });
+                }
+
+            }
+            catch
+            {
+                return Json(new { error = "Error saving image." });
+            }
+        }
+
+        private string GetExtensionFromMimeType(string mimeType)
+        {
+            switch (mimeType)
+            {
+                case "image/jpeg": return ".jpg";
+                case "image/png": return ".png";
+                default: return ".dat"; // Default to .dat if mime type is unknown
+            }
+        }
     }
 }
