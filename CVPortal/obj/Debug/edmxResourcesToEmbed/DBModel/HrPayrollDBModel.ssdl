@@ -63,9 +63,32 @@
     <Property Name="DistrictName" Type="nvarchar(max)" />
     <Property Name="IsActive" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblEducationInfo">
+    <Key>
+      <PropertyRef Name="EducationInfoId" />
+    </Key>
+    <Property Name="EducationInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+    <Property Name="EducationLevelId" Type="int" Nullable="false" />
+    <Property Name="EducationLevel" Type="nvarchar(max)" />
+    <Property Name="NameofExamination" Type="nvarchar(max)" />
+    <Property Name="InstituteName" Type="nvarchar(max)" />
+    <Property Name="DurationYear" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Group" Type="nvarchar(max)" />
+    <Property Name="CGPADivision" Type="nvarchar(max)" />
+    <Property Name="CGPAGrade" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CGPAOutOf" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Board" Type="nvarchar(max)" />
+    <Property Name="YearOfPass" Type="int" Nullable="false" />
+    <Property Name="EUserId" Type="bigint" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="Department" Type="nvarchar(max)" />
+  </EntityType>
   <EntityContainer Name="HrPayrollDBModelStoreContainer">
     <EntitySet Name="tblApplicantInfo" EntityType="Self.tblApplicantInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDistricts" EntityType="Self.tblDistricts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEducationInfo" EntityType="Self.tblEducationInfo" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

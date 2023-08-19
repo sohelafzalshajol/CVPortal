@@ -28,5 +28,6 @@ namespace CVPortal.DBModel
         public virtual DbSet<tblCVPortalUser> tblCVPortalUsers { get; set; }
         public virtual DbSet<tblDistrict> tblDistricts { get; set; }
         public virtual DbSet<tblApplicantInfo> tblApplicantInfoes { get; set; }
+        public virtual DbSet<tblEducationInfo> tblEducationInfoes { get; set; }
     }
 }

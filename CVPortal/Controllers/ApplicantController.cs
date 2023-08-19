@@ -314,5 +314,144 @@ namespace CVPortal.Controllers
                 default: return ".dat"; // Default to .dat if mime type is unknown
             }
         }
+
+        public ActionResult EducationInfo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveEducationInfo(EducationInfo objEducationInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var userData = Session["objUser"] as dynamic;
+                    if (objEducationInfo.ApplicantId > 0 && objEducationInfo.EducationInfoId > 0)
+                    {
+                        var objtblEducationInfo = objHrPayrollEntities.tblEducationInfoes.FirstOrDefault(e => e.ApplicantId == objEducationInfo.ApplicantId && e.EducationInfoId == objEducationInfo.EducationInfoId);
+                        objtblEducationInfo.EducationLevelId = objEducationInfo.EducationLevelId;
+                        objtblEducationInfo.EducationLevel = objEducationInfo.EducationLevel;
+                        objtblEducationInfo.NameofExamination = objEducationInfo.NameofExamination;
+                        objtblEducationInfo.InstituteName = objEducationInfo.InstituteName;
+                        objtblEducationInfo.DurationYear = objEducationInfo.DurationYear;
+                        objtblEducationInfo.Group = objEducationInfo.Group;
+                        objtblEducationInfo.Department = objEducationInfo.Department;
+                        objtblEducationInfo.CGPADivision = objEducationInfo.CGPADivision;
+                        objtblEducationInfo.CGPAGrade = objEducationInfo.CGPAGrade;
+                        objtblEducationInfo.CGPAOutOf = objEducationInfo.CGPAOutOf;
+                        objtblEducationInfo.Board = objEducationInfo.Board;
+                        objtblEducationInfo.YearOfPass = objEducationInfo.YearOfPass;
+                        objtblEducationInfo.EUserId = userData.CVPortalUsersId;
+                        objtblEducationInfo.UpdateDate = DateTime.Now;
+
+                        //var entityToUpdate = objHrPayrollEntities.tblApplicantInfoes.Find(objApplicantInfo.ApplicantId);
+                        //objHrPayrollEntities.Entry(objtblApplicantInfo).State = EntityState.Modified;
+                        objHrPayrollEntities.SaveChanges();
+                    }
+                    else if (objEducationInfo.ApplicantId > 0 && objEducationInfo.EducationInfoId == 0)
+                    {
+                        tblEducationInfo objtblEducationInfo = new tblEducationInfo();
+                        objtblEducationInfo.ApplicantId = objEducationInfo.ApplicantId;
+                        objtblEducationInfo.EducationLevelId = objEducationInfo.EducationLevelId;
+                        objtblEducationInfo.EducationLevel = objEducationInfo.EducationLevel;
+                        objtblEducationInfo.NameofExamination = objEducationInfo.NameofExamination;
+                        objtblEducationInfo.InstituteName = objEducationInfo.InstituteName;
+                        objtblEducationInfo.DurationYear = objEducationInfo.DurationYear;
+                        objtblEducationInfo.Group = objEducationInfo.Group;
+                        objtblEducationInfo.Department = objEducationInfo.Department;
+                        objtblEducationInfo.CGPADivision = objEducationInfo.CGPADivision;
+                        objtblEducationInfo.CGPAGrade = objEducationInfo.CGPAGrade;
+                        objtblEducationInfo.CGPAOutOf = objEducationInfo.CGPAOutOf;
+                        objtblEducationInfo.Board = objEducationInfo.Board;
+                        objtblEducationInfo.YearOfPass = objEducationInfo.YearOfPass;
+                        objtblEducationInfo.EUserId = userData.CVPortalUsersId;
+                        objtblEducationInfo.EntryDate = DateTime.Now;
+                        objHrPayrollEntities.tblEducationInfoes.Add(objtblEducationInfo);
+                        objHrPayrollEntities.SaveChanges();
+                        objEducationInfo.EducationInfoId = objtblEducationInfo.EducationInfoId;
+                    }
+
+                    ViewBag.SuccessMessage = "Education information saved/update successfully.";
+                    return Json(new { success = true, message = "Form submitted successfully", EducationInfoId= objEducationInfo.EducationInfoId });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while saving education information.";
+                    return Json(new { success = false, message = "Form didn't submite successfully" });
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "ModelState invalid error occurred while saving education information.";
+                return Json(new { success = false, message = "Form didn't submite successfully" });
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult loadEducationInfo(long? ApplicantId)
+        {
+            List<tblEducationInfo> objtblEducationInfo = new List<tblEducationInfo>();
+            var userData = Session["objUser"] as dynamic;
+            long UserId = userData.CVPortalUsersId;
+            if (ApplicantId > 0)
+            {
+                objtblEducationInfo = objHrPayrollEntities.tblEducationInfoes
+            .Where(e => e.ApplicantId == ApplicantId).ToList();
+            }
+            else
+            {
+
+                objtblEducationInfo = objHrPayrollEntities.tblEducationInfoes.Where(e => e.EUserId == UserId).ToList();
+            }
+
+            if (objtblEducationInfo.Count > 0)
+            {
+                return Json(objtblEducationInfo, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                tblApplicantInfo objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
+                ApplicantId = objtblApplicantInfo.ApplicantId;
+                return Json(ApplicantId, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteEducationInfo(long ApplicantId,long EducationInfoId)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var recordToDelete = objHrPayrollEntities.tblEducationInfoes.Find(EducationInfoId);
+
+                    if (recordToDelete != null)
+                    {
+                        objHrPayrollEntities.tblEducationInfoes.Remove(recordToDelete);
+                        objHrPayrollEntities.SaveChanges();
+                        return Json(new { success = true });
+                    }
+
+                    return Json(new { success = false, message = "Record not found." });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while deleting education information.";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "ModelState invalid error occurred while deleting education information.";
+                return View();
+            }
+
+        }
     }
 }

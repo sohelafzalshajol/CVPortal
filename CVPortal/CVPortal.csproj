@@ -205,6 +205,9 @@
     <Compile Include="DBModel\tblDistrict.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\tblEducationInfo.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +215,7 @@
     <Compile Include="Models\CVPortalLogin.cs" />
     <Compile Include="Models\CVPortalUsers.cs" />
     <Compile Include="Models\District.cs" />
+    <Compile Include="Models\EducationInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +243,7 @@
     <Content Include="Scripts\js\bootstrap.esm.min.js.map" />
     <Content Include="Scripts\js\bootstrap.js.map" />
     <Content Include="Scripts\js\bootstrap.min.js.map" />
+    <Content Include="Views\Applicant\EducationInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

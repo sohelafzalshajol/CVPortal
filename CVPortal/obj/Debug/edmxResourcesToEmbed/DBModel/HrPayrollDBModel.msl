@@ -67,5 +67,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblEducationInfoes">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblEducationInfo">
+        <MappingFragment StoreEntitySet="tblEducationInfo">
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+          <ScalarProperty Name="YearOfPass" ColumnName="YearOfPass" />
+          <ScalarProperty Name="Board" ColumnName="Board" />
+          <ScalarProperty Name="CGPAOutOf" ColumnName="CGPAOutOf" />
+          <ScalarProperty Name="CGPAGrade" ColumnName="CGPAGrade" />
+          <ScalarProperty Name="CGPADivision" ColumnName="CGPADivision" />
+          <ScalarProperty Name="Group" ColumnName="Group" />
+          <ScalarProperty Name="DurationYear" ColumnName="DurationYear" />
+          <ScalarProperty Name="InstituteName" ColumnName="InstituteName" />
+          <ScalarProperty Name="NameofExamination" ColumnName="NameofExamination" />
+          <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+          <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
+          <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+          <ScalarProperty Name="EducationInfoId" ColumnName="EducationInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

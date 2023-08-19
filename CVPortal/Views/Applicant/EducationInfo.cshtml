@@ -1,0 +1,428 @@
+﻿
+@{
+    ViewBag.Title = "EducationInfo";
+}
+
+
+@if (Session["objUser"] == null || Session["UserEmail"] == null)
+{
+    Response.Redirect("~/Account/Login");
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="card my-4">
+                <div class="card-body">
+                    <form id="EducationInfoForm" enctype="multipart/form-data" class="mb-3">
+                        <div class="row">
+                            <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
+                            <input type="hidden" id="txtEducationInfoId" name="txtEducationInfoId" value="0" />
+                            <div class="card-header my-2">
+                                <h5><strong>Education Information</strong></h5>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtEducationLevel" class="form-label required-label">Education Level</label>
+                                <select id="txtEducationLevel" name="txtEducationLevel" class="form-select" placeholder="select education level" required>
+                                    <option value="">--select education level--</option>
+                                    <option value="1">Post Graduation</option>
+                                    <option value="2">Graduation</option>
+                                    <option value="3">Diploma</option>
+                                    <option value="4">HSC/Equivalent</option>
+                                    <option value="5">SSC/Equivalent</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtNameofExamination" class="form-label required-label">Name of Examination</label>
+                                <select id="txtNameofExamination" name="txtNameofExamination" class="form-select" placeholder="select Name of Examination" required>
+                                    <option value="">--select name of examination--</option>
+                                    <option value="SSC">SSC</option>
+                                    <option value="Dakhil">Dakhil</option>
+                                    <option value="O Level">O Level</option>
+                                    <option value="HSC">HSC</option>
+                                    <option value="Alim">Alim</option>
+                                    <option value="A Level">A Level</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="B.Sc. Hons">B.Sc. Hons</option>
+                                    <option value="BBS. Hons">BBS. Hons</option>
+                                    <option value="B.S.S. Hons">B.S.S. Hons</option>
+                                    <option value="B.Com. Hons">B.Com. Hons</option>
+                                    <option value="B.A. Hons">B.A. Hons</option>
+                                    <option value="BFA">BFA</option>
+                                    <option value="B.Ed. Hons">B.Ed. Hons</option>
+                                    <option value="L.L.B. Hons">L.L.B. Hons</option>
+                                    <option value="BBA">BBA</option>
+                                    <option value="B.Sc.">B.Sc.</option>
+                                    <option value="B.A.">B.A.</option>
+                                    <option value="B.Com.">B.Com.</option>
+                                    <option value="B.S.S.">B.S.S.</option>
+                                    <option value="B.Sc. Eng.">B.Sc. Eng.</option>
+                                    <option value="B.Pharm.">B.Pharm.</option>
+                                    <option value="MBBS">MBBS</option>
+                                    <option value="BHMS">BHMS</option>
+                                    <option value="BDS">BDS</option>
+                                    <option value="M.Sc.">M.Sc.</option>
+                                    <option value="M.A.">M.A.</option>
+                                    <option value="M.Com.">M.Com.</option>
+                                    <option value="M.S.S.">M.S.S.</option>
+                                    <option value="MBM">MBM</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="MFA">MFA</option>
+                                    <option value="M.Ed.">M.Ed.</option>
+                                    <option value="M.Sc. Eng.">M.Sc. Eng.</option>
+                                    <option value="M.Pharm.">M.Pharm.</option>
+                                    <option value="M.B.S.">M.B.S.</option>
+                                    <option value="L.L.M.">L.L.M.</option>
+                                    <option value="FCPS">FCPS</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="MD">MD</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MPhil">MPhil</option>
+                                    <option value="MDS">MDS</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtInstituteName" class="form-label required-label">Institute Name</label>
+                                <input type="text" class="form-control" id="txtInstituteName" name="txtInstituteName" placeholder="enter institute name" required />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtDurationYear" class="form-label required-label">Duration in Year</label>
+                                <input type="number" class="form-control" id="txtDurationYear" name="txtDurationYear" placeholder="enter duration year" required />
+                            </div>
+                            <div id="divGroup" class="col-md-6 mb-2">
+                                <label for="txtGroup" class="form-label">Group</label>
+                                <select id="txtGroup" name="txtGroup" class="form-select" placeholder="select group">
+                                    <option value="">--select group--</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Arts">Arts</option>
+                                    <option value="Commerce">Commerce</option>
+                                    <option value="Humanities">Humanities</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </div>
+                            <div id="divDepartment" class="col-md-6 mb-2" style="display: none;">
+                                <label for="txtDepartment" class="form-label">Department</label>
+                                <input type="text" class="form-control" id="txtDepartment" name="txtDepartment" placeholder="enter department" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtCGPADivision" class="form-label">Division/Class/Grade</label>
+                                <select id="txtCGPADivision" name="txtCGPADivision" class="form-select" placeholder="select Division/Class/Grade">
+                                    <option value="">--select division--</option>
+                                    <option value="First">First</option>
+                                    <option value="Second">Second</option>
+                                    <option value="Third">Third</option>
+                                    <option value="Grade">Grade</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtCGPAGrade" class="form-label">Grade/CGPA</label>
+                                <input type="number" class="form-control" id="txtCGPAGrade" name="txtCGPAGrade" placeholder="enter CGPA Grade" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtCGPAOutOf" class="form-label">CGPA Out Of Grade</label>
+                                <input type="number" class="form-control" id="txtCGPAOutOf" name="txtCGPAOutOf" placeholder="enter CGPA Out Of Grade" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtBoard" class="form-label">Board</label>
+                                <select id="txtBoard" name="txtBoard" class="form-select" placeholder="select Board">
+                                    <option value="">--select board--</option>
+                                    <option value="Barisal">Barisal</option>
+                                    <option value="Chittagong">Chittagong</option>
+                                    <option value="Comilla">Comilla</option>
+                                    <option value="Dhaka">Dhaka</option>
+                                    <option value="Dinajpur">Dinajpur</option>
+                                    <option value="Jessore">Jessore</option>
+                                    <option value="Mymensingh">Mymensingh</option>
+                                    <option value="Rajshahi">Rajshahi</option>
+                                    <option value="Sylhet">Sylhet</option>
+                                    <option value="Madrasah">Madrasah</option>
+                                    <option value="Technical">Technical</option>
+                                    <option value="DIBS(Dhaka)">DIBS(Dhaka)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtYearOfPass" class="form-label required-label">Year of Passing</label>
+                                <input type="number" class="form-control" id="txtYearOfPass" name="txtYearOfPass" placeholder="enter year of passing" required />
+                            </div>
+                        </div>
+                        <div class="col-md-8 mx-auto text-center mt-2">
+                            <div id="divSuccess" class="alert alert-success" role="alert" style="display:none;">
+                                <strong>Success!</strong>
+                            </div>
+                            <div id="divEror" class="alert alert-warning" role="alert" style="display:none;">
+                                <strong>Sorry!</strong>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-md-6 mx-auto text-center">
+                                <input id="resetButton" type="reset" value="Reset" class="btn btn-light btn-lg" />
+                                <button type="submit" id="btnAddEducationInfo" class="btn btn-warning btn-lg ms-2" value="Add">Add</button>
+                            </div>
+                        </div>
+                        <div id="response" class="col-md-8 mx-auto text-center"></div>
+                    </form>
+                    <div class="table-responsive">
+                        <table id="EducationInfoTable" class="table table-striped table-hover mx-auto text-center">
+                            <tr>
+                                <th scope="col">Level</th>
+                                <th scope="col">Exam Title</th>
+                                <th scope="col">Institute</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Group/Department</th>
+                                <th scope="col">Division</th>
+                                <th scope="col">Grade/CGPA</th>
+                                <th scope="col">out of CGPA</th>
+                                <th scope="col">Board</th>
+                                <th scope="col">Passing Year</th>
+                                <th scope="col">Action</th>
+                                <th scope="col" hidden>EducationLevelId</th>
+                                <th scope="col" hidden>EducationInfoId</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).ready(function () {
+        loadEducationInfo();
+        $('#txtEducationLevel').change(function () {
+            var selectedValue = $(this).val();
+            if (selectedValue == 4 || selectedValue == 5) {
+                $("#divGroup").show();
+                $("#divDepartment").hide();
+                $("#txtDepartment").val("");
+            } else {
+                $("#divGroup").hide();
+                $("#txtGroup").val("");
+                $("#divDepartment").show();
+            }
+        });
+        $("#resetButton").click(function () {
+            $("#EducationInfoForm")[0].reset();
+        });
+        $("#btnAddEducationInfo").click(function (event) {
+            debugger;
+            event.preventDefault();
+            if ($("#EducationInfoForm").valid() && $("#txtApplicantId").val() > 0) {
+                SaveEducationInfo();
+            } else {
+                $("#divEror").html("<strong>Sorry!</strong> Please fill-up the required (*) fields");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+        });
+    });
+
+
+    function SaveEducationInfo() {
+        debugger;
+        var objData = {
+            ApplicantId : $("#txtApplicantId").val(),
+            EducationInfoId : $("#txtEducationInfoId").val(),
+            EducationLevelId : $("#txtEducationLevel").val(),
+            EducationLevel : $("#txtEducationLevel option:selected").text(),
+            NameofExamination : $("#txtNameofExamination").val(),
+            InstituteName : $("#txtInstituteName").val(),
+            DurationYear : $("#txtDurationYear").val(),
+            Group : $("#txtGroup").val(),
+            Department : $("#txtDepartment").val(),
+            CGPADivision : $("#txtCGPADivision").val(),
+            CGPAGrade : $("#txtCGPAGrade").val(),
+            CGPAOutOf : $("#txtCGPAOutOf").val(),
+            Board : $("#txtBoard").val(),
+            YearOfPass : $("#txtYearOfPass").val()
+        };
+        $.ajax({
+                url: "@Url.Action("SaveEducationInfo", "Applicant")",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(objData),
+            success: function (response) {
+                debugger;
+                if (response.success) {
+
+                    debugger;
+                    // Get the table and insert a new row at the end
+                    let table = document.getElementById("EducationInfoTable");
+                    let newRow = table.insertRow(table.rows.length);
+
+                    // Insert data into cells of the new row
+                    newRow.insertCell(0).innerHTML = $("#txtEducationLevel option:selected").text();
+                    newRow.insertCell(1).innerHTML = $("#txtNameofExamination").val();
+                    newRow.insertCell(2).innerHTML = $("#txtInstituteName").val();
+                    newRow.insertCell(3).innerHTML = $("#txtDurationYear").val();
+                    if ($("#txtEducationLevel").val() == 4 || $("#txtEducationLevel").val() == 5) {
+                        newRow.insertCell(4).innerHTML = $("#txtGroup").val();
+                    } else {
+                        newRow.insertCell(4).innerHTML = $("#txtDepartment").val();
+                    }
+                    newRow.insertCell(5).innerHTML = $("#txtCGPADivision").val();
+                    newRow.insertCell(6).innerHTML = $("#txtCGPAGrade").val();
+                    newRow.insertCell(7).innerHTML = $("#txtCGPAOutOf").val();
+                    newRow.insertCell(8).innerHTML = $("#txtBoard").val();
+                    newRow.insertCell(9).innerHTML = $("#txtYearOfPass").val();
+                    newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    newRow.insertCell(11).innerHTML = $("#txtEducationLevel").val();
+                    if (parseInt($("#txtEducationInfoId").val()) > 0) {
+                        newRow.insertCell(12).innerHTML = $("#txtEducationInfoId").val();
+                    } else {
+                        newRow.insertCell(12).innerHTML = response.EducationInfoId;
+                    }
+
+                    //$("td:eq(11)").hide();
+                    $(newRow.cells[11]).hide();
+                    $(newRow.cells[12]).hide();
+                    // for row length: newRow.cells.length
+                    for (let i = 0; i < 11; i++) {
+                        newRow.cells[i].style.textAlign = "center";
+                    }
+
+                    $("#EducationInfoForm")[0].reset();
+                    $("#txtEducationInfoId").val(0);
+                        /*$("#response").html(response.message);*/
+                        $("#divSuccess").html("<strong>Success!</strong> Education Info. Saved/Updated Successfully");
+                        $("#divSuccess").show();
+                        $("#divEror").hide();
+                    } else {
+                        /*$("#response").html(response.message);*/
+                        $("#divEror").html("<strong>Sorry!</strong> Education Info. Saved/Updated Unsuccessful");
+                        $("#divEror").show();
+                        $("#divSuccess").hide();
+                    }
+                },
+            error: function () {
+                $("#divEror").html("An error occurred while sending the request");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+
+                }
+            });
+
+
+    }
+
+
+    function loadEducationInfo() {
+        debugger;
+        var objData = {
+            ApplicantId: parseInt($("#txtApplicantId").val())
+        };
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("loadEducationInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            data: objData,
+            dataType: "json",
+            success: function (response) {
+                debugger
+                if (response.length > 0) {
+                    let table = document.getElementById("EducationInfoTable");
+                    for (var i = 0; i < response.length; i++) {
+                        let newRow = table.insertRow(table.rows.length);
+
+                        // Insert data into cells of the new row
+                        newRow.insertCell(0).innerHTML = response[i].EducationLevel;
+                        newRow.insertCell(1).innerHTML = response[i].NameofExamination;
+                        newRow.insertCell(2).innerHTML = response[i].InstituteName;
+                        newRow.insertCell(3).innerHTML = response[i].DurationYear;
+                        if (response[i].EducationLevelId == 4 || response[i].EducationLevelId == 5) {
+                            newRow.insertCell(4).innerHTML = response[i].Group;
+                        } else {
+                            newRow.insertCell(4).innerHTML = response[i].Department;
+                        }
+                        newRow.insertCell(5).innerHTML = response[i].CGPADivision;
+                        newRow.insertCell(6).innerHTML = response[i].CGPAGrade;
+                        newRow.insertCell(7).innerHTML = response[i].CGPAOutOf;
+                        newRow.insertCell(8).innerHTML = response[i].Board;
+                        newRow.insertCell(9).innerHTML = response[i].YearOfPass;
+                        newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(11).innerHTML = response[i].EducationLevelId;
+                        newRow.insertCell(12).innerHTML = response[i].EducationInfoId;
+                        //$("td:eq(11)").hide();
+                        $(newRow.cells[11]).hide();
+                        $(newRow.cells[12]).hide();
+                        // for row length: newRow.cells.length
+                        for (let i = 0; i < 11; i++) {
+                            newRow.cells[i].style.textAlign = "center";
+                        }
+
+                    }
+                    $("#txtApplicantId").val(response[0].ApplicantId);
+                } else {
+                    $("#txtApplicantId").val(response);
+                }
+
+            },
+            error: function (error) {
+                console.log("Error loading personal info:", error);
+            }
+        });
+    }
+
+
+    function editData(button) {
+        debugger;
+        // Get the parent row of the clicked button
+        let row = button.parentNode.parentNode;
+        $("#txtEducationLevel").val(row.cells[11].innerHTML);
+        $("#txtNameofExamination").val(row.cells[1].innerHTML);
+        $("#txtInstituteName").val(row.cells[2].innerHTML);
+        $("#txtDurationYear").val(row.cells[3].innerHTML);
+        if (row.cells[11].innerHTML == 4 || row.cells[11].innerHTML == 5) {
+            $("#txtGroup").val(row.cells[4].innerHTML);
+            $("#divGroup").show();
+            $("#divDepartment").hide();
+            $("#txtDepartment").val("");
+        } else {
+            $("#txtDepartment").val(row.cells[4].innerHTML);
+            $("#divGroup").hide();
+            $("#txtGroup").val("");
+            $("#divDepartment").show();
+        }
+        $("#txtCGPADivision").val(row.cells[5].innerHTML);
+        $("#txtCGPAGrade").val(row.cells[6].innerHTML);
+        $("#txtCGPAOutOf").val(row.cells[7].innerHTML);
+        $("#txtBoard").val(row.cells[8].innerHTML);
+        $("#txtYearOfPass").val(row.cells[9].innerHTML);
+        $("#txtEducationInfoId").val(row.cells[12].innerHTML);
+
+        row.parentNode.removeChild(row);
+    }
+    function deleteData(button) {
+        debugger;
+        // Get the parent row of the clicked button
+        let row = button.parentNode.parentNode;
+        var EducationInfoId= parseInt(row.cells[12].innerHTML);
+        var ApplicantId= parseInt($("#txtApplicantId").val());
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteEducationInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ ApplicantId: ApplicantId, EducationInfoId: EducationInfoId }),
+            success: function (response) {
+                if (response.success) {
+                    $("#divSuccess").html("<strong>Success!</strong> Education Info. deleted Successfully");
+                    $("#divSuccess").show();
+                    $("#divEror").hide();
+                } else {
+                    $("#divEror").html("<strong>Sorry!</strong> Education Info. delete Unsuccessful");
+                    $("#divEror").show();
+                    $("#divSuccess").hide();
+                }
+            },
+            error: function () {
+                alert("Error occurred while deleting.");
+            }
+        });
+
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
+    }
+</script>

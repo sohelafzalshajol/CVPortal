@@ -15,6 +15,7 @@
     <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUser" />
     <EntitySet Name="tblDistricts" EntityType="HrPayrollDBModel.tblDistrict" />
     <EntitySet Name="tblApplicantInfoes" EntityType="HrPayrollDBModel.tblApplicantInfo" />
+    <EntitySet Name="tblEducationInfoes" EntityType="HrPayrollDBModel.tblEducationInfo" />
   </EntityContainer>
   <EntityType Name="tblDistrict">
     <Key>
@@ -67,5 +68,27 @@
     <Property Name="ApplicantSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="ApplicantPhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ApplicantSignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblEducationInfo">
+    <Key>
+      <PropertyRef Name="EducationInfoId" />
+    </Key>
+    <Property Name="EducationInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+    <Property Name="EducationLevelId" Type="Int32" Nullable="false" />
+    <Property Name="EducationLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NameofExamination" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InstituteName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DurationYear" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Group" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CGPADivision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CGPAGrade" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CGPAOutOf" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Board" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="YearOfPass" Type="Int32" Nullable="false" />
+    <Property Name="EUserId" Type="Int64" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
