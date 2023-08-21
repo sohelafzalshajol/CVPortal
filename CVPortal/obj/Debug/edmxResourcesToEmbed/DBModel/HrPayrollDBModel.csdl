@@ -16,6 +16,8 @@
     <EntitySet Name="tblDistricts" EntityType="HrPayrollDBModel.tblDistrict" />
     <EntitySet Name="tblApplicantInfoes" EntityType="HrPayrollDBModel.tblApplicantInfo" />
     <EntitySet Name="tblEducationInfoes" EntityType="HrPayrollDBModel.tblEducationInfo" />
+    <EntitySet Name="tblEmploymentInfoes" EntityType="HrPayrollDBModel.tblEmploymentInfo" />
+    <EntitySet Name="tblTrainingInfoes" EntityType="HrPayrollDBModel.tblTrainingInfo" />
   </EntityContainer>
   <EntityType Name="tblDistrict">
     <Key>
@@ -90,5 +92,41 @@
     <Property Name="EntryDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblEmploymentInfo">
+    <Key>
+      <PropertyRef Name="EmploymentInfoId" />
+    </Key>
+    <Property Name="EmploymentInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+    <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JobType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Duties" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DutiesRelatedToAppliedJob" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Precision="3" />
+    <Property Name="IsContinue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LeavingReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EUserId" Type="Int64" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblTrainingInfo">
+    <Key>
+      <PropertyRef Name="TrainingInfoId" />
+    </Key>
+    <Property Name="TrainingInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Topic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Institute" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EUserId" Type="Int64" />
+    <Property Name="EntryDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

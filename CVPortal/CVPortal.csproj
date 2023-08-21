@@ -208,6 +208,12 @@
     <Compile Include="DBModel\tblEducationInfo.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\tblEmploymentInfo.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\tblTrainingInfo.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +222,8 @@
     <Compile Include="Models\CVPortalUsers.cs" />
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\EducationInfo.cs" />
+    <Compile Include="Models\EmploymentInfo.cs" />
+    <Compile Include="Models\TrainingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +252,8 @@
     <Content Include="Scripts\js\bootstrap.js.map" />
     <Content Include="Scripts\js\bootstrap.min.js.map" />
     <Content Include="Views\Applicant\EducationInfo.cshtml" />
+    <Content Include="Views\Applicant\EmploymentInfo.cshtml" />
+    <Content Include="Views\Applicant\TrainingInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

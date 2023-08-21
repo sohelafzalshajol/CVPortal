@@ -85,10 +85,48 @@
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="Department" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="tblEmploymentInfo">
+    <Key>
+      <PropertyRef Name="EmploymentInfoId" />
+    </Key>
+    <Property Name="EmploymentInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar(max)" />
+    <Property Name="JobType" Type="nvarchar(max)" />
+    <Property Name="Duties" Type="nvarchar(max)" />
+    <Property Name="DutiesRelatedToAppliedJob" Type="nvarchar(max)" />
+    <Property Name="CompanyName" Type="nvarchar(max)" />
+    <Property Name="CompanyAddress" Type="nvarchar(max)" />
+    <Property Name="FromDate" Type="datetime" />
+    <Property Name="ToDate" Type="datetime" />
+    <Property Name="IsContinue" Type="nvarchar(max)" />
+    <Property Name="LeavingReason" Type="nvarchar(max)" />
+    <Property Name="EUserId" Type="bigint" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblTrainingInfo">
+    <Key>
+      <PropertyRef Name="TrainingInfoId" />
+    </Key>
+    <Property Name="TrainingInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Topic" Type="nvarchar(max)" />
+    <Property Name="Institute" Type="nvarchar(max)" />
+    <Property Name="Country" Type="nvarchar(max)" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Duration" Type="nvarchar(max)" />
+    <Property Name="EUserId" Type="bigint" />
+    <Property Name="EntryDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
   <EntityContainer Name="HrPayrollDBModelStoreContainer">
     <EntitySet Name="tblApplicantInfo" EntityType="Self.tblApplicantInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDistricts" EntityType="Self.tblDistricts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEducationInfo" EntityType="Self.tblEducationInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmploymentInfo" EntityType="Self.tblEmploymentInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTrainingInfo" EntityType="Self.tblTrainingInfo" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

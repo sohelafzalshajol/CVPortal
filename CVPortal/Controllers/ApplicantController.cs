@@ -141,8 +141,16 @@ namespace CVPortal.Controllers
                 long UserId = userData.CVPortalUsersId;
                 objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
             }
+            if (objtblApplicantInfo != null)
+            {
+                return Json(objtblApplicantInfo, JsonRequestBehavior.AllowGet);
 
-            return Json(objtblApplicantInfo, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -151,6 +159,31 @@ namespace CVPortal.Controllers
             tblDistrict objtblDistrict = new tblDistrict();
             var districts = objHrPayrollEntities.tblDistricts.Where(d => d.IsActive == 1).OrderBy(d => d.DistrictName).Select(d => new { DistrictId = d.DistrictId, DistrictName = d.DistrictName }).ToList();
             return Json(districts, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetProgress()
+        {
+            int result = 0;
+            var userData = Session["objUser"] as dynamic;
+            long UserId = userData.CVPortalUsersId;
+            List<bool> hasData = new List<bool>();
+            hasData.Add(objHrPayrollEntities.tblApplicantInfoes.Any(row =>
+                row.EUserId == UserId));
+            hasData.Add(objHrPayrollEntities.tblEducationInfoes.Any(row =>
+                row.EUserId == UserId));
+            hasData.Add(objHrPayrollEntities.tblEmploymentInfoes.Any(row =>
+                row.EUserId == UserId));
+            hasData.Add(objHrPayrollEntities.tblTrainingInfoes.Any(row =>
+                row.EUserId == UserId));
+            foreach (var item in hasData)
+            {
+                if (item)
+                {
+                    result++;
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -188,6 +221,7 @@ namespace CVPortal.Controllers
                             applicant.EUserId = userData.CVPortalUsersId;
                             applicant.UpdateDate = DateTime.Now;
                             objHrPayrollEntities.SaveChanges();
+                            ApplicantId = applicant.ApplicantId;
                             System.IO.File.WriteAllBytes(imagePath, imageBytes);
                         }
                         else
@@ -201,13 +235,15 @@ namespace CVPortal.Controllers
 
                             objHrPayrollEntities.tblApplicantInfoes.Add(objtblApplicantInfo);
                             objHrPayrollEntities.SaveChanges();
+                            ApplicantId = objtblApplicantInfo.ApplicantId;
                             System.IO.File.WriteAllBytes(imagePath, imageBytes);
                         }
 
                         var result = new
                         {
                             FilePath = imagePath,
-                            FileName = uniqueFileName
+                            FileName = uniqueFileName,
+                            ApplicantId = ApplicantId
                         };
 
                         return Json(result);
@@ -264,6 +300,7 @@ namespace CVPortal.Controllers
                             applicant.EUserId = userData.CVPortalUsersId;
                             applicant.UpdateDate = DateTime.Now;
                             objHrPayrollEntities.SaveChanges();
+                            ApplicantId = applicant.ApplicantId;
                             System.IO.File.WriteAllBytes(imagePath, imageBytes);
                         }
                         else
@@ -277,13 +314,15 @@ namespace CVPortal.Controllers
 
                             objHrPayrollEntities.tblApplicantInfoes.Add(objtblApplicantInfo);
                             objHrPayrollEntities.SaveChanges();
+                            ApplicantId = objtblApplicantInfo.ApplicantId;
                             System.IO.File.WriteAllBytes(imagePath, imageBytes);
                         }
 
                         var result = new
                         {
                             FilePath = imagePath,
-                            FileName = uniqueFileName
+                            FileName = uniqueFileName,
+                            ApplicantId = ApplicantId
                         };
 
                         return Json(result);
@@ -316,6 +355,16 @@ namespace CVPortal.Controllers
         }
 
         public ActionResult EducationInfo()
+        {
+            return View();
+        }
+
+        public ActionResult EmploymentInfo()
+        {
+            return View();
+        }
+
+        public ActionResult TrainingInfo()
         {
             return View();
         }
@@ -390,6 +439,125 @@ namespace CVPortal.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult SaveTrainingInfo(TrainingInfo objTrainingInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var userData = Session["objUser"] as dynamic;
+                    if (objTrainingInfo.ApplicantId > 0 && objTrainingInfo.TrainingInfoId > 0)
+                    {
+                        var objtblTrainingInfo = objHrPayrollEntities.tblTrainingInfoes.FirstOrDefault(e => e.ApplicantId == objTrainingInfo.ApplicantId && e.TrainingInfoId == objTrainingInfo.TrainingInfoId);
+                        objtblTrainingInfo.Title = objTrainingInfo.Title;
+                        objtblTrainingInfo.Topic = objTrainingInfo.Topic;
+                        objtblTrainingInfo.Institute = objTrainingInfo.Institute;
+                        objtblTrainingInfo.Country = objTrainingInfo.Country;
+                        objtblTrainingInfo.Year = objTrainingInfo.Year;
+                        objtblTrainingInfo.Duration = objTrainingInfo.Duration;
+                        objtblTrainingInfo.EUserId = userData.CVPortalUsersId;
+                        objtblTrainingInfo.UpdateDate = DateTime.Now;
+                        objHrPayrollEntities.SaveChanges();
+                    }
+                    else if (objTrainingInfo.ApplicantId > 0 && objTrainingInfo.TrainingInfoId == 0)
+                    {
+                        tblTrainingInfo objtblTrainingInfo = new tblTrainingInfo();
+                        objtblTrainingInfo.ApplicantId = objTrainingInfo.ApplicantId;
+                        objtblTrainingInfo.Title = objTrainingInfo.Title;
+                        objtblTrainingInfo.Topic = objTrainingInfo.Topic;
+                        objtblTrainingInfo.Institute = objTrainingInfo.Institute;
+                        objtblTrainingInfo.Country = objTrainingInfo.Country;
+                        objtblTrainingInfo.Year = objTrainingInfo.Year;
+                        objtblTrainingInfo.Duration = objTrainingInfo.Duration;
+                        objtblTrainingInfo.EUserId = userData.CVPortalUsersId;
+                        objtblTrainingInfo.EntryDate = DateTime.Now;
+                        objHrPayrollEntities.tblTrainingInfoes.Add(objtblTrainingInfo);
+                        objHrPayrollEntities.SaveChanges();
+                        objTrainingInfo.TrainingInfoId = objtblTrainingInfo.TrainingInfoId;
+                    }
+
+                    ViewBag.SuccessMessage = "Training information saved/update successfully.";
+                    return Json(new { success = true, message = "Form submitted successfully", TrainingInfoId = objTrainingInfo.TrainingInfoId });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while saving training information.";
+                    return Json(new { success = false, message = "Form didn't submite successfully" });
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "ModelState invalid error occurred while saving training information.";
+                return Json(new { success = false, message = "Form didn't submite successfully" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SaveEmploymentInfo(EmploymentInfo objEmploymentInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var userData = Session["objUser"] as dynamic;
+                    if (objEmploymentInfo.ApplicantId > 0 && objEmploymentInfo.EmploymentInfoId > 0)
+                    {
+                        var objtblEmploymentInfo = objHrPayrollEntities.tblEmploymentInfoes.FirstOrDefault(e => e.ApplicantId == objEmploymentInfo.ApplicantId && e.EmploymentInfoId == objEmploymentInfo.EmploymentInfoId);
+                        objtblEmploymentInfo.Designation = objEmploymentInfo.Designation;
+                        objtblEmploymentInfo.JobType = objEmploymentInfo.JobType;
+                        objtblEmploymentInfo.Duties = objEmploymentInfo.Duties;
+                        objtblEmploymentInfo.DutiesRelatedToAppliedJob = objEmploymentInfo.DutiesRelatedToAppliedJob;
+                        objtblEmploymentInfo.CompanyName = objEmploymentInfo.CompanyName;
+                        objtblEmploymentInfo.CompanyAddress = objEmploymentInfo.CompanyAddress;
+                        objtblEmploymentInfo.FromDate = objEmploymentInfo.FromDate;
+                        objtblEmploymentInfo.ToDate = objEmploymentInfo.ToDate;
+                        objtblEmploymentInfo.IsContinue = objEmploymentInfo.IsContinue;
+                        objtblEmploymentInfo.LeavingReason = objEmploymentInfo.LeavingReason;
+                        objtblEmploymentInfo.EUserId = userData.CVPortalUsersId;
+                        objtblEmploymentInfo.UpdateDate = DateTime.Now;
+
+                        objHrPayrollEntities.SaveChanges();
+                    }
+                    else if (objEmploymentInfo.ApplicantId > 0 && objEmploymentInfo.EmploymentInfoId == 0)
+                    {
+                        tblEmploymentInfo objtblEmploymentInfo = new tblEmploymentInfo();
+                        objtblEmploymentInfo.ApplicantId = objEmploymentInfo.ApplicantId;
+                        objtblEmploymentInfo.Designation = objEmploymentInfo.Designation;
+                        objtblEmploymentInfo.JobType = objEmploymentInfo.JobType;
+                        objtblEmploymentInfo.Duties = objEmploymentInfo.Duties;
+                        objtblEmploymentInfo.DutiesRelatedToAppliedJob = objEmploymentInfo.DutiesRelatedToAppliedJob;
+                        objtblEmploymentInfo.CompanyName = objEmploymentInfo.CompanyName;
+                        objtblEmploymentInfo.CompanyAddress = objEmploymentInfo.CompanyAddress;
+                        objtblEmploymentInfo.FromDate = objEmploymentInfo.FromDate;
+                        objtblEmploymentInfo.ToDate = objEmploymentInfo.ToDate;
+                        objtblEmploymentInfo.IsContinue = objEmploymentInfo.IsContinue;
+                        objtblEmploymentInfo.LeavingReason = objEmploymentInfo.LeavingReason;
+                        objtblEmploymentInfo.EUserId = userData.CVPortalUsersId;
+                        objtblEmploymentInfo.EntryDate = DateTime.Now;
+                        objHrPayrollEntities.tblEmploymentInfoes.Add(objtblEmploymentInfo);
+                        objHrPayrollEntities.SaveChanges();
+                        objEmploymentInfo.EmploymentInfoId = objtblEmploymentInfo.EmploymentInfoId;
+                    }
+
+                    ViewBag.SuccessMessage = "Employment information saved/update successfully.";
+                    return Json(new { success = true, message = "Form submitted successfully", EmploymentInfoId = objEmploymentInfo.EmploymentInfoId });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while saving employment information.";
+                    return Json(new { success = false, message = "Form didn't submite successfully" });
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "ModelState invalid error occurred while saving employment information.";
+                return Json(new { success = false, message = "Form didn't submite successfully" });
+            }
+        }
+
 
         [HttpGet]
         public ActionResult loadEducationInfo(long? ApplicantId)
@@ -400,12 +568,12 @@ namespace CVPortal.Controllers
             if (ApplicantId > 0)
             {
                 objtblEducationInfo = objHrPayrollEntities.tblEducationInfoes
-            .Where(e => e.ApplicantId == ApplicantId).ToList();
+            .Where(e => e.ApplicantId == ApplicantId).OrderBy(e => e.EducationLevelId).ToList();
             }
             else
             {
 
-                objtblEducationInfo = objHrPayrollEntities.tblEducationInfoes.Where(e => e.EUserId == UserId).ToList();
+                objtblEducationInfo = objHrPayrollEntities.tblEducationInfoes.Where(e => e.EUserId == UserId).OrderBy(e => e.EducationLevelId).ToList();
             }
 
             if (objtblEducationInfo.Count > 0)
@@ -419,6 +587,66 @@ namespace CVPortal.Controllers
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
             
+        }
+
+        [HttpGet]
+        public ActionResult loadTrainingInfo(long? ApplicantId)
+        {
+            List<tblTrainingInfo> objtblTrainingInfo = new List<tblTrainingInfo>();
+            var userData = Session["objUser"] as dynamic;
+            long UserId = userData.CVPortalUsersId;
+            if (ApplicantId > 0)
+            {
+                objtblTrainingInfo = objHrPayrollEntities.tblTrainingInfoes
+            .Where(e => e.ApplicantId == ApplicantId).OrderByDescending(e => e.TrainingInfoId).ToList();
+            }
+            else
+            {
+
+                objtblTrainingInfo = objHrPayrollEntities.tblTrainingInfoes.Where(e => e.EUserId == UserId).OrderByDescending(e => e.TrainingInfoId).ToList();
+            }
+
+            if (objtblTrainingInfo.Count > 0)
+            {
+                return Json(objtblTrainingInfo, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                tblApplicantInfo objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
+                ApplicantId = objtblApplicantInfo.ApplicantId;
+                return Json(ApplicantId, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult loadEmploymentInfo(long? ApplicantId)
+        {
+            List<tblEmploymentInfo> objtblEmploymentInfo = new List<tblEmploymentInfo>();
+            var userData = Session["objUser"] as dynamic;
+            long UserId = userData.CVPortalUsersId;
+            if (ApplicantId > 0)
+            {
+                objtblEmploymentInfo = objHrPayrollEntities.tblEmploymentInfoes
+            .Where(e => e.ApplicantId == ApplicantId).OrderByDescending(e => e.FromDate).ToList();
+            }
+            else
+            {
+
+                objtblEmploymentInfo = objHrPayrollEntities.tblEmploymentInfoes.Where(e => e.EUserId == UserId).OrderByDescending(e => e.FromDate).ToList();
+            }
+
+            if (objtblEmploymentInfo.Count > 0)
+            {
+                return Json(objtblEmploymentInfo, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                tblApplicantInfo objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
+                ApplicantId = objtblApplicantInfo.ApplicantId;
+                return Json(ApplicantId, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
 
@@ -453,5 +681,70 @@ namespace CVPortal.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult DeleteTrainingInfo(long ApplicantId, long TrainingInfoId)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var recordToDelete = objHrPayrollEntities.tblTrainingInfoes.Find(TrainingInfoId);
+
+                    if (recordToDelete != null)
+                    {
+                        objHrPayrollEntities.tblTrainingInfoes.Remove(recordToDelete);
+                        objHrPayrollEntities.SaveChanges();
+                        return Json(new { success = true });
+                    }
+
+                    return Json(new { success = false, message = "Record not found." });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while deleting training information.";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "ModelState invalid error occurred while deleting training information.";
+                return View();
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEmploymentInfo(long ApplicantId, long EmploymentInfoId)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var recordToDelete = objHrPayrollEntities.tblEmploymentInfoes.Find(EmploymentInfoId);
+
+                    if (recordToDelete != null)
+                    {
+                        objHrPayrollEntities.tblEmploymentInfoes.Remove(recordToDelete);
+                        objHrPayrollEntities.SaveChanges();
+                        return Json(new { success = true });
+                    }
+
+                    return Json(new { success = false, message = "Record not found." });
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "An error occurred while deleting employment information.";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "ModelState invalid error occurred while deleting employment information.";
+                return View();
+            }
+
+        }
+
     }
 }

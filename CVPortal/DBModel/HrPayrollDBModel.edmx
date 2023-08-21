@@ -90,11 +90,49 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="Department" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tblEmploymentInfo">
+          <Key>
+            <PropertyRef Name="EmploymentInfoId" />
+          </Key>
+          <Property Name="EmploymentInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar(max)" />
+          <Property Name="JobType" Type="nvarchar(max)" />
+          <Property Name="Duties" Type="nvarchar(max)" />
+          <Property Name="DutiesRelatedToAppliedJob" Type="nvarchar(max)" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="CompanyAddress" Type="nvarchar(max)" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="IsContinue" Type="nvarchar(max)" />
+          <Property Name="LeavingReason" Type="nvarchar(max)" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblTrainingInfo">
+          <Key>
+            <PropertyRef Name="TrainingInfoId" />
+          </Key>
+          <Property Name="TrainingInfoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Topic" Type="nvarchar(max)" />
+          <Property Name="Institute" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="nvarchar(max)" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="HrPayrollDBModelStoreContainer">
           <EntitySet Name="tblApplicantInfo" EntityType="Self.tblApplicantInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDistricts" EntityType="Self.tblDistricts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEducationInfo" EntityType="Self.tblEducationInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmploymentInfo" EntityType="Self.tblEmploymentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTrainingInfo" EntityType="Self.tblTrainingInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -116,6 +154,8 @@
           <EntitySet Name="tblDistricts" EntityType="HrPayrollDBModel.tblDistrict" />
           <EntitySet Name="tblApplicantInfoes" EntityType="HrPayrollDBModel.tblApplicantInfo" />
           <EntitySet Name="tblEducationInfoes" EntityType="HrPayrollDBModel.tblEducationInfo" />
+          <EntitySet Name="tblEmploymentInfoes" EntityType="HrPayrollDBModel.tblEmploymentInfo" />
+          <EntitySet Name="tblTrainingInfoes" EntityType="HrPayrollDBModel.tblTrainingInfo" />
         </EntityContainer>
         <EntityType Name="tblDistrict">
           <Key>
@@ -190,6 +230,42 @@
           <Property Name="EntryDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblEmploymentInfo">
+          <Key>
+            <PropertyRef Name="EmploymentInfoId" />
+          </Key>
+          <Property Name="EmploymentInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+          <Property Name="Designation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Duties" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DutiesRelatedToAppliedJob" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromDate" Type="DateTime" Precision="3" />
+          <Property Name="ToDate" Type="DateTime" Precision="3" />
+          <Property Name="IsContinue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LeavingReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EUserId" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblTrainingInfo">
+          <Key>
+            <PropertyRef Name="TrainingInfoId" />
+          </Key>
+          <Property Name="TrainingInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Topic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Institute" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Duration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EUserId" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -283,6 +359,44 @@
                 <ScalarProperty Name="EducationLevelId" ColumnName="EducationLevelId" />
                 <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
                 <ScalarProperty Name="EducationInfoId" ColumnName="EducationInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmploymentInfoes">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblEmploymentInfo">
+              <MappingFragment StoreEntitySet="tblEmploymentInfo">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+                <ScalarProperty Name="LeavingReason" ColumnName="LeavingReason" />
+                <ScalarProperty Name="IsContinue" ColumnName="IsContinue" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="DutiesRelatedToAppliedJob" ColumnName="DutiesRelatedToAppliedJob" />
+                <ScalarProperty Name="Duties" ColumnName="Duties" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="EmploymentInfoId" ColumnName="EmploymentInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTrainingInfoes">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblTrainingInfo">
+              <MappingFragment StoreEntitySet="tblTrainingInfo">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Institute" ColumnName="Institute" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="TrainingInfoId" ColumnName="TrainingInfoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

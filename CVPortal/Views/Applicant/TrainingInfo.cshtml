@@ -1,0 +1,307 @@
+﻿
+@{
+    ViewBag.Title = "TrainingInfo";
+}
+
+
+@if (Session["objUser"] == null || Session["UserEmail"] == null)
+{
+    Response.Redirect("~/Account/Login");
+}
+else
+{
+    <div class="progress-container mt-2">
+        <div class="progress">
+            <div class="progress-bar bg-warning progress-bar-striped custom-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <span class="progress-text"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card my-2">
+                <div class="card-body">
+                    <form id="TrainingInfoForm" enctype="multipart/form-data" class="mb-3">
+                        <div class="row">
+                            <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
+                            <input type="hidden" id="txtTrainingInfoId" name="txtTrainingInfoId" value="0" />
+                            <div class="card-header my-2">
+                                <h5><strong>Training Information</strong></h5>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtTitle" class="form-label required-label">Training Title</label>
+                                <input type="text" class="form-control" id="txtTitle" name="txtTitle" placeholder="enter training title" required />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtTopic" class="form-label required-label">Topics learned in the training</label>
+                                <textarea id="txtTopic" name="txtTopic" class="form-control" placeholder="enter topics" rows="3" required></textarea>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtInstitute" class="form-label required-label">Institute Name</label>
+                                <input type="text" class="form-control" id="txtInstitute" name="txtInstitute" placeholder="enter institute name" required />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtCountry" class="form-label">Country</label>
+                                <select id="txtCountry" name="txtCountry" class="form-select" placeholder="select country">
+                                    <option value="">--select country--</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtYear" class="form-label">Training Year</label>
+                                <input type="number" class="form-control" id="txtYear" name="txtYear" placeholder="enter training year" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtDuration" class="form-label">Training Duration</label>
+                                <input type="text" class="form-control" id="txtDuration" name="txtDuration" placeholder="enter training duration" />
+                            </div>
+                        </div>
+                        <div class="col-md-8 mx-auto text-center mt-2">
+                            <div id="divSuccess" class="alert alert-success" role="alert" style="display:none;">
+                                <strong>Success!</strong>
+                            </div>
+                            <div id="divEror" class="alert alert-warning" role="alert" style="display:none;">
+                                <strong>Sorry!</strong>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-md-6 mx-auto text-center">
+                                <input id="resetButton" type="reset" value="Reset" class="btn btn-light btn-lg" />
+                                <button type="submit" id="btnAddTrainingInfo" class="btn btn-warning btn-lg ms-2" value="Add">Add</button>
+                            </div>
+                        </div>
+                        <div id="response" class="col-md-8 mx-auto text-center"></div>
+                    </form>
+                    <div class="table-responsive">
+                        <table id="TrainingInfoTable" class="table table-striped table-bordered table-condensed table-hover mx-auto text-center">
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Topic</th>
+                                <th scope="col">Institute</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Year</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Action</th>
+                                <th scope="col" hidden>TrainingInfoId</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).ready(function () {
+        loadTrainingInfo();
+        loadProgressBar();
+        $("#resetButton").click(function () {
+            $("#TrainingInfoForm")[0].reset();
+        });
+        $("#btnAddTrainingInfo").click(function (event) {
+            debugger;
+            event.preventDefault();
+            if ($("#TrainingInfoForm").valid() && $("#txtApplicantId").val() > 0) {
+                SaveTrainingInfo();
+            } else {
+                $("#divEror").html("<strong>Sorry!</strong> Please fill-up the required (*) fields");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+        });
+    });
+
+
+    function SaveTrainingInfo() {
+        debugger;
+        var objData = {
+            ApplicantId : $("#txtApplicantId").val(),
+            TrainingInfoId: $("#txtTrainingInfoId").val(),
+            Title: $("#txtTitle").val(),
+            Topic: $("#txtTopic").val(),
+            Institute: $("#txtInstitute").val(),
+            Country: $("#txtCountry").val(),
+            Year: $("#txtYear").val(),
+            Duration: $("#txtDuration").val()
+        };
+        $.ajax({
+                url: "@Url.Action("SaveTrainingInfo", "Applicant")",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(objData),
+            success: function (response) {
+                debugger;
+                if (response.success) {
+
+                    debugger;
+                    // Get the table and insert a new row at the end
+                    let table = document.getElementById("TrainingInfoTable");
+                    let newRow = table.insertRow(table.rows.length);
+
+                    // Insert data into cells of the new row
+                    newRow.insertCell(0).innerHTML = $("#txtTitle").val();
+                    newRow.insertCell(1).innerHTML = $("#txtTopic").val();
+                    newRow.insertCell(2).innerHTML = $("#txtInstitute").val();
+                    newRow.insertCell(3).innerHTML = $("#txtCountry").val();
+                    newRow.insertCell(4).innerHTML = $("#txtYear").val();
+                    newRow.insertCell(5).innerHTML = $("#txtDuration").val();
+                    newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    if (parseInt($("#txtTrainingInfoId").val()) > 0) {
+                        newRow.insertCell(7).innerHTML = $("#txtTrainingInfoId").val();
+                    } else {
+                        newRow.insertCell(7).innerHTML = response.TrainingInfoId;
+                    }
+                    $(newRow.cells[7]).hide();
+                    // for row length: newRow.cells.length
+                    for (let i = 0; i < 7; i++) {
+                        newRow.cells[i].style.textAlign = "center";
+                    }
+
+                    $("#TrainingInfoForm")[0].reset();
+                    $("#txtTrainingInfoId").val(0);
+                        /*$("#response").html(response.message);*/
+                        $("#divSuccess").html("<strong>Success!</strong> Training Info. Saved/Updated Successfully");
+                        $("#divSuccess").show();
+                    $("#divEror").hide();
+                    loadProgressBar();
+                    } else {
+                        /*$("#response").html(response.message);*/
+                        $("#divEror").html("<strong>Sorry!</strong> Training Info. Saved/Updated Unsuccessful");
+                        $("#divEror").show();
+                        $("#divSuccess").hide();
+                    }
+                },
+            error: function () {
+                $("#divEror").html("An error occurred while sending the request");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+
+                }
+            });
+
+
+    }
+
+
+    function loadTrainingInfo() {
+        debugger;
+        var objData = {
+            ApplicantId: parseInt($("#txtApplicantId").val())
+        };
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("loadTrainingInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            data: objData,
+            dataType: "json",
+            success: function (response) {
+                debugger
+                if (response.length > 0) {
+                    let table = document.getElementById("TrainingInfoTable");
+                    for (var i = 0; i < response.length; i++) {
+                        let newRow = table.insertRow(table.rows.length);
+
+                        // Insert data into cells of the new row
+                        newRow.insertCell(0).innerHTML = response[i].Title;
+                        newRow.insertCell(1).innerHTML = response[i].Topic;
+                        newRow.insertCell(2).innerHTML = response[i].Institute;
+                        newRow.insertCell(3).innerHTML = response[i].Country;
+                        newRow.insertCell(4).innerHTML = response[i].Year;
+                        newRow.insertCell(5).innerHTML = response[i].Duration;
+                        newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(7).innerHTML = response[i].TrainingInfoId;
+                        $(newRow.cells[7]).hide();
+                        // for row length: newRow.cells.length
+                        for (let i = 0; i < 7; i++) {
+                            newRow.cells[i].style.textAlign = "center";
+                        }
+
+                    }
+                    $("#txtApplicantId").val(response[0].ApplicantId);
+                } else {
+                    $("#txtApplicantId").val(response);
+                }
+
+            },
+            error: function (error) {
+                console.log("Error loading training info:", error);
+            }
+        });
+    }
+
+
+    function editData(button) {
+        debugger;
+        // Get the parent row of the clicked button
+        let row = button.parentNode.parentNode;
+        $("#txtTitle").val(row.cells[0].innerHTML);
+        $("#txtTopic").val(row.cells[1].innerHTML);
+        $("#txtInstitute").val(row.cells[2].innerHTML);
+        $("#txtCountry").val(row.cells[3].innerHTML);
+        $("#txtYear").val(row.cells[4].innerHTML);
+        $("#txtDuration").val(row.cells[5].innerHTML);
+        $("#txtTrainingInfoId").val(row.cells[7].innerHTML);
+
+        row.parentNode.removeChild(row);
+    }
+    function deleteData(button) {
+        debugger;
+        // Get the parent row of the clicked button
+        let row = button.parentNode.parentNode;
+        var TrainingInfoId= parseInt(row.cells[7].innerHTML);
+        var ApplicantId= parseInt($("#txtApplicantId").val());
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteTrainingInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ ApplicantId: ApplicantId, TrainingInfoId: TrainingInfoId }),
+            success: function (response) {
+                if (response.success) {
+                    $("#divSuccess").html("<strong>Success!</strong> Training Info. deleted Successfully");
+                    $("#divSuccess").show();
+                    $("#divEror").hide();
+                    loadProgressBar();
+                } else {
+                    $("#divEror").html("<strong>Sorry!</strong> Training Info. delete Unsuccessful");
+                    $("#divEror").show();
+                    $("#divSuccess").hide();
+                }
+            },
+            error: function () {
+                alert("Error occurred while deleting.");
+            }
+        });
+
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
+    }
+
+
+    function loadProgressBar() {
+        var progress = $(".progress-bar");
+        var currentProgress = progress.attr("aria-valuenow");
+        $.ajax({
+            url: "@Url.Action("GetProgress", "Applicant")",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+
+                var newProgress = parseInt(data) * 25;
+
+                progress.css("width", newProgress + "%");
+                progress.attr("aria-valuenow", newProgress);
+                document.querySelector(".progress-text").textContent = newProgress + "% Completed";
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching progress data: ' + error);
+            }
+        });
+
+    }
+
+</script>

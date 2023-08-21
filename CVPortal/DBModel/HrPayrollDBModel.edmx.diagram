@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="HrPayrollDBModel.tblDistrict" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="HrPayrollDBModel.tblApplicantInfo" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="HrPayrollDBModel.tblEducationInfo" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HrPayrollDBModel.tblEmploymentInfo" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HrPayrollDBModel.tblTrainingInfo" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,382 @@
+﻿
+@{
+    ViewBag.Title = "EmploymentInfo";
+}
+
+
+@if (Session["objUser"] == null || Session["UserEmail"] == null)
+{
+    Response.Redirect("~/Account/Login");
+}
+else
+{
+    <div class="progress-container mt-2">
+        <div class="progress">
+            <div class="progress-bar bg-warning progress-bar-striped custom-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <span class="progress-text"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card my-2">
+                <div class="card-body">
+                    <form id="EmploymentInfoForm" enctype="multipart/form-data" class="mb-3">
+                        <div class="row">
+                            <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
+                            <input type="hidden" id="txtEmploymentInfoId" name="txtEmploymentInfoId" value="0" />
+                            <div class="card-header my-2">
+                                <h5><strong>Employment Information</strong></h5>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtDesignation" class="form-label required-label">Designation</label>
+                                <input type="text" class="form-control" id="txtDesignation" name="txtDesignation" placeholder="enter designation" required />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtJobType" class="form-label required-label">Job Type</label>
+                                <select id="txtJobType" name="txtJobType" class="form-select" placeholder="select job type" required>
+                                    <option value="">--select job type--</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contractual">Contractual</option>
+                                    <option value="Probationary">Probationary</option>
+                                    <option value="Internship">Internship</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtDuties" class="form-label required-label">Duties</label>
+                                <textarea id="txtDuties" name="txtDuties" class="form-control" placeholder="enter duties" rows="3" required></textarea>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtDutiesRelatedToAppliedJob" class="form-label required-label">Duties Related To Applied Job?</label>
+                                <select id="txtDutiesRelatedToAppliedJob" name="txtDutiesRelatedToAppliedJob" class="form-select" placeholder="select answer" required>
+                                    <option value="">--select answer--</option>
+                                    <option value="Related">Related</option>
+                                    <option value="Not Related">Not Related</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtCompanyName" class="form-label">Company Name</label>
+                                <input type="text" class="form-control" id="txtCompanyName" name="txtCompanyName" placeholder="enter company name" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtCompanyAddress" class="form-label">Company Address</label>
+                                <textarea id="txtCompanyAddress" name="txtCompanyAddress" class="form-control" placeholder="enter company address" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtFromDate" class="form-label required-label">From Date</label>
+                                <input type="date" class="form-control" id="txtFromDate" name="txtFromDate" placeholder="enter date of joining" required />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtIsContinue" class="form-label required-label">Is currently work here?</label>
+                                <select id="txtIsContinue" name="txtIsContinue" class="form-select" placeholder="select answer" required>
+                                    <option value="">--select answer--</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div id="divToDate" class="col-md-6 mb-2" style="display:none;">
+                                <label for="txtToDate" class="form-label required-label">To Date</label>
+                                <input type="date" class="form-control" id="txtToDate" name="txtToDate" placeholder="enter date of resign" />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="txtLeavingReason" class="form-label">Leaving Reason</label>
+                                <input type="text" class="form-control" id="txtLeavingReason" name="txtLeavingReason" placeholder="enter reason of leaving" />
+                            </div>
+                        </div>
+                        <div class="col-md-8 mx-auto text-center mt-2">
+                            <div id="divSuccess" class="alert alert-success" role="alert" style="display:none;">
+                                <strong>Success!</strong>
+                            </div>
+                            <div id="divEror" class="alert alert-warning" role="alert" style="display:none;">
+                                <strong>Sorry!</strong>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-2">
+                            <div class="col-md-6 mx-auto text-center">
+                                <input id="resetButton" type="reset" value="Reset" class="btn btn-light btn-lg" />
+                                <button type="submit" id="btnAddEmploymentInfo" class="btn btn-warning btn-lg ms-2" value="Add">Add</button>
+                            </div>
+                        </div>
+                        <div id="response" class="col-md-8 mx-auto text-center"></div>
+                    </form>
+                    <div class="table-responsive">
+                        <table id="EmploymentInfoTable" class="table table-striped table-bordered table-condensed table-hover mx-auto text-center">
+                            <tr>
+                                <th scope="col">Designation</th>
+                                <th scope="col">Job Type</th>
+                                <th scope="col">Duties</th>
+                                <th scope="col">Related to Application?</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Company Address</th>
+                                <th scope="col">From Date</th>
+                                <th scope="col">To Date</th>
+                                <th scope="col">Is Continue?</th>
+                                <th scope="col">Leaving Reason</th>
+                                <th scope="col">Action</th>
+                                <th scope="col" hidden>EmploymentInfoId</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).ready(function () {
+        loadEmploymentInfo();
+        loadProgressBar();
+        $('#txtIsContinue').change(function () {
+            var selectedValue = $(this).val();
+            if (selectedValue == "No") {
+                $("#divToDate").show();
+                $("#txtToDate").val("");
+            } else {
+                $("#divToDate").hide();
+                $("#txtToDate").val("");
+            }
+        });
+        $("#resetButton").click(function () {
+            $("#EmploymentInfoForm")[0].reset();
+        });
+        $("#btnAddEmploymentInfo").click(function (event) {
+            debugger;
+            event.preventDefault();
+            if ($("#EmploymentInfoForm").valid() && $("#txtApplicantId").val() > 0) {
+                SaveEmploymentInfo();
+            } else {
+                $("#divEror").html("<strong>Sorry!</strong> Please fill-up the required (*) fields");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+        });
+    });
+
+
+    function SaveEmploymentInfo() {
+        debugger;
+        var objData = {
+            ApplicantId : $("#txtApplicantId").val(),
+            EmploymentInfoId: $("#txtEmploymentInfoId").val(),
+            Designation: $("#txtDesignation").val(),
+            JobType: $("#txtJobType").val(),
+            Duties: $("#txtDuties").val(),
+            DutiesRelatedToAppliedJob: $("#txtDutiesRelatedToAppliedJob").val(),
+            CompanyName: $("#txtCompanyName").val(),
+            CompanyAddress: $("#txtCompanyAddress").val(),
+            FromDate: $("#txtFromDate").val(),
+            ToDate: $("#txtToDate").val(),
+            IsContinue: $("#txtIsContinue").val(),
+            LeavingReason: $("#txtLeavingReason").val()
+        };
+        $.ajax({
+                url: "@Url.Action("SaveEmploymentInfo", "Applicant")",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(objData),
+            success: function (response) {
+                debugger;
+                if (response.success) {
+
+                    debugger;
+                    // Get the table and insert a new row at the end
+                    let table = document.getElementById("EmploymentInfoTable");
+                    let newRow = table.insertRow(table.rows.length);
+
+                    // Insert data into cells of the new row
+                    newRow.insertCell(0).innerHTML = $("#txtDesignation").val();
+                    newRow.insertCell(1).innerHTML = $("#txtJobType").val();
+                    newRow.insertCell(2).innerHTML = $("#txtDuties").val();
+                    newRow.insertCell(3).innerHTML = $("#txtDutiesRelatedToAppliedJob").val();
+                    newRow.insertCell(4).innerHTML = $("#txtCompanyName").val();
+                    newRow.insertCell(5).innerHTML = $("#txtCompanyAddress").val();
+                    newRow.insertCell(6).innerHTML = $("#txtFromDate").val();
+                    newRow.insertCell(7).innerHTML = $("#txtToDate").val();
+                    newRow.insertCell(8).innerHTML = $("#txtIsContinue").val();
+                    newRow.insertCell(9).innerHTML = $("#txtLeavingReason").val();
+                    newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    if (parseInt($("#txtEmploymentInfoId").val()) > 0) {
+                        newRow.insertCell(11).innerHTML = $("#txtEmploymentInfoId").val();
+                    } else {
+                        newRow.insertCell(11).innerHTML = response.EmploymentInfoId;
+                    }
+
+                    $(newRow.cells[11]).hide();
+                    for (let i = 0; i < 11; i++) {
+                        newRow.cells[i].style.textAlign = "center";
+                    }
+
+                    $("#EmploymentInfoForm")[0].reset();
+                    $("#txtEmploymentInfoId").val(0);
+                        /*$("#response").html(response.message);*/
+                        $("#divSuccess").html("<strong>Success!</strong> Employment Info. Saved/Updated Successfully");
+                        $("#divSuccess").show();
+                    $("#divEror").hide();
+                    loadProgressBar();
+                    } else {
+                        /*$("#response").html(response.message);*/
+                        $("#divEror").html("<strong>Sorry!</strong> Employment Info. Saved/Updated Unsuccessful");
+                        $("#divEror").show();
+                        $("#divSuccess").hide();
+                    }
+                },
+            error: function () {
+                $("#divEror").html("An error occurred while sending the request");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+
+                }
+            });
+
+
+    }
+
+
+    function loadEmploymentInfo() {
+        debugger;
+        var objData = {
+            ApplicantId: parseInt($("#txtApplicantId").val())
+        };
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("loadEmploymentInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            data: objData,
+            dataType: "json",
+            success: function (response) {
+                debugger
+                if (response.length > 0) {
+                    let table = document.getElementById("EmploymentInfoTable");
+                    for (var i = 0; i < response.length; i++) {
+                        let newRow = table.insertRow(table.rows.length);
+
+                        // Insert data into cells of the new row
+                        newRow.insertCell(0).innerHTML = response[i].Designation;
+                        newRow.insertCell(1).innerHTML = response[i].JobType;
+                        newRow.insertCell(2).innerHTML = response[i].Duties;
+                        newRow.insertCell(3).innerHTML = response[i].DutiesRelatedToAppliedJob;
+                        newRow.insertCell(4).innerHTML = response[i].CompanyName;
+                        newRow.insertCell(5).innerHTML = response[i].CompanyAddress;
+                        var milliseconds = parseInt(response[i].FromDate.replace('/Date(', '').replace(')/', ''), 10);
+                        var formatedDate = new Date(milliseconds);
+                        milliseconds = formatedDate.setDate(formatedDate.getDate() + 1);
+                        formatedDate = new Date(milliseconds);
+                        var dt = formatedDate.toISOString().substr(0, 10);
+                        newRow.insertCell(6).innerHTML = dt;
+                        if (response[i].ToDate != null && response[i].ToDate != "") {
+                            var milliseconds = parseInt(response[i].ToDate.replace('/Date(', '').replace(')/', ''), 10);
+                            var formatedDate = new Date(milliseconds);
+                            milliseconds = formatedDate.setDate(formatedDate.getDate() + 1);
+                            formatedDate = new Date(milliseconds);
+                            var dt = formatedDate.toISOString().substr(0, 10);
+                            newRow.insertCell(7).innerHTML = dt;
+                        } else {
+                            newRow.insertCell(7).innerHTML = null;
+                        }
+                        newRow.insertCell(8).innerHTML = response[i].IsContinue;
+                        newRow.insertCell(9).innerHTML = response[i].LeavingReason;
+                        newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(11).innerHTML = response[i].EmploymentInfoId;
+                        $(newRow.cells[11]).hide();
+                        for (let i = 0; i < 11; i++) {
+                            newRow.cells[i].style.textAlign = "center";
+                        }
+                    }
+                    $("#txtApplicantId").val(response[0].ApplicantId);
+                } else {
+                    $("#txtApplicantId").val(response);
+                }
+
+            },
+            error: function (error) {
+                console.log("Error loading employment info:", error);
+            }
+        });
+    }
+
+
+    function editData(button) {
+        debugger;
+        // Get the parent row of the clicked button
+        let row = button.parentNode.parentNode;
+        $("#txtDesignation").val(row.cells[0].innerHTML);
+        $("#txtJobType").val(row.cells[1].innerHTML);
+        $("#txtDuties").val(row.cells[2].innerHTML);
+        $("#txtDutiesRelatedToAppliedJob").val(row.cells[3].innerHTML);
+        $("#txtCompanyName").val(row.cells[4].innerHTML);
+        $("#txtCompanyAddress").val(row.cells[5].innerHTML);
+        $("#txtFromDate").val(row.cells[6].innerHTML);
+        $("#txtToDate").val(row.cells[7].innerHTML);
+        $("#txtIsContinue").val(row.cells[8].innerHTML);
+        if (row.cells[8].innerHTML == "No") {
+            $("#divToDate").show();
+        } else {
+            $("#divToDate").hide();
+        }
+        $("#txtLeavingReason").val(row.cells[9].innerHTML);
+
+        $("#txtEmploymentInfoId").val(row.cells[11].innerHTML);
+
+        row.parentNode.removeChild(row);
+    }
+    function deleteData(button) {
+        debugger;
+        // Get the parent row of the clicked button
+        let row = button.parentNode.parentNode;
+        var EmploymentInfoId= parseInt(row.cells[11].innerHTML);
+        var ApplicantId= parseInt($("#txtApplicantId").val());
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteEmploymentInfo", "Applicant")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({ ApplicantId: ApplicantId, EmploymentInfoId: EmploymentInfoId }),
+            success: function (response) {
+                if (response.success) {
+                    $("#divSuccess").html("<strong>Success!</strong> Employment Info. deleted Successfully");
+                    $("#divSuccess").show();
+                    $("#divEror").hide();
+                    loadProgressBar();
+                } else {
+                    $("#divEror").html("<strong>Sorry!</strong> Employment Info. delete Unsuccessful");
+                    $("#divEror").show();
+                    $("#divSuccess").hide();
+                }
+            },
+            error: function () {
+                alert("Error occurred while deleting.");
+            }
+        });
+
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
+    }
+
+
+    function loadProgressBar() {
+        var progress = $(".progress-bar");
+        var currentProgress = progress.attr("aria-valuenow");
+        $.ajax({
+            url: "@Url.Action("GetProgress", "Applicant")",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+
+                var newProgress = parseInt(data) * 25;
+
+                progress.css("width", newProgress + "%");
+                progress.attr("aria-valuenow", newProgress);
+                document.querySelector(".progress-text").textContent = newProgress + "% Completed";
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching progress data: ' + error);
+            }
+        });
+
+    }
+
+</script>
