@@ -1,0 +1,132 @@
+USE [HrPayroll-CCDB]
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Chittagong', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Rajshahi', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Dhaka', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Jessore', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Sylhet', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Dinajpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Mymensingh', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Comilla', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Barisal', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Faridpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Noakhali', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Bogra', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Pabna', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Rangamati', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Khulna', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Kushtia', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Tangail', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Patuakhali', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Jamalpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Panchagarh', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Bandarban', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Joypurhat', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Khagrachari', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Rangpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Brahmanbaria', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Sirajganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Sherpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Netrokona', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Kishoreganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Lakshmipur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Feni', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Sunamganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Habiganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Maulvibazar', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Thakurgaon', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Panchagarh', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Cox’s Bazar', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Munshiganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Narsingdi', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Narayanganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Manikganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Gazipur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Gopalganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Shariatpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Madaripur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Rajbari', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Chandpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Naogaon', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Noyabganj', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Lalmonirhat', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Kurigram', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Nilphamari', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Gaibandha', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Satkhira', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Bagerhat', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Jhenaidah', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Narail', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Magura', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Chuadanga', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Meherpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Jhalokati', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Pirojpur', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Barguna', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Bhola', 1)
+GO
+INSERT INTO [tblDistricts] ([DistrictName], [IsActive]) VALUES (N'Lakshmipur', 1)
+GO
