@@ -101,7 +101,7 @@ else
             $("#TrainingInfoForm")[0].reset();
         });
         $("#btnAddTrainingInfo").click(function (event) {
-            debugger;
+            
             event.preventDefault();
             if ($("#TrainingInfoForm").valid() && $("#txtApplicantId").val() > 0) {
                 SaveTrainingInfo();
@@ -115,7 +115,7 @@ else
 
 
     function SaveTrainingInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId : $("#txtApplicantId").val(),
             TrainingInfoId: $("#txtTrainingInfoId").val(),
@@ -133,10 +133,10 @@ else
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(objData),
             success: function (response) {
-                debugger;
+                
                 if (response.success) {
 
-                    debugger;
+                    
                     // Get the table and insert a new row at the end
                     let table = document.getElementById("TrainingInfoTable");
                     let newRow = table.insertRow(table.rows.length);
@@ -148,7 +148,7 @@ else
                     newRow.insertCell(3).innerHTML = $("#txtCountry").val();
                     newRow.insertCell(4).innerHTML = $("#txtYear").val();
                     newRow.insertCell(5).innerHTML = $("#txtDuration").val();
-                    newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                     if (parseInt($("#txtTrainingInfoId").val()) > 0) {
                         newRow.insertCell(7).innerHTML = $("#txtTrainingInfoId").val();
                     } else {
@@ -187,7 +187,7 @@ else
 
 
     function loadTrainingInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId: parseInt($("#txtApplicantId").val())
         };
@@ -198,7 +198,7 @@ else
             data: objData,
             dataType: "json",
             success: function (response) {
-                debugger
+                
                 if (response.length > 0) {
                     let table = document.getElementById("TrainingInfoTable");
                     for (var i = 0; i < response.length; i++) {
@@ -211,7 +211,7 @@ else
                         newRow.insertCell(3).innerHTML = response[i].Country;
                         newRow.insertCell(4).innerHTML = response[i].Year;
                         newRow.insertCell(5).innerHTML = response[i].Duration;
-                        newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                         newRow.insertCell(7).innerHTML = response[i].TrainingInfoId;
                         $(newRow.cells[7]).hide();
                         // for row length: newRow.cells.length
@@ -234,7 +234,7 @@ else
 
 
     function editData(button) {
-        debugger;
+        
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         $("#txtTitle").val(row.cells[0].innerHTML);
@@ -248,7 +248,7 @@ else
         row.parentNode.removeChild(row);
     }
     function deleteData(button) {
-        debugger;
+        
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         var TrainingInfoId= parseInt(row.cells[7].innerHTML);
@@ -289,7 +289,7 @@ else
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                debugger;
+                
 
                 var newProgress = parseInt(data) * 25;
 

@@ -277,7 +277,7 @@ else
         loadPersonalInfo();
         loadProgressBar();
         $("#btnSavePersonalInfo").click(function (event) {
-            debugger;
+            
             event.preventDefault();
             if ($("#PersonalInfoForm").valid() && ddlDistrict.val() > 0) {
                 SavePersonalInfo();
@@ -297,7 +297,7 @@ else
             }
         });
         $('#txtDOB').change(function () {
-            debugger
+            
             var dob = new Date(txtDOB.val());
             var currentDate = new Date();
 
@@ -323,7 +323,7 @@ else
             }
         });
         $("#imgApplicantPhoto").change(function () {
-            debugger;
+            
             var reader = new FileReader();
             var file = this.files[0];
 
@@ -341,7 +341,7 @@ else
             reader.readAsDataURL(file);
         });
         $("#imgApplicantSignature").change(function () {
-            debugger;
+            
             var reader = new FileReader();
             var file = this.files[0];
 
@@ -361,7 +361,7 @@ else
     });
 
     function loadPersonalInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId: parseInt(txtApplicantId.val())
         };
@@ -372,7 +372,7 @@ else
             data: objData,
             dataType: "json",
             success: function (response) {
-                debugger
+                
                 if (response != false) {
                     txtApplicantId.val(response.ApplicantId);
                     txtFirstName.val(response.FirstName);
@@ -443,7 +443,7 @@ else
     }
 
     function SavePersonalInfo() {
-        debugger;
+        
         var HasDisability = 0;
         if ($("input[name='rdoDisability']:checked").val() == 1) {
              HasDisability = 1;
@@ -488,7 +488,7 @@ else
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(objData),
             success: function (response) {
-                debugger;
+                
                     if (response) {
                         /*$("#response").html(response.message);*/
                         $("#divSuccess").html("<strong>Success!</strong> Personal Info. Saved/Updated Successfully");
@@ -518,7 +518,7 @@ else
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                debugger
+                
                 ddlDistrict.empty();
                 ddlDistrict.append($('<option>').text('--select district--').attr('value', 0));
                 data.forEach(function (district) {
@@ -596,7 +596,7 @@ else
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                debugger;
+                
 
                 var newProgress = parseInt(data) * 25;
 

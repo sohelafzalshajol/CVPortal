@@ -26,7 +26,7 @@ else
                             <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
                             <input type="hidden" id="txtEducationInfoId" name="txtEducationInfoId" value="0" />
                             <div class="card-header my-2">
-                                <h5><strong>Education Information</strong></h5>
+                                <h5><strong>Educational Qualifications</strong></h5>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="txtEducationLevel" class="form-label required-label">Education Level</label>
@@ -214,7 +214,7 @@ else
             $("#EducationInfoForm")[0].reset();
         });
         $("#btnAddEducationInfo").click(function (event) {
-            debugger;
+            
             event.preventDefault();
             if ($("#EducationInfoForm").valid() && $("#txtApplicantId").val() > 0) {
                 SaveEducationInfo();
@@ -228,7 +228,7 @@ else
 
 
     function SaveEducationInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId : $("#txtApplicantId").val(),
             EducationInfoId : $("#txtEducationInfoId").val(),
@@ -252,10 +252,10 @@ else
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(objData),
             success: function (response) {
-                debugger;
+                
                 if (response.success) {
 
-                    debugger;
+                    
                     // Get the table and insert a new row at the end
                     let table = document.getElementById("EducationInfoTable");
                     let newRow = table.insertRow(table.rows.length);
@@ -275,7 +275,7 @@ else
                     newRow.insertCell(7).innerHTML = $("#txtCGPAOutOf").val();
                     newRow.insertCell(8).innerHTML = $("#txtBoard").val();
                     newRow.insertCell(9).innerHTML = $("#txtYearOfPass").val();
-                    newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                     newRow.insertCell(11).innerHTML = $("#txtEducationLevel").val();
                     if (parseInt($("#txtEducationInfoId").val()) > 0) {
                         newRow.insertCell(12).innerHTML = $("#txtEducationInfoId").val();
@@ -318,7 +318,7 @@ else
 
 
     function loadEducationInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId: parseInt($("#txtApplicantId").val())
         };
@@ -329,7 +329,7 @@ else
             data: objData,
             dataType: "json",
             success: function (response) {
-                debugger
+                
                 if (response.length > 0) {
                     let table = document.getElementById("EducationInfoTable");
                     for (var i = 0; i < response.length; i++) {
@@ -350,7 +350,7 @@ else
                         newRow.insertCell(7).innerHTML = response[i].CGPAOutOf;
                         newRow.insertCell(8).innerHTML = response[i].Board;
                         newRow.insertCell(9).innerHTML = response[i].YearOfPass;
-                        newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                         newRow.insertCell(11).innerHTML = response[i].EducationLevelId;
                         newRow.insertCell(12).innerHTML = response[i].EducationInfoId;
                         //$("td:eq(11)").hide();
@@ -376,7 +376,7 @@ else
 
 
     function editData(button) {
-        debugger;
+        
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         $("#txtEducationLevel").val(row.cells[11].innerHTML);
@@ -404,7 +404,7 @@ else
         row.parentNode.removeChild(row);
     }
     function deleteData(button) {
-        debugger;
+        
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         var EducationInfoId= parseInt(row.cells[12].innerHTML);
@@ -445,7 +445,7 @@ else
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                debugger;
+                
 
                 var newProgress = parseInt(data) * 25;
 

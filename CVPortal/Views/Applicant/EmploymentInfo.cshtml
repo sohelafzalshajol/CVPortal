@@ -26,7 +26,7 @@ else
                             <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
                             <input type="hidden" id="txtEmploymentInfoId" name="txtEmploymentInfoId" value="0" />
                             <div class="card-header my-2">
-                                <h5><strong>Employment Information</strong></h5>
+                                <h5><strong>Employment History</strong></h5>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="txtDesignation" class="form-label required-label">Designation</label>
@@ -142,7 +142,7 @@ else
             $("#EmploymentInfoForm")[0].reset();
         });
         $("#btnAddEmploymentInfo").click(function (event) {
-            debugger;
+            
             event.preventDefault();
             if ($("#EmploymentInfoForm").valid() && $("#txtApplicantId").val() > 0) {
                 SaveEmploymentInfo();
@@ -156,7 +156,7 @@ else
 
 
     function SaveEmploymentInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId : $("#txtApplicantId").val(),
             EmploymentInfoId: $("#txtEmploymentInfoId").val(),
@@ -178,10 +178,10 @@ else
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(objData),
             success: function (response) {
-                debugger;
+                
                 if (response.success) {
 
-                    debugger;
+                    
                     // Get the table and insert a new row at the end
                     let table = document.getElementById("EmploymentInfoTable");
                     let newRow = table.insertRow(table.rows.length);
@@ -197,7 +197,7 @@ else
                     newRow.insertCell(7).innerHTML = $("#txtToDate").val();
                     newRow.insertCell(8).innerHTML = $("#txtIsContinue").val();
                     newRow.insertCell(9).innerHTML = $("#txtLeavingReason").val();
-                    newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                     if (parseInt($("#txtEmploymentInfoId").val()) > 0) {
                         newRow.insertCell(11).innerHTML = $("#txtEmploymentInfoId").val();
                     } else {
@@ -236,7 +236,7 @@ else
 
 
     function loadEmploymentInfo() {
-        debugger;
+        
         var objData = {
             ApplicantId: parseInt($("#txtApplicantId").val())
         };
@@ -247,7 +247,7 @@ else
             data: objData,
             dataType: "json",
             success: function (response) {
-                debugger
+                
                 if (response.length > 0) {
                     let table = document.getElementById("EmploymentInfoTable");
                     for (var i = 0; i < response.length; i++) {
@@ -278,7 +278,7 @@ else
                         }
                         newRow.insertCell(8).innerHTML = response[i].IsContinue;
                         newRow.insertCell(9).innerHTML = response[i].LeavingReason;
-                        newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(10).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                         newRow.insertCell(11).innerHTML = response[i].EmploymentInfoId;
                         $(newRow.cells[11]).hide();
                         for (let i = 0; i < 11; i++) {
@@ -299,7 +299,7 @@ else
 
 
     function editData(button) {
-        debugger;
+        
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         $("#txtDesignation").val(row.cells[0].innerHTML);
@@ -323,7 +323,7 @@ else
         row.parentNode.removeChild(row);
     }
     function deleteData(button) {
-        debugger;
+        
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         var EmploymentInfoId= parseInt(row.cells[11].innerHTML);
@@ -364,7 +364,7 @@ else
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                debugger;
+                
 
                 var newProgress = parseInt(data) * 25;
 
