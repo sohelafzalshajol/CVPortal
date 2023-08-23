@@ -279,6 +279,14 @@ else
         $("#btnSavePersonalInfo").click(function (event) {
             
             event.preventDefault();
+
+            if (imgPreviewApplicantPhoto.attr("src") && imgPreviewApplicantPhoto.attr("src") !== '#') {
+                imgApplicantPhoto.removeAttr("required");
+            } 
+
+            if (imgPreviewApplicantSignature.attr("src") && imgPreviewApplicantSignature.attr("src") !== '#') {
+                imgApplicantSignature.removeAttr("required");
+            }
             if ($("#PersonalInfoForm").valid() && ddlDistrict.val() > 0) {
                 SavePersonalInfo();
             } else {

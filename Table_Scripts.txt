@@ -1,0 +1,230 @@
+---------  tblCVPortalUsers  ---------------
+
+USE [Database]
+GO
+
+/****** Object:  Table [dbo].[tblCVPortalUsers]    Script Date: 8/23/2023 11:50:11 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblCVPortalUsers](
+	[CVPortalUsersId] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](max) NULL,
+	[UserEmail] [nvarchar](max) NULL,
+	[UserPassword] [nvarchar](max) NULL,
+	[IsActive] [int] NOT NULL,
+	[CreateDate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.tblCVPortalUsers] PRIMARY KEY CLUSTERED 
+(
+	[CVPortalUsersId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+------------  tblApplicantInfo  --------------------
+
+USE [Database]
+GO
+
+/****** Object:  Table [dbo].[tblApplicantInfo]    Script Date: 8/23/2023 11:52:44 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[tblApplicantInfo](
+	[ApplicantId] [bigint] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](max) NULL,
+	[MiddleName] [nvarchar](max) NULL,
+	[LastName] [nvarchar](max) NULL,
+	[FatherName] [nvarchar](max) NULL,
+	[MotherName] [nvarchar](max) NULL,
+	[DOB] [datetime] NULL,
+	[Age] [nvarchar](max) NULL,
+	[MaritalStatus] [nvarchar](max) NULL,
+	[Gender] [nvarchar](max) NULL,
+	[Country] [nvarchar](max) NULL,
+	[ContactNumber1] [nvarchar](max) NULL,
+	[ContactNumber2] [nvarchar](max) NULL,
+	[NIDNumber] [nvarchar](max) NULL,
+	[TINNumber] [nvarchar](max) NULL,
+	[PassportNumber] [nvarchar](max) NULL,
+	[EmailAddress] [nvarchar](max) NULL,
+	[PresentAddress] [nvarchar](max) NULL,
+	[PermanentAddress] [nvarchar](max) NULL,
+	[DistrictName] [nvarchar](max) NULL,
+	[DistrictId] [bigint] NOT NULL,
+	[LinkedInProfile] [nvarchar](max) NULL,
+	[HasDisability] [int] NOT NULL,
+	[DisabilityInfo] [nvarchar](max) NULL,
+	[TotalExperience] [decimal](18, 2) NOT NULL,
+	[LastOrganization] [nvarchar](max) NULL,
+	[LastOrgDesignation] [nvarchar](max) NULL,
+	[CanGetReleaseLtrLastOrg] [nvarchar](max) NULL,
+	[WhyCantGetReleaseLtrLastOrg] [nvarchar](max) NULL,
+	[FieldOfExpertise] [nvarchar](max) NULL,
+	[LinkOfPublishedWork] [nvarchar](max) NULL,
+	[ApplicantPhoto] [varbinary](max) NULL,
+	[ApplicantSignature] [varbinary](max) NULL,
+	[ApplicantPhotoPath] [nvarchar](max) NULL,
+	[ApplicantSignaturePath] [nvarchar](max) NULL,
+	[IsActive] [int] NOT NULL,
+	[EUserId] [bigint] NULL,
+	[EntryDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.tblApplicantInfo] PRIMARY KEY CLUSTERED 
+(
+	[ApplicantId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+-----------------  tblDistricts  ---------------
+
+USE [Database]
+GO
+
+/****** Object:  Table [dbo].[tblDistricts]    Script Date: 8/23/2023 11:53:38 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblDistricts](
+	[DistrictId] [bigint] IDENTITY(1,1) NOT NULL,
+	[DistrictName] [nvarchar](max) NULL,
+	[IsActive] [int] NOT NULL,
+ CONSTRAINT [PK_dbo.tblDistricts] PRIMARY KEY CLUSTERED 
+(
+	[DistrictId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+-------------  tblEducationInfo  -------------
+
+USE [Database]
+GO
+
+/****** Object:  Table [dbo].[tblEducationInfo]    Script Date: 8/23/2023 11:54:35 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblEducationInfo](
+	[EducationInfoId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ApplicantId] [bigint] NOT NULL,
+	[EducationLevelId] [int] NOT NULL,
+	[EducationLevel] [nvarchar](max) NULL,
+	[NameofExamination] [nvarchar](max) NULL,
+	[InstituteName] [nvarchar](max) NULL,
+	[DurationYear] [decimal](18, 2) NOT NULL,
+	[Group] [nvarchar](max) NULL,
+	[Department] [nvarchar](max) NULL,
+	[CGPADivision] [nvarchar](max) NULL,
+	[CGPAGrade] [decimal](18, 2) NOT NULL,
+	[CGPAOutOf] [decimal](18, 2) NOT NULL,
+	[Board] [nvarchar](max) NULL,
+	[YearOfPass] [int] NOT NULL,
+	[EUserId] [bigint] NULL,
+	[EntryDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.tblEducationInfo] PRIMARY KEY CLUSTERED 
+(
+	[EducationInfoId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+-------------------  tblEmploymentInfo  -------------------
+
+USE [Database]
+GO
+
+/****** Object:  Table [dbo].[tblEmploymentInfo]    Script Date: 8/23/2023 11:55:15 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblEmploymentInfo](
+	[EmploymentInfoId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ApplicantId] [bigint] NOT NULL,
+	[Designation] [nvarchar](max) NULL,
+	[JobType] [nvarchar](max) NULL,
+	[Duties] [nvarchar](max) NULL,
+	[DutiesRelatedToAppliedJob] [nvarchar](max) NULL,
+	[CompanyName] [nvarchar](max) NULL,
+	[CompanyAddress] [nvarchar](max) NULL,
+	[FromDate] [datetime] NULL,
+	[ToDate] [datetime] NULL,
+	[IsContinue] [nvarchar](max) NULL,
+	[LeavingReason] [nvarchar](max) NULL,
+	[EUserId] [bigint] NULL,
+	[EntryDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.tblEmploymentInfo] PRIMARY KEY CLUSTERED 
+(
+	[EmploymentInfoId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+----------------  tblTrainingInfo  --------------------
+
+USE [Database]
+GO
+
+/****** Object:  Table [dbo].[tblTrainingInfo]    Script Date: 8/23/2023 11:55:49 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tblTrainingInfo](
+	[TrainingInfoId] [bigint] IDENTITY(1,1) NOT NULL,
+	[ApplicantId] [bigint] NOT NULL,
+	[Title] [nvarchar](max) NULL,
+	[Topic] [nvarchar](max) NULL,
+	[Institute] [nvarchar](max) NULL,
+	[Country] [nvarchar](max) NULL,
+	[Year] [int] NOT NULL,
+	[Duration] [nvarchar](max) NULL,
+	[EUserId] [bigint] NULL,
+	[EntryDate] [datetime] NULL,
+	[UpdateDate] [datetime] NULL,
+ CONSTRAINT [PK_dbo.tblTrainingInfo] PRIMARY KEY CLUSTERED 
+(
+	[TrainingInfoId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
