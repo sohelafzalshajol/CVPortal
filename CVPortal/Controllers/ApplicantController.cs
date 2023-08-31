@@ -583,7 +583,11 @@ namespace CVPortal.Controllers
             else
             {
                 tblApplicantInfo objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
-                ApplicantId = objtblApplicantInfo.ApplicantId;
+                if (objtblApplicantInfo != null)
+                {
+                    ApplicantId = objtblApplicantInfo.ApplicantId;
+                }
+                
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
             
@@ -613,7 +617,11 @@ namespace CVPortal.Controllers
             else
             {
                 tblApplicantInfo objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
-                ApplicantId = objtblApplicantInfo.ApplicantId;
+                if (objtblApplicantInfo != null)
+                {
+                    ApplicantId = objtblApplicantInfo.ApplicantId;
+                }
+                
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
 
@@ -643,7 +651,11 @@ namespace CVPortal.Controllers
             else
             {
                 tblApplicantInfo objtblApplicantInfo = objHrPayrollEntities.tblApplicantInfoes.FirstOrDefault(a => a.EUserId == UserId);
-                ApplicantId = objtblApplicantInfo.ApplicantId;
+                if (objtblApplicantInfo != null)
+                {
+                    ApplicantId = objtblApplicantInfo.ApplicantId;
+                }
+                
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
 
