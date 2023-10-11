@@ -1,0 +1,142 @@
+﻿@model IEnumerable<CVPortal.Models.JobVacancyPost>
+@{
+    ViewBag.Title = "Apply";
+    var jobVacancyPostId = Model.FirstOrDefault()?.JobVacancyPostId;
+}
+
+@if (Session["objUser"] == null || Session["UserEmail"] == null)
+{
+    Response.Redirect("~/Account/Login");
+}
+else
+{
+
+<div class="container" style="min-height:600px;">
+    <form id="QuestionsForm" >
+        <div class="row">
+            <div class="card my-2">
+                <div class="card-header">
+                    <h5 class="card-title"><b>Apply Answering the Questions</b></h5>
+                </div>
+                <div class="card-body">
+
+                    <input type="hidden" id="txtJobVacancyPostId" name="txtJobVacancyPostId" value=@jobVacancyPostId />
+                    @foreach (var questions in Model)
+                    {
+                        <div class="col-md-12">
+                            <input type="hidden" id="txtJobVacancyPostQuestionId" name="questionId[]" value=@questions.JobVacancyPostQuestionId />
+                            <label for="txtAnswer" class="form-label required-label">@questions.Question</label>
+                            <textarea type="text" class="form-control mb-2" id="txtAnswer" name="questionAns[@questions.JobVacancyPostQuestionId]" placeholder="enter your answer" required ></textarea>
+                        </div>
+                    }
+
+                </div>
+                <div class="col-md-8 mx-auto text-center mt-2">
+                    <div id="divSuccess" class="alert alert-success" role="alert" style="display:none;">
+                        <strong>Success!</strong>
+                    </div>
+                    <div id="divEror" class="alert alert-warning" role="alert" style="display:none;">
+                        <strong>Sorry!</strong>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <input id="resetButton" type="reset" value="Reset" class="btn btn-light mx-2" />
+                    <button id="btnApply" type="submit" class="btn btn-primary">Apply</button>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+
+}
+
+<script>
+    var txtJobVacancyPostId = $("#txtJobVacancyPostId");
+
+    $(document).ready(function () {
+        $("#resetButton").click(function () {
+            $("#QuestionsForm")[0].reset();
+        });
+
+
+        $('#QuestionsForm').submit(function (event) {
+            debugger;
+            event.preventDefault();
+            //if ($("#QuestionsForm").valid() && $("#txtApplicantId").val() > 0) {
+            if ($("#QuestionsForm").valid()) {
+                SaveApplyInfo();
+            } else {
+                $("#divEror").html("<strong>Sorry!</strong> Please fill-up the required (*) fields");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+            }
+
+        });// end of subimt
+
+
+
+    });
+
+
+    function SaveApplyInfo() {
+        debugger;
+
+        var arrQId = $('input[name="questionId[]"]').map(function () {
+            return $(this).val()
+        }).get();
+
+        console.log(arrQId);
+        var arrQObj = [];
+        $.each(arrQId, function (i, item) {
+
+            console.log(item);
+
+            var arrQAns = $('textarea[name="questionAns[' + item + ']"]').map(function () {
+                return $(this).val()
+            }).get()[0];
+
+            var tempObj = {
+                JobVacancyPostId: txtJobVacancyPostId.val(),
+                JobVacancyPostQuestionId: item,
+                Answer: arrQAns,
+
+            }
+
+            arrQObj.push(tempObj);
+
+        });// end of loop
+
+        $.ajax({
+                url: "@Url.Action("SaveApplyInfo", "Home")",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(arrQObj),
+            success: function (response) {
+
+                if (response.success) {
+                    /*$("#response").html(response.message);*/
+                    $("#divSuccess").html("<strong>Success!</strong> " + response.message);
+                    $("#divSuccess").show();
+                    $("#divEror").hide();
+                    } else {
+                        /*$("#response").html(response.message);*/
+                        $("#divEror").html("<strong>Sorry!</strong> "+response.message);
+                        $("#divEror").show();
+                        $("#divSuccess").hide();
+                    }
+                },
+            error: function () {
+                $("#divEror").html("An error occurred while sending the request");
+                $("#divEror").show();
+                $("#divSuccess").hide();
+
+                }
+            });
+
+
+    }
+
+</script>

@@ -31,5 +31,10 @@ namespace CVPortal.DBModel
         public virtual DbSet<tblEducationInfo> tblEducationInfoes { get; set; }
         public virtual DbSet<tblEmploymentInfo> tblEmploymentInfoes { get; set; }
         public virtual DbSet<tblTrainingInfo> tblTrainingInfoes { get; set; }
+        public virtual DbSet<tblTrainingType> tblTrainingTypes { get; set; }
+        public virtual DbSet<tblJobVacancyPost> tblJobVacancyPosts { get; set; }
+        public virtual DbSet<tblJobVacancyPostQuestion> tblJobVacancyPostQuestions { get; set; }
+        public virtual DbSet<tblAppliedJob> tblAppliedJobs { get; set; }
+        public virtual DbSet<tblJobVacancyPostAnswer> tblJobVacancyPostAnswers { get; set; }
     }
 }

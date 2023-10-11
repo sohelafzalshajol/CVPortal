@@ -16,6 +16,7 @@ namespace CVPortal.Models
         public Nullable<DateTime> DOB { get; set; }
         public string Age { get; set; }
         public string MaritalStatus { get; set; }
+        public string Religion { get; set; }
         public string Gender { get; set; }
         public string Country { get; set; }
         public string ContactNumber1 { get; set; }

@@ -40,14 +40,26 @@
           <Property Name="WhyCantGetReleaseLtrLastOrg" Type="nvarchar(max)" />
           <Property Name="FieldOfExpertise" Type="nvarchar(max)" />
           <Property Name="LinkOfPublishedWork" Type="nvarchar(max)" />
-          <Property Name="IsActive" Type="int" Nullable="false" />
-          <Property Name="EUserId" Type="bigint" />
-          <Property Name="EntryDate" Type="datetime" />
-          <Property Name="UpdateDate" Type="datetime" />
           <Property Name="ApplicantPhoto" Type="varbinary(max)" />
           <Property Name="ApplicantSignature" Type="varbinary(max)" />
           <Property Name="ApplicantPhotoPath" Type="nvarchar(max)" />
           <Property Name="ApplicantSignaturePath" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Religion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblAppliedJobs">
+          <Key>
+            <PropertyRef Name="AppliedJobsId" />
+          </Key>
+          <Property Name="AppliedJobsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CVPortalUsersId" Type="bigint" Nullable="false" />
+          <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+          <Property Name="JobVacancyPostId" Type="bigint" Nullable="false" />
+          <Property Name="IsShortListed" Type="nvarchar(max)" />
+          <Property Name="AppliedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCVPortalUsers">
           <Key>
@@ -80,6 +92,7 @@
           <Property Name="InstituteName" Type="nvarchar(max)" />
           <Property Name="DurationYear" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Group" Type="nvarchar(max)" />
+          <Property Name="Department" Type="nvarchar(max)" />
           <Property Name="CGPADivision" Type="nvarchar(max)" />
           <Property Name="CGPAGrade" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CGPAOutOf" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -88,7 +101,6 @@
           <Property Name="EUserId" Type="bigint" />
           <Property Name="EntryDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
-          <Property Name="Department" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tblEmploymentInfo">
           <Key>
@@ -110,6 +122,62 @@
           <Property Name="EntryDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblJobVacancyPost">
+          <Key>
+            <PropertyRef Name="JobVacancyPostId" />
+          </Key>
+          <Property Name="JobVacancyPostId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="bigint" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar(max)" />
+          <Property Name="DesignationId" Type="bigint" Nullable="false" />
+          <Property Name="DesignationTitle" Type="nvarchar(max)" />
+          <Property Name="NoOfVacancy" Type="int" Nullable="false" />
+          <Property Name="ExperienceRequired" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PostLiveDate" Type="datetime" />
+          <Property Name="PostClosingDate" Type="datetime" />
+          <Property Name="JobType" Type="nvarchar(max)" />
+          <Property Name="AdditionalComment" Type="nvarchar(max)" />
+          <Property Name="WorkingPlaceId" Type="bigint" Nullable="false" />
+          <Property Name="WorkingPlaceName" Type="nvarchar(max)" />
+          <Property Name="SiteId" Type="bigint" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="OrganizationId" Type="bigint" Nullable="false" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpUserId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblJobVacancyPostAnswers">
+          <Key>
+            <PropertyRef Name="JobVacancyPostAnswerId" />
+          </Key>
+          <Property Name="JobVacancyPostAnswerId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobVacancyPostQuestionId" Type="bigint" Nullable="false" />
+          <Property Name="CVPortalUsersId" Type="bigint" Nullable="false" />
+          <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+          <Property Name="JobVacancyPostId" Type="bigint" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpUserId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblJobVacancyPostQuestions">
+          <Key>
+            <PropertyRef Name="JobVacancyPostQuestionId" />
+          </Key>
+          <Property Name="JobVacancyPostQuestionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobVacancyPostId" Type="bigint" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="QuestionType" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="OrganizationId" Type="bigint" Nullable="false" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpUserId" Type="bigint" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblTrainingInfo">
           <Key>
             <PropertyRef Name="TrainingInfoId" />
@@ -125,14 +193,50 @@
           <Property Name="EUserId" Type="bigint" />
           <Property Name="EntryDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="TrainingTypeId" Type="bigint" Nullable="false" />
+          <Property Name="TrainingTypeName" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tblTrainingType">
+          <Key>
+            <PropertyRef Name="TrainingTypeId" />
+          </Key>
+          <Property Name="TrainingTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrainingTypeName" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="EUserId" Type="bigint" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId">
+          <End Role="tblJobVacancyPost" Type="Self.tblJobVacancyPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblJobVacancyPostQuestions" Type="Self.tblJobVacancyPostQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJobVacancyPost">
+              <PropertyRef Name="JobVacancyPostId" />
+            </Principal>
+            <Dependent Role="tblJobVacancyPostQuestions">
+              <PropertyRef Name="JobVacancyPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HrPayrollDBModelStoreContainer">
           <EntitySet Name="tblApplicantInfo" EntityType="Self.tblApplicantInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAppliedJobs" EntityType="Self.tblAppliedJobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCVPortalUsers" EntityType="Self.tblCVPortalUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDistricts" EntityType="Self.tblDistricts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEducationInfo" EntityType="Self.tblEducationInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmploymentInfo" EntityType="Self.tblEmploymentInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJobVacancyPost" EntityType="Self.tblJobVacancyPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJobVacancyPostAnswers" EntityType="Self.tblJobVacancyPostAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJobVacancyPostQuestions" EntityType="Self.tblJobVacancyPostQuestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTrainingInfo" EntityType="Self.tblTrainingInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTrainingType" EntityType="Self.tblTrainingType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId" Association="Self.FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId">
+            <End Role="tblJobVacancyPost" EntitySet="tblJobVacancyPost" />
+            <End Role="tblJobVacancyPostQuestions" EntitySet="tblJobVacancyPostQuestions" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -156,6 +260,15 @@
           <EntitySet Name="tblEducationInfoes" EntityType="HrPayrollDBModel.tblEducationInfo" />
           <EntitySet Name="tblEmploymentInfoes" EntityType="HrPayrollDBModel.tblEmploymentInfo" />
           <EntitySet Name="tblTrainingInfoes" EntityType="HrPayrollDBModel.tblTrainingInfo" />
+          <EntitySet Name="tblTrainingTypes" EntityType="HrPayrollDBModel.tblTrainingType" />
+          <EntitySet Name="tblJobVacancyPosts" EntityType="HrPayrollDBModel.tblJobVacancyPost" />
+          <EntitySet Name="tblJobVacancyPostQuestions" EntityType="HrPayrollDBModel.tblJobVacancyPostQuestion" />
+          <AssociationSet Name="FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId" Association="HrPayrollDBModel.FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId">
+            <End Role="tblJobVacancyPost" EntitySet="tblJobVacancyPosts" />
+            <End Role="tblJobVacancyPostQuestion" EntitySet="tblJobVacancyPostQuestions" />
+          </AssociationSet>
+          <EntitySet Name="tblAppliedJobs" EntityType="HrPayrollDBModel.tblAppliedJob" />
+          <EntitySet Name="tblJobVacancyPostAnswers" EntityType="HrPayrollDBModel.tblJobVacancyPostAnswer" />
         </EntityContainer>
         <EntityType Name="tblDistrict">
           <Key>
@@ -208,6 +321,7 @@
           <Property Name="ApplicantSignature" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ApplicantPhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ApplicantSignaturePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Religion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblEducationInfo">
           <Key>
@@ -266,6 +380,102 @@
           <Property Name="EUserId" Type="Int64" />
           <Property Name="EntryDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="TrainingTypeId" Type="Int64" Nullable="false" />
+          <Property Name="TrainingTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblTrainingType">
+          <Key>
+            <PropertyRef Name="TrainingTypeId" />
+          </Key>
+          <Property Name="TrainingTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrainingTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EUserId" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblJobVacancyPost">
+          <Key>
+            <PropertyRef Name="JobVacancyPostId" />
+          </Key>
+          <Property Name="JobVacancyPostId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int64" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DesignationId" Type="Int64" Nullable="false" />
+          <Property Name="DesignationTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfVacancy" Type="Int32" Nullable="false" />
+          <Property Name="ExperienceRequired" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PostLiveDate" Type="DateTime" Precision="3" />
+          <Property Name="PostClosingDate" Type="DateTime" Precision="3" />
+          <Property Name="JobType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkingPlaceId" Type="Int64" Nullable="false" />
+          <Property Name="WorkingPlaceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteId" Type="Int64" Nullable="false" />
+          <Property Name="SiteName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" />
+          <Property Name="EUserId" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="UpUserId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblJobVacancyPostQuestions" Relationship="HrPayrollDBModel.FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId" FromRole="tblJobVacancyPost" ToRole="tblJobVacancyPostQuestion" />
+        </EntityType>
+        <EntityType Name="tblJobVacancyPostQuestion">
+          <Key>
+            <PropertyRef Name="JobVacancyPostQuestionId" />
+          </Key>
+          <Property Name="JobVacancyPostQuestionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobVacancyPostId" Type="Int64" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int64" Nullable="false" />
+          <Property Name="EUserId" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="UpUserId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblJobVacancyPost" Relationship="HrPayrollDBModel.FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId" FromRole="tblJobVacancyPostQuestion" ToRole="tblJobVacancyPost" />
+        </EntityType>
+        <Association Name="FK_dbo_tblJobVacancyPostQuestions_dbo_tblJobVacancyPost_JobVacancyPostId">
+          <End Type="HrPayrollDBModel.tblJobVacancyPost" Role="tblJobVacancyPost" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HrPayrollDBModel.tblJobVacancyPostQuestion" Role="tblJobVacancyPostQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJobVacancyPost">
+              <PropertyRef Name="JobVacancyPostId" />
+            </Principal>
+            <Dependent Role="tblJobVacancyPostQuestion">
+              <PropertyRef Name="JobVacancyPostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAppliedJob">
+          <Key>
+            <PropertyRef Name="AppliedJobsId" />
+          </Key>
+          <Property Name="AppliedJobsId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CVPortalUsersId" Type="Int64" Nullable="false" />
+          <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+          <Property Name="JobVacancyPostId" Type="Int64" Nullable="false" />
+          <Property Name="AppliedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsShortListed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblJobVacancyPostAnswer">
+          <Key>
+            <PropertyRef Name="JobVacancyPostAnswerId" />
+          </Key>
+          <Property Name="JobVacancyPostAnswerId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CVPortalUsersId" Type="Int64" Nullable="false" />
+          <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+          <Property Name="JobVacancyPostId" Type="Int64" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EUserId" Type="Int64" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="UpUserId" Type="Int64" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="JobVacancyPostQuestionId" Type="Int64" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -297,6 +507,7 @@
           <EntitySetMapping Name="tblApplicantInfoes">
             <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
               <MappingFragment StoreEntitySet="tblApplicantInfo">
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
                 <ScalarProperty Name="ApplicantSignaturePath" ColumnName="ApplicantSignaturePath" />
                 <ScalarProperty Name="ApplicantPhotoPath" ColumnName="ApplicantPhotoPath" />
                 <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
@@ -386,6 +597,8 @@
           <EntitySetMapping Name="tblTrainingInfoes">
             <EntityTypeMapping TypeName="HrPayrollDBModel.tblTrainingInfo">
               <MappingFragment StoreEntitySet="tblTrainingInfo">
+                <ScalarProperty Name="TrainingTypeName" ColumnName="TrainingTypeName" />
+                <ScalarProperty Name="TrainingTypeId" ColumnName="TrainingTypeId" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="EUserId" ColumnName="EUserId" />
@@ -397,6 +610,89 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
                 <ScalarProperty Name="TrainingInfoId" ColumnName="TrainingInfoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTrainingTypes">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblTrainingType">
+              <MappingFragment StoreEntitySet="tblTrainingType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+                <ScalarProperty Name="TrainingTypeName" ColumnName="TrainingTypeName" />
+                <ScalarProperty Name="TrainingTypeId" ColumnName="TrainingTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJobVacancyPosts">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblJobVacancyPost">
+              <MappingFragment StoreEntitySet="tblJobVacancyPost">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpUserId" ColumnName="UpUserId" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="WorkingPlaceName" ColumnName="WorkingPlaceName" />
+                <ScalarProperty Name="WorkingPlaceId" ColumnName="WorkingPlaceId" />
+                <ScalarProperty Name="AdditionalComment" ColumnName="AdditionalComment" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="PostClosingDate" ColumnName="PostClosingDate" />
+                <ScalarProperty Name="PostLiveDate" ColumnName="PostLiveDate" />
+                <ScalarProperty Name="ExperienceRequired" ColumnName="ExperienceRequired" />
+                <ScalarProperty Name="NoOfVacancy" ColumnName="NoOfVacancy" />
+                <ScalarProperty Name="DesignationTitle" ColumnName="DesignationTitle" />
+                <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJobVacancyPostQuestions">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblJobVacancyPostQuestion">
+              <MappingFragment StoreEntitySet="tblJobVacancyPostQuestions">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpUserId" ColumnName="UpUserId" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+                <ScalarProperty Name="JobVacancyPostQuestionId" ColumnName="JobVacancyPostQuestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAppliedJobs">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblAppliedJob">
+              <MappingFragment StoreEntitySet="tblAppliedJobs">
+                <ScalarProperty Name="IsShortListed" ColumnName="IsShortListed" />
+                <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
+                <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="CVPortalUsersId" ColumnName="CVPortalUsersId" />
+                <ScalarProperty Name="AppliedJobsId" ColumnName="AppliedJobsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJobVacancyPostAnswers">
+            <EntityTypeMapping TypeName="HrPayrollDBModel.tblJobVacancyPostAnswer">
+              <MappingFragment StoreEntitySet="tblJobVacancyPostAnswers">
+                <ScalarProperty Name="JobVacancyPostQuestionId" ColumnName="JobVacancyPostQuestionId" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpUserId" ColumnName="UpUserId" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="CVPortalUsersId" ColumnName="CVPortalUsersId" />
+                <ScalarProperty Name="JobVacancyPostAnswerId" ColumnName="JobVacancyPostAnswerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

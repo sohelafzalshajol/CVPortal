@@ -53,5 +53,6 @@ namespace CVPortal.DBModel
         public byte[] ApplicantSignature { get; set; }
         public string ApplicantPhotoPath { get; set; }
         public string ApplicantSignaturePath { get; set; }
+        public string Religion { get; set; }
     }
 }

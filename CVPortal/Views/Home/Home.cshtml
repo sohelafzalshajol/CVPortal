@@ -1,21 +1,33 @@
-﻿
+﻿@model IEnumerable<CVPortal.Models.JobVacancyPost>
+
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "";
 }
 
-<div class="container">
+<div class="container" style="min-height:600px;">
     <div class="row">
-        <div class="card my-4">
-            <div class="card-body">
-                <form id="EducationInfoForm" enctype="multipart/form-data">
-                    <div class="row">
-                        <input type="hidden" id="txtApplicantId" name="txtApplicantId" value="0" />
-                        <div class="card-header my-2">
-                            <h5><strong>Home</strong></h5>
-                        </div>
-                    </div>
-                </form>
+        @foreach (var vacancy in Model)
+        {
+            <div class="card my-2">
+                <div class="card-header">
+                    <h5 class="card-title"><b>@vacancy.DesignationTitle - @vacancy.NoOfVacancy Vacancy</b></h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted card-text">@vacancy.AdditionalComment</h6>
+                    <ul class="list-group list-group-flush mt-2">
+                        <li class="list-group-item"><p class="card-subtitle text-muted card-text"><b>Position:</b> @vacancy.DesignationTitle</p></li>
+                        <li class="list-group-item"><p class="card-subtitle text-muted card-text"><b>Experience:</b> @vacancy.ExperienceRequired+ years</p></li>
+                        <li class="list-group-item"><p class="card-subtitle text-muted card-text"><b>Location:</b> @vacancy.SiteName</p></li>
+                        <li class="list-group-item"><p class="card-subtitle text-muted card-text"><b>Type:</b> @vacancy.JobType</p></li>
+                        <li class="list-group-item"><p class="card-subtitle text-muted card-text">
+    <b>Deadline:</b> @(vacancy.PostClosingDate.HasValue ? vacancy.PostClosingDate.Value.ToString("dd MMMM, yyyy") : "N/A")
+</p></li>
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="@Url.Action("Apply", "Home", new { JobVacancyPostId = vacancy.JobVacancyPostId })" class="btn btn-primary">Apply Now</a>
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>

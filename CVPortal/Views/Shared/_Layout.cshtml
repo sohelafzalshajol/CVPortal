@@ -11,25 +11,26 @@
     <script src="~/Scripts/js/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
+                            @*<div class="display-3 fw-bold py-2 text-center text-lg-start d-none d-lg-block">CCDB</div>*@
 <body>
     <nav>
-        <div class="container-fluid p-0 bg-warning">
+        <div class="container-fluid p-0 bg-info">
             <div class="container-fluid container-lg p-0">
                 <div class="textColor">
                     <div class="row justify-content-center align-items-center mx-auto">
                         <div class="col-12 col-lg-3 p-0">
-                            <div class="display-3 fw-bold py-2 text-center text-lg-start d-none d-lg-block">LOGO</div>
+                            <div class="display-3 fw-bold py-2 text-center text-lg-start d-none d-lg-block">CCDB</div>
                             <!-- <hr class="d-block d-lg-none"> -->
                         </div>
                         <div class="col-4 col-lg-3 sideLine">
                             <div class="d-flex justify-content-center align-items-center">
                                 <div class="me-3 p-2 py-3">
                                     <img class="iconHeight"
-                                         src="~/Content/img/building-check.svg" alt="building">
+                                         src="~/Content/img/Internet.svg" alt="Website">
                                 </div>
                                 <div class="d-none d-lg-block">
-                                    <span class="fw-medium">Opening Hour</span> <br>
-                                    Mon-Fri : 8:00 - 9:00
+                                    <span class="fw-medium">Visit Us</span> <br>
+                                    <a href="https://ccdbbd.org/" class="text-decoration-none" style="color: #000000;" target="_blank">www.ccdbbd.org</a>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +42,7 @@
                                              src="~/Content/img/telephone-svgrepo-com.svg" alt="telephone">
                                     </div>
                                 </a>
-                                <div class="d-none d-lg-block"><span class="fw-medium">Call Us</span><br> +1-800-123-1234</div>
+                                <div class="d-none d-lg-block"><span class="fw-medium">Call Us</span><br> +880-2-48036370-3</div>
                             </div>
                         </div>
                         <div class="col-4 col-lg-3">
@@ -52,13 +53,13 @@
                                              src="~/Content/img/mail-svgrepo-com.svg" alt="Mail">
                                     </div>
                                 </a>
-                                <div class="d-none d-lg-block"><span class="fw-medium">Email Us</span><br> example@emmail.com</div>
+                                <div class="d-none d-lg-block"><span class="fw-medium">Email Us</span><br> info@ccdbbd.org</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr class="my-0 d-lg-none">
-                <div class="text-center display-3 fw-bold mb-2 d-lg-none">LOGO</div>
+                <div class="text-center display-3 fw-bold mb-2 d-lg-none">CCDB</div>
                 <div class="navbarBgDark" data-bs-theme="dark">
                     <nav class="navbar navbar-expand-lg justify-content-center justify-content-lg-between p-0">
 
@@ -70,9 +71,9 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
                             <ul class="navbar-nav text-uppercase ps-3">
-                                <li class="nav-item">
+                                @*<li class="nav-item">
                                     @Html.ActionLink("Home", "Home", "Home", new { area = "" }, new { @class = "nav-link px-lg-3" })
-                                </li>
+                                </li>*@
                                 @if (Session["objUser"] != null)
                                 {
                                     <li class="nav-item">
@@ -107,7 +108,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Home", "Home", new { area = "" })" class="nav-link px-lg-3">
+                                        <a href="@Url.Action("AppliedJobs", "Applicant", new { area = "" })" class="nav-link px-lg-3">
                                             Applied jobs
                                         </a>
                                     </li>

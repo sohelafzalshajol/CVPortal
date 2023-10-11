@@ -11,7 +11,7 @@ namespace CVPortal.Models
 		public long CVPortalUsersId { get; set; }
 
 		[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter User Name")]
-		[Display(Name = "User Name")]
+		[Display(Name = "User Full Name")]
 		public string UserName { get; set; }
 
 		[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter User Email")]

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,6 +40,7 @@ namespace CVPortal.Controllers
                         applicant.MotherName = objApplicantInfo.MotherName;
                         applicant.DOB = objApplicantInfo.DOB;
                         applicant.Age = objApplicantInfo.Age;
+                        applicant.Religion = objApplicantInfo.Religion;
                         applicant.Gender = objApplicantInfo.Gender;
                         applicant.MaritalStatus = objApplicantInfo.MaritalStatus;
                         applicant.HasDisability = objApplicantInfo.HasDisability;
@@ -79,6 +82,7 @@ namespace CVPortal.Controllers
                         objtblApplicantInfo.MotherName = objApplicantInfo.MotherName;
                         objtblApplicantInfo.DOB = objApplicantInfo.DOB;
                         objtblApplicantInfo.Age = objApplicantInfo.Age;
+                        objtblApplicantInfo.Religion = objApplicantInfo.Religion;
                         objtblApplicantInfo.Gender = objApplicantInfo.Gender;
                         objtblApplicantInfo.MaritalStatus = objApplicantInfo.MaritalStatus;
                         objtblApplicantInfo.HasDisability = objApplicantInfo.HasDisability;
@@ -159,6 +163,14 @@ namespace CVPortal.Controllers
             tblDistrict objtblDistrict = new tblDistrict();
             var districts = objHrPayrollEntities.tblDistricts.Where(d => d.IsActive == 1).OrderBy(d => d.DistrictName).Select(d => new { DistrictId = d.DistrictId, DistrictName = d.DistrictName }).ToList();
             return Json(districts, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetTrainingTypes()
+        {
+            tblTrainingType objtblTrainingType = new tblTrainingType();
+            var TrainingTypes = objHrPayrollEntities.tblTrainingTypes.Where(tt => tt.IsActive == 1).OrderBy(tt => tt.TrainingTypeName).Select(tt => new { TrainingTypeId = tt.TrainingTypeId, TrainingTypeName = tt.TrainingTypeName }).ToList();
+            return Json(TrainingTypes, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -369,6 +381,11 @@ namespace CVPortal.Controllers
             return View();
         }
 
+        public ActionResult AppliedJobs()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult SaveEducationInfo(EducationInfo objEducationInfo)
         {
@@ -451,6 +468,8 @@ namespace CVPortal.Controllers
                     if (objTrainingInfo.ApplicantId > 0 && objTrainingInfo.TrainingInfoId > 0)
                     {
                         var objtblTrainingInfo = objHrPayrollEntities.tblTrainingInfoes.FirstOrDefault(e => e.ApplicantId == objTrainingInfo.ApplicantId && e.TrainingInfoId == objTrainingInfo.TrainingInfoId);
+                        objtblTrainingInfo.TrainingTypeId = objTrainingInfo.TrainingTypeId;
+                        objtblTrainingInfo.TrainingTypeName = objTrainingInfo.TrainingTypeName;
                         objtblTrainingInfo.Title = objTrainingInfo.Title;
                         objtblTrainingInfo.Topic = objTrainingInfo.Topic;
                         objtblTrainingInfo.Institute = objTrainingInfo.Institute;
@@ -465,6 +484,8 @@ namespace CVPortal.Controllers
                     {
                         tblTrainingInfo objtblTrainingInfo = new tblTrainingInfo();
                         objtblTrainingInfo.ApplicantId = objTrainingInfo.ApplicantId;
+                        objtblTrainingInfo.TrainingTypeId = objTrainingInfo.TrainingTypeId;
+                        objtblTrainingInfo.TrainingTypeName = objTrainingInfo.TrainingTypeName;
                         objtblTrainingInfo.Title = objTrainingInfo.Title;
                         objtblTrainingInfo.Topic = objTrainingInfo.Topic;
                         objtblTrainingInfo.Institute = objTrainingInfo.Institute;
@@ -587,7 +608,6 @@ namespace CVPortal.Controllers
                 {
                     ApplicantId = objtblApplicantInfo.ApplicantId;
                 }
-                
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
             
@@ -621,7 +641,6 @@ namespace CVPortal.Controllers
                 {
                     ApplicantId = objtblApplicantInfo.ApplicantId;
                 }
-                
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
 
@@ -655,11 +674,44 @@ namespace CVPortal.Controllers
                 {
                     ApplicantId = objtblApplicantInfo.ApplicantId;
                 }
-                
                 return Json(ApplicantId, JsonRequestBehavior.AllowGet);
             }
 
         }
+
+        [HttpGet]
+        public ActionResult loadAppliedJobs()
+        {
+            var userData = Session["objUser"] as dynamic;
+            long UserId = userData.CVPortalUsersId;
+            if (UserId > 0)
+            {
+                objHrPayrollEntities.Configuration.ProxyCreationEnabled = false;
+                var objAppliedJobs = (from tblAppliedJob in objHrPayrollEntities.tblAppliedJobs
+                                      join tblJobVacancyPost in objHrPayrollEntities.tblJobVacancyPosts
+                                      on tblAppliedJob.JobVacancyPostId equals tblJobVacancyPost.JobVacancyPostId
+                                      where tblAppliedJob.CVPortalUsersId == UserId
+                                      select new
+                                         {
+                                             AppliedJob = tblAppliedJob,
+                                             JobVacancyPost = tblJobVacancyPost
+                                         }).OrderByDescending(e => e.AppliedJob.AppliedDate).ToList();
+
+                if (objAppliedJobs.Count > 0)
+                {
+                    return Json(objAppliedJobs, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
 
         [HttpPost]
@@ -757,6 +809,27 @@ namespace CVPortal.Controllers
             }
 
         }
+        public async Task<ActionResult> DownloadCV(long CVPortalUsersId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:7739/");
+                HttpResponseMessage response = await client.GetAsync($"api/HrPayroll/GetApplicantResumeReport?uid={CVPortalUsersId}");
 
+                if (response.IsSuccessStatusCode)
+                {
+                    byte[] reportBytes = await response.Content.ReadAsByteArrayAsync();
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("Content-Disposition", $"attachment; filename={response.Content.Headers.ContentDisposition.FileName}");
+                    Response.BinaryWrite(reportBytes);
+
+                    return new EmptyResult(); // No view to render
+                }
+                else
+                {
+                    return new EmptyResult(); // No view to render
+                }
+            }
+        }
     }
 }

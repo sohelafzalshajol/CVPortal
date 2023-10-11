@@ -12,7 +12,7 @@ else
 {
     <div class="progress-container mt-2">
         <div class="progress">
-            <div class="progress-bar bg-warning progress-bar-striped custom-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-info progress-bar-striped custom-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                 <span class="progress-text"></span>
             </div>
         </div>
@@ -27,6 +27,11 @@ else
                             <input type="hidden" id="txtTrainingInfoId" name="txtTrainingInfoId" value="0" />
                             <div class="card-header my-2">
                                 <h5><strong>Training Information</strong></h5>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="ddlTrainingType" class="form-label required-label">Training Type</label>
+                                <select id="ddlTrainingType" name="ddlTrainingType" class="form-select" placeholder="--select training type--" required>
+                                </select>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="txtTitle" class="form-label required-label">Training Title</label>
@@ -67,7 +72,7 @@ else
                         <div class="row justify-content-center mt-2">
                             <div class="col-md-6 mx-auto text-center">
                                 <input id="resetButton" type="reset" value="Reset" class="btn btn-light btn-lg" />
-                                <button type="submit" id="btnAddTrainingInfo" class="btn btn-warning btn-lg ms-2" value="Add">Add</button>
+                                <button type="submit" id="btnAddTrainingInfo" class="btn btn-info btn-lg ms-2" value="Add">Add</button>
                             </div>
                         </div>
                         <div id="response" class="col-md-8 mx-auto text-center"></div>
@@ -75,6 +80,7 @@ else
                     <div class="table-responsive">
                         <table id="TrainingInfoTable" class="table table-striped table-bordered table-condensed table-hover mx-auto text-center">
                             <tr>
+                                <th scope="col">Training Type</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Topic</th>
                                 <th scope="col">Institute</th>
@@ -83,6 +89,7 @@ else
                                 <th scope="col">Duration</th>
                                 <th scope="col">Action</th>
                                 <th scope="col" hidden>TrainingInfoId</th>
+                                <th scope="col" hidden>TrainingTypeId</th>
                             </tr>
                         </table>
                     </div>
@@ -94,16 +101,19 @@ else
 
 <script>
 
+    var ddlTrainingType = $('#ddlTrainingType');
+
     $(document).ready(function () {
+        loadddlTrainingType();
         loadTrainingInfo();
         loadProgressBar();
         $("#resetButton").click(function () {
             $("#TrainingInfoForm")[0].reset();
         });
         $("#btnAddTrainingInfo").click(function (event) {
-            
+
             event.preventDefault();
-            if ($("#TrainingInfoForm").valid() && $("#txtApplicantId").val() > 0) {
+            if ($("#TrainingInfoForm").valid() && $("#txtApplicantId").val() > 0 && ddlTrainingType.val() > 0) {
                 SaveTrainingInfo();
             } else {
                 $("#divEror").html("<strong>Sorry!</strong> Please fill-up the required (*) fields");
@@ -115,10 +125,12 @@ else
 
 
     function SaveTrainingInfo() {
-        
+
         var objData = {
             ApplicantId : $("#txtApplicantId").val(),
             TrainingInfoId: $("#txtTrainingInfoId").val(),
+            TrainingTypeId: ddlTrainingType.val(),
+            TrainingTypeName: $("#ddlTrainingType option:selected").text(),
             Title: $("#txtTitle").val(),
             Topic: $("#txtTopic").val(),
             Institute: $("#txtInstitute").val(),
@@ -133,30 +145,33 @@ else
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(objData),
             success: function (response) {
-                
+
                 if (response.success) {
 
-                    
+
                     // Get the table and insert a new row at the end
                     let table = document.getElementById("TrainingInfoTable");
                     let newRow = table.insertRow(table.rows.length);
 
                     // Insert data into cells of the new row
-                    newRow.insertCell(0).innerHTML = $("#txtTitle").val();
-                    newRow.insertCell(1).innerHTML = $("#txtTopic").val();
-                    newRow.insertCell(2).innerHTML = $("#txtInstitute").val();
-                    newRow.insertCell(3).innerHTML = $("#txtCountry").val();
-                    newRow.insertCell(4).innerHTML = $("#txtYear").val();
-                    newRow.insertCell(5).innerHTML = $("#txtDuration").val();
-                    newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                    newRow.insertCell(0).innerHTML = $("#ddlTrainingType option:selected").text();
+                    newRow.insertCell(1).innerHTML = $("#txtTitle").val();
+                    newRow.insertCell(2).innerHTML = $("#txtTopic").val();
+                    newRow.insertCell(3).innerHTML = $("#txtInstitute").val();
+                    newRow.insertCell(4).innerHTML = $("#txtCountry").val();
+                    newRow.insertCell(5).innerHTML = $("#txtYear").val();
+                    newRow.insertCell(6).innerHTML = $("#txtDuration").val();
+                    newRow.insertCell(7).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
                     if (parseInt($("#txtTrainingInfoId").val()) > 0) {
-                        newRow.insertCell(7).innerHTML = $("#txtTrainingInfoId").val();
+                        newRow.insertCell(8).innerHTML = $("#txtTrainingInfoId").val();
                     } else {
-                        newRow.insertCell(7).innerHTML = response.TrainingInfoId;
+                        newRow.insertCell(8).innerHTML = response.TrainingInfoId;
                     }
-                    $(newRow.cells[7]).hide();
+                    newRow.insertCell(9).innerHTML = ddlTrainingType.val();
+                    $(newRow.cells[8]).hide();
+                    $(newRow.cells[9]).hide();
                     // for row length: newRow.cells.length
-                    for (let i = 0; i < 7; i++) {
+                    for (let i = 0; i < 8; i++) {
                         newRow.cells[i].style.textAlign = "center";
                     }
 
@@ -187,7 +202,7 @@ else
 
 
     function loadTrainingInfo() {
-        
+
         var objData = {
             ApplicantId: parseInt($("#txtApplicantId").val())
         };
@@ -198,24 +213,27 @@ else
             data: objData,
             dataType: "json",
             success: function (response) {
-                
+
                 if (response.length > 0) {
                     let table = document.getElementById("TrainingInfoTable");
                     for (var i = 0; i < response.length; i++) {
                         let newRow = table.insertRow(table.rows.length);
 
                         // Insert data into cells of the new row
-                        newRow.insertCell(0).innerHTML = response[i].Title;
-                        newRow.insertCell(1).innerHTML = response[i].Topic;
-                        newRow.insertCell(2).innerHTML = response[i].Institute;
-                        newRow.insertCell(3).innerHTML = response[i].Country;
-                        newRow.insertCell(4).innerHTML = response[i].Year;
-                        newRow.insertCell(5).innerHTML = response[i].Duration;
-                        newRow.insertCell(6).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
-                        newRow.insertCell(7).innerHTML = response[i].TrainingInfoId;
-                        $(newRow.cells[7]).hide();
+                        newRow.insertCell(0).innerHTML = response[i].TrainingTypeName;
+                        newRow.insertCell(1).innerHTML = response[i].Title;
+                        newRow.insertCell(2).innerHTML = response[i].Topic;
+                        newRow.insertCell(3).innerHTML = response[i].Institute;
+                        newRow.insertCell(4).innerHTML = response[i].Country;
+                        newRow.insertCell(5).innerHTML = response[i].Year;
+                        newRow.insertCell(6).innerHTML = response[i].Duration;
+                        newRow.insertCell(7).innerHTML = '<button class="btn btn-secondary btn-sm mb-2" onclick="editData(this)">Edit</button><br /><button class="btn btn-danger btn-sm" onclick="deleteData(this)">Delete</button>';
+                        newRow.insertCell(8).innerHTML = response[i].TrainingInfoId;
+                        newRow.insertCell(9).innerHTML = response[i].TrainingTypeId;
+                        $(newRow.cells[8]).hide();
+                        $(newRow.cells[9]).hide();
                         // for row length: newRow.cells.length
-                        for (let i = 0; i < 7; i++) {
+                        for (let i = 0; i < 8; i++) {
                             newRow.cells[i].style.textAlign = "center";
                         }
 
@@ -234,21 +252,22 @@ else
 
 
     function editData(button) {
-        
+
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
-        $("#txtTitle").val(row.cells[0].innerHTML);
-        $("#txtTopic").val(row.cells[1].innerHTML);
-        $("#txtInstitute").val(row.cells[2].innerHTML);
-        $("#txtCountry").val(row.cells[3].innerHTML);
-        $("#txtYear").val(row.cells[4].innerHTML);
-        $("#txtDuration").val(row.cells[5].innerHTML);
-        $("#txtTrainingInfoId").val(row.cells[7].innerHTML);
+        ddlTrainingType.val(row.cells[9].innerHTML);
+        $("#txtTitle").val(row.cells[1].innerHTML);
+        $("#txtTopic").val(row.cells[2].innerHTML);
+        $("#txtInstitute").val(row.cells[3].innerHTML);
+        $("#txtCountry").val(row.cells[4].innerHTML);
+        $("#txtYear").val(row.cells[5].innerHTML);
+        $("#txtDuration").val(row.cells[6].innerHTML);
+        $("#txtTrainingInfoId").val(row.cells[8].innerHTML);
 
         row.parentNode.removeChild(row);
     }
     function deleteData(button) {
-        
+
         // Get the parent row of the clicked button
         let row = button.parentNode.parentNode;
         var TrainingInfoId= parseInt(row.cells[7].innerHTML);
@@ -289,7 +308,7 @@ else
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                
+
 
                 var newProgress = parseInt(data) * 25;
 
@@ -302,6 +321,27 @@ else
             }
         });
 
+    }
+
+    function loadddlTrainingType() {
+        $.ajax({
+            url: "@Url.Action("GetTrainingTypes", "Applicant")",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                ddlTrainingType.empty();
+                ddlTrainingType.append($('<option>').text('--select training type--').attr('value', 0));
+                data.forEach(function (TrainingTypes) {
+                    ddlTrainingType.append($('<option>').text(TrainingTypes.TrainingTypeName).attr('value', TrainingTypes.TrainingTypeId));
+                });
+
+                $.validator.setDefaults({ ignore: ":hidden:not('#ddlTrainingType')" });
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching training type data: ' + error);
+            }
+        });
     }
 
 </script>

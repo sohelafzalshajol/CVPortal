@@ -25,5 +25,7 @@ namespace CVPortal.DBModel
         public Nullable<long> EUserId { get; set; }
         public Nullable<System.DateTime> EntryDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public long TrainingTypeId { get; set; }
+        public string TrainingTypeName { get; set; }
     }
 }

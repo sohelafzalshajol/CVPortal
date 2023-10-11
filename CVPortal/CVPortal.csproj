@@ -50,6 +50,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -119,7 +123,10 @@
     <Content Include="Content\img\building-check.svg" />
     <Content Include="Content\img\envelope-of-white-paper.svg" />
     <Content Include="Content\img\HRM_Rec.jpg" />
+    <Content Include="Content\img\HRM_Rec_New.jpg" />
     <Content Include="Content\img\HRM_Vector.jpg" />
+    <Content Include="Content\img\HRM_Vector_1.jpg" />
+    <Content Include="Content\img\Internet.svg" />
     <Content Include="Content\img\mail-svgrepo-com.svg" />
     <Content Include="Content\img\telephone-inbound-fill.svg" />
     <Content Include="Content\img\telephone-svgrepo-com.svg" />
@@ -157,6 +164,7 @@
     <Content Include="Content\css\bootstrap.rtl.min.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -174,7 +182,9 @@
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -199,6 +209,9 @@
     <Compile Include="DBModel\tblApplicantInfo.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\tblAppliedJob.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\tblCVPortalUser.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
@@ -211,7 +224,19 @@
     <Compile Include="DBModel\tblEmploymentInfo.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\tblJobVacancyPost.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\tblJobVacancyPostAnswer.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\tblJobVacancyPostQuestion.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\tblTrainingInfo.cs">
+      <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\tblTrainingType.cs">
       <DependentUpon>HrPayrollDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -223,7 +248,10 @@
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\EducationInfo.cs" />
     <Compile Include="Models\EmploymentInfo.cs" />
+    <Compile Include="Models\JobVacancyPost.cs" />
+    <Compile Include="Models\JobVacancyPostAnswer.cs" />
     <Compile Include="Models\TrainingInfo.cs" />
+    <Compile Include="Models\TrainingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +282,8 @@
     <Content Include="Views\Applicant\EducationInfo.cshtml" />
     <Content Include="Views\Applicant\EmploymentInfo.cshtml" />
     <Content Include="Views\Applicant\TrainingInfo.cshtml" />
+    <Content Include="Views\Home\Apply.cshtml" />
+    <Content Include="Views\Applicant\AppliedJobs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -25,6 +25,7 @@
     <EntitySetMapping Name="tblApplicantInfoes">
       <EntityTypeMapping TypeName="HrPayrollDBModel.tblApplicantInfo">
         <MappingFragment StoreEntitySet="tblApplicantInfo">
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
           <ScalarProperty Name="ApplicantSignaturePath" ColumnName="ApplicantSignaturePath" />
           <ScalarProperty Name="ApplicantPhotoPath" ColumnName="ApplicantPhotoPath" />
           <ScalarProperty Name="ApplicantSignature" ColumnName="ApplicantSignature" />
@@ -114,6 +115,8 @@
     <EntitySetMapping Name="tblTrainingInfoes">
       <EntityTypeMapping TypeName="HrPayrollDBModel.tblTrainingInfo">
         <MappingFragment StoreEntitySet="tblTrainingInfo">
+          <ScalarProperty Name="TrainingTypeName" ColumnName="TrainingTypeName" />
+          <ScalarProperty Name="TrainingTypeId" ColumnName="TrainingTypeId" />
           <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
           <ScalarProperty Name="EUserId" ColumnName="EUserId" />
@@ -125,6 +128,89 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
           <ScalarProperty Name="TrainingInfoId" ColumnName="TrainingInfoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTrainingTypes">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblTrainingType">
+        <MappingFragment StoreEntitySet="tblTrainingType">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+          <ScalarProperty Name="TrainingTypeName" ColumnName="TrainingTypeName" />
+          <ScalarProperty Name="TrainingTypeId" ColumnName="TrainingTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblJobVacancyPosts">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblJobVacancyPost">
+        <MappingFragment StoreEntitySet="tblJobVacancyPost">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpUserId" ColumnName="UpUserId" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+          <ScalarProperty Name="WorkingPlaceName" ColumnName="WorkingPlaceName" />
+          <ScalarProperty Name="WorkingPlaceId" ColumnName="WorkingPlaceId" />
+          <ScalarProperty Name="AdditionalComment" ColumnName="AdditionalComment" />
+          <ScalarProperty Name="JobType" ColumnName="JobType" />
+          <ScalarProperty Name="PostClosingDate" ColumnName="PostClosingDate" />
+          <ScalarProperty Name="PostLiveDate" ColumnName="PostLiveDate" />
+          <ScalarProperty Name="ExperienceRequired" ColumnName="ExperienceRequired" />
+          <ScalarProperty Name="NoOfVacancy" ColumnName="NoOfVacancy" />
+          <ScalarProperty Name="DesignationTitle" ColumnName="DesignationTitle" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblJobVacancyPostQuestions">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblJobVacancyPostQuestion">
+        <MappingFragment StoreEntitySet="tblJobVacancyPostQuestions">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpUserId" ColumnName="UpUserId" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+          <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+          <ScalarProperty Name="JobVacancyPostQuestionId" ColumnName="JobVacancyPostQuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAppliedJobs">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblAppliedJob">
+        <MappingFragment StoreEntitySet="tblAppliedJobs">
+          <ScalarProperty Name="IsShortListed" ColumnName="IsShortListed" />
+          <ScalarProperty Name="AppliedDate" ColumnName="AppliedDate" />
+          <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+          <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+          <ScalarProperty Name="CVPortalUsersId" ColumnName="CVPortalUsersId" />
+          <ScalarProperty Name="AppliedJobsId" ColumnName="AppliedJobsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblJobVacancyPostAnswers">
+      <EntityTypeMapping TypeName="HrPayrollDBModel.tblJobVacancyPostAnswer">
+        <MappingFragment StoreEntitySet="tblJobVacancyPostAnswers">
+          <ScalarProperty Name="JobVacancyPostQuestionId" ColumnName="JobVacancyPostQuestionId" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpUserId" ColumnName="UpUserId" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EUserId" ColumnName="EUserId" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="JobVacancyPostId" ColumnName="JobVacancyPostId" />
+          <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+          <ScalarProperty Name="CVPortalUsersId" ColumnName="CVPortalUsersId" />
+          <ScalarProperty Name="JobVacancyPostAnswerId" ColumnName="JobVacancyPostAnswerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

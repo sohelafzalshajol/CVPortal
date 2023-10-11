@@ -9,6 +9,8 @@ namespace CVPortal.Models
     {
         public long TrainingInfoId { get; set; }
         public long ApplicantId { get; set; }
+        public long TrainingTypeId { get; set; }
+        public string TrainingTypeName { get; set; }
         public string Title { get; set; }
         public string Topic { get; set; }
         public string Institute { get; set; }
